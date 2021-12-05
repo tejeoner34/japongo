@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,6 +12,7 @@ import Menu from '@mui/material/Menu';
 import { useTranslation } from 'react-i18next';
 import SwitchComponent from '../switch/switch-component';
 import MenuItem from '@mui/material/MenuItem';
+import { AuthContext } from '../../auth/auth.context';
 
 
 
@@ -19,6 +20,7 @@ import MenuItem from '@mui/material/MenuItem';
 export default function Header(props) {
 
     const [t, i18n] = useTranslation('global');
+    const [isAuth] = useContext(AuthContext);
 
     const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -76,8 +78,10 @@ export default function Header(props) {
                             <option value="jp">JP</option>
                         </select>
                         <SwitchComponent isDard={props.isDark} onThemeChange={props.onThemeChange} />
-
-                        <Button color="inherit">Login</Button>
+                         {isAuth && 
+                         <Button color="inherit">Login</Button>
+                         }   
+                        {/* <Button color="inherit">Login</Button> */}
                     </Box>
                 </Toolbar>
             </AppBar>
