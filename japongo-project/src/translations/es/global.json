@@ -1,5 +1,9 @@
 {
     "Header":{
         "Hello-World": "Hola Mundo"
+    },
+    "Login": {
+        "Access": "Acceder",
+        "HaveAccount": "¿No tienes cuenta?"
     }
 }

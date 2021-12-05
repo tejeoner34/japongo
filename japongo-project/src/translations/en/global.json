@@ -1,5 +1,24 @@
 {
-    "Header":{
+    "Header": {
         "Hello-World": "Hello World"
+    },
+    "Login": {
+        "Access": "Sign in",
+        "HaveAccount": "You do not have an account?"
+    },
+    "Validation":{
+        "Loading": "Loading",
+        "Ok":"Email validated successfully",
+        "Error":"Invalid Email"
+
+    },
+    "Register":{
+        "Register":"Sign Up",
+        "Name":"Name",
+        "Password": "Password",
+        "ConfirmPassword": "Confirm Password",
+        "Email":"Email",
+        "Error": "Passwords are not equal",
+        "ErrorMessage": "Incorrect User or Password"
     }
 }

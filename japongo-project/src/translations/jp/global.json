@@ -1,0 +1,25 @@
+{
+    "Header": {
+        "Hello-World": "おはよう世界"
+    },
+    "Login": {
+        "Access": "アックセス",
+        "HaveAccount": "¿アカウントはありませんか?"
+    },
+    "Validation":{
+        "Loading":"ロード中",
+        "Ok":"メールが検証されました",
+        "Error":"このEメールアドレスを持つアカウントが見つかりません"
+
+    },
+    "Register":{
+        "Register":"登録",
+        "Name":"名前",
+        "Password": "パスワード",
+        "ConfirmPassword": "パスワード確認",
+        "Email": "メール",
+        "Error":"パスワードには問題はあります",
+        "ErrorMessage": "パスワードには問題はあります"
+
+    }
+}

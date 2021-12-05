@@ -41,7 +41,7 @@ export default function Header(props) {
                     </Typography>
                 </Toolbar>
                 <Toolbar sx={{ columnGap: '30px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-                    <Box>
+                    <Box sx={{display:'flex', alignItems:'center'}}>
                         <IconButton
                             size="large"
                             edge="start"
@@ -51,6 +51,7 @@ export default function Header(props) {
                         >
                             <MenuIcon />
                         </IconButton>
+                        <Typography>Menu</Typography>
                         <Menu
                             id="basic-menu"
                             anchorEl={anchorEl}
@@ -71,8 +72,8 @@ export default function Header(props) {
                     <Box sx={{ columnGap: '30px', display: 'flex', justifyContent: 'space-between' }}>
                         {/* <LanguageSelect /> */}
                         <select onChange={(e) => i18n.changeLanguage(e.target.value)} name="lang" id="language">
-                            <option value="es">ES</option>
                             <option value="en">EN</option>
+                            <option value="jp">JP</option>
                         </select>
                         <SwitchComponent isDard={props.isDark} onThemeChange={props.onThemeChange} />
 

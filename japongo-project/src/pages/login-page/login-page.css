@@ -1,0 +1,11 @@
+.login-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem  ;
+}
+
+.avatar-container{
+    display: flex;
+    justify-content: center;
+}
