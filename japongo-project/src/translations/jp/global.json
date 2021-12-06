@@ -1,6 +1,17 @@
 {
     "Header": {
-        "Hello-World": "おはよう世界"
+        "Hello-World": "おはよう世界",
+        "Profile": "プロファイル",
+        "Account": "アカウント",
+        "Logout": "ログアウト",
+        "Settings": "設定",
+        "Schools": "学校",
+        "Accommodation": "宿泊",
+        "AboutUs": "会社について",
+        "Legal": "Legal",
+        "Login": "ログイン",
+        "Menu": "メニュー"
+
     },
     "Login": {
         "Access": "アックセス",
@@ -21,5 +32,11 @@
         "Error":"パスワードには問題はあります",
         "ErrorMessage": "パスワードには問題はあります"
 
+    },
+    "Home":{
+        "H1": "東京で日本語勉強しよう！",
+        "Steps":{
+            "Title": "どうしたらいいですか？"
+        }
     }
 }

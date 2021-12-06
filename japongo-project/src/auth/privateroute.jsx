@@ -14,8 +14,8 @@ export default function PrivateRoute({ children, ...rest }) {
 
     const [status, setStatus] = useState(null);
 
-    useEffect(()=>{
-        (async ()=>setStatus(await getStatus()))();
+    useEffect(async()=>{
+        setStatus(await getStatus());
     },[])
 
     //  function useAuth() {

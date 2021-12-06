@@ -1,6 +1,16 @@
 {
     "Header": {
-        "Hello-World": "Hello World"
+        "Hello-World": "Hello World",
+        "Profile": "Profile",
+        "Account": "My Account",
+        "Logout": "Logout",
+        "Settings": "Settings",
+        "Schools": "Schools",
+        "Accommodation": "Accommodation",
+        "AboutUs": "About Us",
+        "Legal": "Legal",
+        "Login": "Login",
+        "Menu": "Menu"
     },
     "Login": {
         "Access": "Sign in",
@@ -20,5 +30,11 @@
         "Email":"Email",
         "Error": "Passwords are not equal",
         "ErrorMessage": "Incorrect User or Password"
+    },
+    "Home":{
+        "H1": "Live and Study in Tokyo!",
+        "Steps":{
+            "Title": "How does it work?"
+        }
     }
 }

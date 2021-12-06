@@ -50,6 +50,7 @@ function Login() {
                      if(d!==undefined){
                     localStorage.setItem('token','Bearer ' + d);
                     updateIsAuth(true)
+                    localStorage.setItem('isAuth', true);
                     history.push("/my-profile");    
                 }
                 console.log(d)});

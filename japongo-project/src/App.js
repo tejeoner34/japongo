@@ -9,6 +9,7 @@ import EscuelasPage from './pages/academias-page/academias-page';
 import AlojamientoPage from './pages/alojamiento-page/alojamiento-page';
 import Login from './pages/login-page/login-page';
 import Register from './pages/register-page/register.page';
+import HomePage from './pages/home-page/home-page';
 import SobreNosotros from './pages/sobre-nosotros-page/sobre.nosotros';
 import LegalPage from './pages/legal-page/legal.page';
 import { useTranslation } from 'react-i18next';
@@ -34,13 +35,14 @@ function App() {
 
 
   return (
-    <AuthProvider value={false}>
+    <AuthProvider value={localStorage.getItem('isAuth')??false}>
     <ThemeProvider theme={isDark ? darkTheme : theme}>
       <BrowserRouter>
         <Paper sx={{ borderRadius: "0" }} style={{ minHeight: '100vh' }}>
           <Grid container direction="column"
             alignItems="center"
-            justifyContent="center">
+            justifyContent="center"
+           >
             <Grid item container xs={12}>
               <Header isDark={isDark} onThemeChange={onThemeChange} />
             </Grid>
@@ -67,7 +69,7 @@ function App() {
                 <MyProfile></MyProfile>
               </PrivateRoute>
               <Route path='/'>
-                <h1>{t('Header.Hello-World')}</h1>
+                <HomePage></HomePage>
               </Route>
             </Switch>
 
