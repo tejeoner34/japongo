@@ -4,7 +4,7 @@ import { theme, darkTheme } from './assets/theme';
 import { ThemeProvider } from '@mui/material/styles';
 import { Paper, Grid } from '@mui/material';
 import Header from './components/header/header.jsx';
-import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import EscuelasPage from './pages/academias-page/academias-page';
 import AlojamientoPage from './pages/alojamiento-page/alojamiento-page';
 import Login from './pages/login-page/login-page';
@@ -14,6 +14,8 @@ import LegalPage from './pages/legal-page/legal.page';
 import { useTranslation } from 'react-i18next';
 import ValidateEmail from './pages/validation-page/validate-email';
 import MyProfile from './pages/myprofile-page/my-profile-page';
+import PrivateRoute from './auth/privateroute';
+import AuthProvider from './auth/authprovider';
 
 
 
@@ -22,7 +24,7 @@ function App() {
 
 
 
-  const [t, i18n] = useTranslation('global');
+  const [t] = useTranslation('global');
   const [isDark, setDark] = useState(false);
 
   const onThemeChange = () => {
@@ -32,6 +34,7 @@ function App() {
 
 
   return (
+    <AuthProvider value={false}>
     <ThemeProvider theme={isDark ? darkTheme : theme}>
       <BrowserRouter>
         <Paper sx={{ borderRadius: "0" }} style={{ minHeight: '100vh' }}>
@@ -60,9 +63,9 @@ function App() {
               <Route path='/legal'>
                 <LegalPage></LegalPage>
               </Route>
-              <Route>
+              <PrivateRoute path='/my-profile'>
                 <MyProfile></MyProfile>
-              </Route>
+              </PrivateRoute>
               <Route path='/'>
                 <h1>{t('Header.Hello-World')}</h1>
               </Route>
@@ -72,6 +75,7 @@ function App() {
         </Paper>
       </BrowserRouter>
     </ThemeProvider>
+    </AuthProvider>
   );
 }
 

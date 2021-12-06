@@ -1,12 +1,14 @@
 import { Paper, Grid, Button, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './login-page.css';
 import LockIcon from '@mui/icons-material/Lock';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react'
+import { useState, useContext } from 'react';
+import {AuthContext} from '../../auth/auth.context.js'
+
 
 
 
@@ -14,8 +16,11 @@ import { useState } from 'react'
 
 function Login() {
 
-    const [t, i18n] = useTranslation('global');
+    const [isAuth, updateIsAuth] = useContext(AuthContext);
+    const [t] = useTranslation('global');
     const [errorMessage, setErrorMessage] = useState('');
+    let history = useHistory();
+
 
     const handleSubmit = (e) => { // gestiono el submit del formulario
         e.preventDefault();
@@ -31,17 +36,41 @@ function Login() {
                     password: e.target.password.value
                 })
             }
-            // llamo al login
+
             fetch('http://localhost:4567/auth/login', options)
-            .then(r => r.json())
-            .then(d => console.log(d)) // aqui tendríamos el access token
+            .then(r=>{
+                console.log(r)
+
+                if(r.status!==200){
+                    setErrorMessage(t('Register.ErrorMessage'))
+                } 
+               return r.json()
+            })
+            .then(d=> {
+                     if(d!==undefined){
+                    localStorage.setItem('token','Bearer ' + d);
+                    updateIsAuth(true)
+                    history.push("/my-profile");    
+                }
+                console.log(d)});
+            
         }else{
           setErrorMessage(t('Register.ErrorMessage'))
         }
        
       }
 
+    //   const onValidation = async (e)=>{
+    //      fetch('http://localhost:4567/user/',{
+    //         headers:{
+    //             "Authorization": localStorage.getItem('token'),
+    //         }
+    //     }).then(r=> {
+    //         return r.ok;
 
+    //     })
+            
+    //   }
 
 
     return (
@@ -67,8 +96,8 @@ function Login() {
                     <Avatar><LockIcon></LockIcon></Avatar>
                     </div>
                     <h2>Login</h2>
-                    <TextField id="outlined-basic" name='email' required type='email' label={t("Register.Email")} variant="outlined" />
-                    <TextField id="outlined-basic"name='password' required type='password' label={t('Register.Password')} variant="outlined" />
+                    <TextField id="email" name='email' required type='email' label={t("Register.Email")} variant="outlined" />
+                    <TextField id="password"name='password' required type='password' label={t('Register.Password')} variant="outlined" />
                     <Typography color='error'>{errorMessage}</Typography>
                     <Button variant='contained' type='submit' color='primary'>{t('Login.Access')}</Button>
                     <Typography>{t('Login.HaveAccount')} <Link to='/register'>Sign up</Link></Typography>
