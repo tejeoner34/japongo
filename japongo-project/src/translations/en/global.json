@@ -34,7 +34,34 @@
     "Home":{
         "H1": "Live and Study in Tokyo!",
         "Steps":{
-            "Title": "How does it work?"
+            "Title": "How does it work?",
+            "One": {
+                "Title": "Search",
+                "Body": "Search for the school that better suits your interestes."
+            },
+            "Two":{
+                "Title": "Book",
+                "Body":"Once you have find your school, fill the contact form to make the reservation"
+            },
+            "Three":{
+                "Title": "Relax",
+                "Body": "Everything is ready. Just relax and wait for the experience to start!"
+            }
+        },
+        "FirstStep":{
+            "Banner": "First Step",
+            "SchoolCard":{
+                "Title":"Choose a School",
+                "Button": "Schools"
+            },
+            "AccommodationCard": {
+                "Title": "Choose Accommodation",
+                "Button": "Accommodation"
+            },
+            "OnlineCourseCard": {
+                "Title": "Online Courses",
+                "Button": "Courses"
+            }
         }
     }
 }

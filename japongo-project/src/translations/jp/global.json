@@ -36,7 +36,34 @@
     "Home":{
         "H1": "東京で日本語勉強しよう！",
         "Steps":{
-            "Title": "どうしたらいいですか？"
+            "Title": "どうしたらいいですか？",
+            "One": {
+                "Title": "探す",
+                "Body": "好きな学校を探す"
+            },
+            "Two":{
+                "Title": "予約",
+                "Body":"好きな学校を見つけたら、コンタクトフォームを入力して予約する"
+            },
+            "Three":{
+                "Title": "リラックス",
+                "Body": "これからはリラックスしながらエクスペリエンスが始まるまで待つ"
+            }
+        },
+        "FirstStep":{
+            "Banner": "第一歩",
+            "SchoolCard":{
+                "Title":"学校を選ぼう",
+                "Button": "学校"
+            },
+            "AccommodationCard": {
+                "Title": "宿泊を選ぼう",
+                "Button": "宿泊"
+            },
+            "OnlineCourseCard": {
+                "Title": "オンライン授業",
+                "Button": "授業"
+            }
         }
     }
 }
