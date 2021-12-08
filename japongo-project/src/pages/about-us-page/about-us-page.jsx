@@ -1,9 +1,9 @@
 
 
-function SobreNosotros(){
+function AboutUsPage(){
     return(
         <h1>Sobre Nosotros</h1>
     )
 }
 
-export default SobreNosotros;
+export default AboutUsPage;

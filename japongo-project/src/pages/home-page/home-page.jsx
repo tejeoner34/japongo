@@ -7,11 +7,25 @@ import LooksOneIcon from '@mui/icons-material/LooksOne';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import Looks3Icon from '@mui/icons-material/Looks3';
 import SchoolCard from "../../components/cards/school-card/school-card";
-
+import OnlineCourseCard from "../../components/cards/online-course-card/online-course-card";
+import AccommodationCard from "../../components/cards/accommodation-card/accommodation-card";
+import ReviewCard from "../../components/reviews-card/reviews-card";
+import ReviewCardSlider from "../../components/review-card-slider/review-card-slider";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
 
-    const [t, i18n] = useTranslation('global');
+    useEffect(()=>{
+        fetch('http://localhost:4567/reviews/')
+        .then(r=>r.json())
+        .then(d=>{
+            setReviews(oldvalue=> oldvalue.concat(d))
+        })
+    },[]);
+
+    const [reviews, setReviews] = useState([])
+
+    const [t] = useTranslation('global');
 
 
     return (
@@ -58,8 +72,16 @@ export default function HomePage() {
                 <Typography variant='h1' color='common.white' sx={{ position: 'absolute' }}>{t("Home.FirstStep.Banner")}</Typography>
             </div>
             <Divider sx={{ padding: '10px', width: '70%', borderBottomWidth: 2, }} />
-            <Stack>
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} rowGap={4}>
                 <SchoolCard/>
+                <OnlineCourseCard/>
+                <AccommodationCard/>
+            </Stack>
+            <Stack direction={{ xs: 'row', sm: 'row' }} spacing={2} rowGap={4} sx={{overflowX:'hidden'}}>
+                {reviews?.map((e,i)=> <ReviewCard key={i} data={e}/>)}
+            </Stack>
+            <Stack>
+                <ReviewCardSlider data={reviews}/>
             </Stack>
 
         </Grid>

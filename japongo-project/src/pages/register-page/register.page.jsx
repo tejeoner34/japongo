@@ -1,6 +1,5 @@
 import LockIcon from '@mui/icons-material/Lock';
 import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useTranslation } from 'react-i18next';
 import { Paper, Grid, Button, Typography } from '@mui/material';
@@ -10,7 +9,7 @@ import { useState } from 'react';
 
 function Register(){
 
-    const [t, i18n] = useTranslation('global');
+    const [t] = useTranslation('global');
     const [errorMessage, updateErrorMessage] = useState('');
     const [error, setError] = useState(false);
 
