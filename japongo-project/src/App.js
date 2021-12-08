@@ -16,6 +16,7 @@ import MyProfile from './pages/myprofile-page/my-profile-page';
 import PrivateRoute from './auth/privateroute';
 import AuthProvider from './auth/authprovider';
 import AboutUsPage from './pages/about-us-page/about-us-page';
+import CoursesPage from './pages/courses-page/courses-page';
 import Footer from './components/footer/footer';
 
 
@@ -69,6 +70,9 @@ function App() {
                 </Route>
                 <PrivateRoute path='/my-profile'>
                   <MyProfile></MyProfile>
+                </PrivateRoute>
+                <PrivateRoute path='/courses'>
+                  <CoursesPage/>
                 </PrivateRoute>
                 <Route path='/'>
                   <HomePage></HomePage>

@@ -72,5 +72,8 @@
                 "Next":"次"
             }
         }
+    },
+    "CoursesPage":{
+        "Banner": "オンライン授業"
     }
 }

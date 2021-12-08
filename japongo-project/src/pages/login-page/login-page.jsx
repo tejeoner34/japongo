@@ -51,7 +51,7 @@ function Login() {
                     localStorage.setItem('token','Bearer ' + d);
                     updateIsAuth(true)
                     localStorage.setItem('isAuth', true);
-                    history.push("/my-profile");    
+                    history.push("/courses");    
                 }
                 console.log(d)});
             

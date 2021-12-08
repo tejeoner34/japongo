@@ -70,5 +70,8 @@
                 "Next":"NEXT"
             }
         }
+    },
+    "CoursesPage":{
+        "Banner": "Online Courses"
     }
 }
