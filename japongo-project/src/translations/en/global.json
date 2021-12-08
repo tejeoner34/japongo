@@ -62,6 +62,13 @@
                 "Title": "Online Courses",
                 "Button": "Courses"
             }
+        },
+        "Reviews":{
+            "Banner":"Reviews",
+            "Steps":{
+                "Back":"BACK",
+                "Next":"NEXT"
+            }
         }
     }
 }

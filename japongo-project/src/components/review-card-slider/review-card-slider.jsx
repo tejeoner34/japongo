@@ -7,14 +7,13 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
-import './review-card-slider.css'
+import './review-card-slider.css';
+import { useTranslation } from 'react-i18next';
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 
 function ReviewCardSlider(props) {
+    const [t] = useTranslation('global');
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
     const maxSteps = props.data?.length;
@@ -27,32 +26,34 @@ function ReviewCardSlider(props) {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    const handleStepChange = (step) => {
-        setActiveStep(step);
-    };
+   
 
     return (
-        <Box className='review-card-slider' sx={{ maxWidth: 400, flexGrow: 1 }}>
+        <Box className='review-card-slider' justifyContent='center' alignContent='center' alignItems='center' sx={{ maxWidth: 300, flexGrow: 1, height:200 }}>
             <Paper
                 square
                 elevation={0}
                 sx={{
                     display: 'flex',
                     alignItems: 'center',
+                    justifyContent:'center',
                     height: 50,
                     pl: 2,
                     bgcolor: 'background.default',
                 }}
             >
-                <Typography>{props?.data?.[activeStep]?.name}</Typography>
+                <Typography variant='h5'>{props?.data?.[activeStep]?.name}</Typography>
             </Paper>
-            <AutoPlaySwipeableViews
+            {/* <AutoPlaySwipeableViews
                 axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                 index={activeStep}
                 onChangeIndex={handleStepChange}
                 enableMouseEvents
-            >
-                {props.data?.map((step, index) => (
+            > */}
+            <Box>
+            
+            {props?.data?.[activeStep]?.body}
+                {/* {props.data?.map((step, index) => (
                     <div key={step.name}>
                         {Math.abs(activeStep - index) <= 2 ? (
                             <Box
@@ -74,8 +75,9 @@ function ReviewCardSlider(props) {
                             </Box>
                         ) : null}
                     </div>
-                ))}
-            </AutoPlaySwipeableViews>
+                ))} */}
+                </Box>
+            {/* </AutoPlaySwipeableViews> */}
             <MobileStepper
                 steps={maxSteps}
                 position="static"
@@ -86,7 +88,7 @@ function ReviewCardSlider(props) {
                         onClick={handleNext}
                         disabled={activeStep === maxSteps - 1}
                     >
-                        Next
+                        {t("Home.Reviews.Steps.Next")}
                         {theme.direction === 'rtl' ? (
                             <KeyboardArrowLeft />
                         ) : (
@@ -101,7 +103,7 @@ function ReviewCardSlider(props) {
                         ) : (
                             <KeyboardArrowLeft />
                         )}
-                        Back
+                        {t("Home.Reviews.Steps.Back")}
                     </Button>
                 }
             />

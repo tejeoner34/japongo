@@ -64,6 +64,13 @@
                 "Title": "オンライン授業",
                 "Button": "授業"
             }
+        },
+        "Reviews":{
+            "Banner": "レビュー",
+            "Steps":{
+                "Back":"前",
+                "Next":"次"
+            }
         }
     }
 }

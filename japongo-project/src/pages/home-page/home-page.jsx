@@ -7,6 +7,7 @@ import LooksOneIcon from '@mui/icons-material/LooksOne';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import Looks3Icon from '@mui/icons-material/Looks3';
 import SchoolCard from "../../components/cards/school-card/school-card";
+import ReviewsBanner from '../../img/home-reviews-banner.jpg';
 import OnlineCourseCard from "../../components/cards/online-course-card/online-course-card";
 import AccommodationCard from "../../components/cards/accommodation-card/accommodation-card";
 import ReviewCard from "../../components/reviews-card/reviews-card";
@@ -77,9 +78,16 @@ export default function HomePage() {
                 <OnlineCourseCard/>
                 <AccommodationCard/>
             </Stack>
+            <Divider sx={{ padding: '10px', width: '70%', borderBottomWidth: 2, }} />
+            <div className='home__card'>
+                <img className='home__card__img' src={ReviewsBanner} alt="Robot" />
+                <div className='home__card__background'></div>
+                <Typography variant='h1' color='common.white' sx={{ position: 'absolute' }}>{t("Home.Reviews.Banner")}</Typography>
+            </div>
             <Stack direction={{ xs: 'row', sm: 'row' }} spacing={2} rowGap={4} sx={{overflowX:'hidden'}}>
                 {reviews?.map((e,i)=> <ReviewCard key={i} data={e}/>)}
             </Stack>
+
             <Stack>
                 <ReviewCardSlider data={reviews}/>
             </Stack>
