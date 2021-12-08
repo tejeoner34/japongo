@@ -41,6 +41,19 @@ export const darkTheme = createTheme({
             '@media (min-width:600px)': {
                 fontSize: 50,
               },
+            
+        },
+        h2:{
+            fontSize: 22,
+            '@media (min-width:600px)': {
+                fontSize: 40,
+              },
+        },
+        h3:{
+            fontSize: 18,
+            '@media (min-width:600px)': {
+                fontSize: 36,
+              },
         }
     }
 })
