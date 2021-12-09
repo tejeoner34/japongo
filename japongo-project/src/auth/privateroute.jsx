@@ -7,6 +7,10 @@ async function getStatus(){
             "Authorization": localStorage.getItem('token'),
         }
     })
+    console.log(r)
+    const d = await r.json();
+    sessionStorage.setItem('mail', d.email);
+    sessionStorage.setItem('name', d.name);
     return r.status
 }
 

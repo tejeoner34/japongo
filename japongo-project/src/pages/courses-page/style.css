@@ -1,0 +1,16 @@
+
+.courses__search-bar{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.courses__search-bar__input{
+    width: 70%;
+    min-width: 300px;
+    padding: 0.6rem;
+    border-radius: 10px;
+}
+

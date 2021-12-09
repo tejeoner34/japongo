@@ -1,11 +1,9 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Button } from "@mui/material";
 import OnlineCoursesBanner from '../../img/online-courses-banner.jpg';
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import CoursesCard from "../../components/courses-card/courses-card";
+import CourseCard2 from "../../courses-card2/courses-card";
+import './style.css'
 
 export default function CoursesPage() {
     const [t] = useTranslation('global');
@@ -14,17 +12,28 @@ export default function CoursesPage() {
             .then(r => r.json())
             .then(d => {
                 console.log(d)
-                setCourses(oldvalue => oldvalue.concat(d))
+                setCourses(oldvalue => oldvalue.concat(d));
+                setCoursesOriginal(oldvalue=> oldvalue.concat(d));
             })
     }, []);
 
     const [courses, setCourses] = useState([]);
+    const [courseOriginal, setCoursesOriginal] = useState([]);
+    
 
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        let data = e.target.course.value.toLowerCase();
+        const filtered = courseOriginal.filter(e=> e.name.toLowerCase().includes(data))
+        setCourses(filtered)
+
+    }
 
 
     return (
@@ -34,7 +43,14 @@ export default function CoursesPage() {
                 <div className='home__banner__background'></div>
                 <Typography variant='h1' color='common.white' sx={{ position: 'absolute' }}>{t("CoursesPage.Banner")}</Typography>
             </div>
-            <Box sx={{ maxWidth: 450, bgcolor: 'background.paper', overflow:'auto' }}>
+            <form onSubmit={handleSubmit} className='courses__search-bar'>
+                <input name='course' className='courses__search-bar__input' type="text" />
+                <Button type='submit' variant='contained'>{t("CoursesPage.SearchBar.Button")}</Button>
+            </form>
+            {
+                courses?.map((e,i)=> <CourseCard2 key={i} data={e}></CourseCard2>)
+            }
+            {/* <Box sx={{ maxWidth: 450, bgcolor: 'background.paper', overflow:'auto' }}>
                 <Tabs
                     value={value}
                     onChange={handleChange}
@@ -47,7 +63,7 @@ export default function CoursesPage() {
                 >
                     {courses?.map((e,i)=> <CoursesCard key={i} data={e}/>)}
                 </Tabs>
-            </Box>
+            </Box> */}
         </Grid>
     )
 }

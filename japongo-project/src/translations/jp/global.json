@@ -74,6 +74,23 @@
         }
     },
     "CoursesPage":{
-        "Banner": "オンライン授業"
+        "Banner": "オンライン授業",
+        "SearchBar":{
+            "Placeholder": "",
+            "Button": "探す",
+            "Level": "レベル"
+        }
+    },
+    "CoursePage":{
+        "Comment":{
+            "PlaceHolder": "コメント",
+            "Button": "投稿"
+        },
+        "Info":{
+            "Duration": "時間"
+        }
+    },
+    "Profile":{
+        "Hello":"こんにちは" 
     }
 }

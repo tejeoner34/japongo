@@ -17,6 +17,7 @@ import PrivateRoute from './auth/privateroute';
 import AuthProvider from './auth/authprovider';
 import AboutUsPage from './pages/about-us-page/about-us-page';
 import CoursesPage from './pages/courses-page/courses-page';
+import CourseDetailPage from './pages/course-detail-page/course-detail-page';
 import Footer from './components/footer/footer';
 
 
@@ -73,6 +74,9 @@ function App() {
                 </PrivateRoute>
                 <PrivateRoute path='/courses'>
                   <CoursesPage/>
+                </PrivateRoute>
+                <PrivateRoute path='/course/:id'>
+                  <CourseDetailPage/>
                 </PrivateRoute>
                 <Route path='/'>
                   <HomePage></HomePage>

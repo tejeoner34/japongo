@@ -28,6 +28,7 @@ function Register(){
                   // Genero el body como string
                   email: e.target.email.value, // obtengo el value de un input por su name
                   password: e.target.password.value,
+                  name: e.target.name.value
                 }),
               };
               // llamo al registro

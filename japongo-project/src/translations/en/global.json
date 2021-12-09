@@ -72,6 +72,23 @@
         }
     },
     "CoursesPage":{
-        "Banner": "Online Courses"
+        "Banner": "Online Courses",
+        "SearchBar":{
+            "Placeholder": "",
+            "Button": "Search",
+            "Level": "Level"
+        }
+    },
+    "CoursePage":{
+        "Comment":{
+            "PlaceHolder": "Comment",
+            "Button": "Post"
+        },
+        "Info":{
+            "Duration": "Duration"
+        }
+    },
+    "Profile":{
+        "Hello":"Hello" 
     }
 }
