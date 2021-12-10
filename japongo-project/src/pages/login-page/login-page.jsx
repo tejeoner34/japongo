@@ -48,9 +48,9 @@ function Login() {
             })
             .then(d=> {
                      if(d!==undefined){
-                    localStorage.setItem('token','Bearer ' + d);
+                    sessionStorage.setItem('token','Bearer ' + d);
                     updateIsAuth(true)
-                    localStorage.setItem('isAuth', true);
+                    sessionStorage.setItem('isAuth', true);
                     history.push("/courses");    
                 }
                 console.log(d)});

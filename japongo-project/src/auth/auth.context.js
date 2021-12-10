@@ -1,4 +1,4 @@
 import {createContext} from "react";
 
 
-export const AuthContext = createContext(localStorage.getItem('isAuth')??false);
+export const AuthContext = createContext(sessionStorage.getItem('isAuth')??false);

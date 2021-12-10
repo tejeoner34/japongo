@@ -85,10 +85,16 @@
             "Button": "Post"
         },
         "Info":{
-            "Duration": "Duration"
+            "Duration": "Duration",
+            "Comment": "Comments",
+            "Button": "Add to Fav",
+            "NotAddedMessage":"Already in your Favs",
+            "AddedMessage": "Added to Favs"
         }
     },
     "Profile":{
-        "Hello":"Hello" 
+        "Hello":"Hello",
+        "Favorite": "Your Favorite Courses" 
+        
     }
 }

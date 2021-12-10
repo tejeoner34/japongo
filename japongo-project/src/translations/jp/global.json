@@ -87,10 +87,15 @@
             "Button": "投稿"
         },
         "Info":{
-            "Duration": "時間"
+            "Duration": "時間",
+            "Comment": "コメント",
+            "Button": "お気に入り",
+            "NotAddedMessage":"もうお気に入りに追加しました",
+            "AddedMessage": "お気に入りに追加しました"
         }
     },
     "Profile":{
-        "Hello":"こんにちは" 
+        "Hello":"こんにちは",
+        "Favorite": "お気に入り"
     }
 }

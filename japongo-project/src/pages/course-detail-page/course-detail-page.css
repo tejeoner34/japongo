@@ -1,0 +1,12 @@
+.course-detail__form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 60%;
+}
+
+.course-detail__form button{
+    max-width: 6rem;
+}

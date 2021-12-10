@@ -19,6 +19,7 @@ import AboutUsPage from './pages/about-us-page/about-us-page';
 import CoursesPage from './pages/courses-page/courses-page';
 import CourseDetailPage from './pages/course-detail-page/course-detail-page';
 import Footer from './components/footer/footer';
+import UserProvider from './context/user-context/user-provider';
 
 
 
@@ -36,7 +37,7 @@ function App() {
 
 
   return (
-    <AuthProvider value={localStorage.getItem('isAuth') ?? false}>
+    <AuthProvider value={sessionStorage.getItem('isAuth') ?? false}>
       <ThemeProvider theme={isDark ? darkTheme : theme}>
         <BrowserRouter>
           <Paper sx={{ borderRadius: "0" }} style={{ minHeight: '100vh' }}>
@@ -69,6 +70,7 @@ function App() {
                 <Route path='/about-us'>
                   <AboutUsPage></AboutUsPage>
                 </Route>
+                <UserProvider value={null}>
                 <PrivateRoute path='/my-profile'>
                   <MyProfile></MyProfile>
                 </PrivateRoute>
@@ -78,6 +80,7 @@ function App() {
                 <PrivateRoute path='/course/:id'>
                   <CourseDetailPage/>
                 </PrivateRoute>
+                </UserProvider>
                 <Route path='/'>
                   <HomePage></HomePage>
                 </Route>

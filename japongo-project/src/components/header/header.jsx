@@ -48,8 +48,8 @@ export default function Header(props) {
     };
 
     const handleLogout = (e)=>{
-        localStorage.removeItem('isAuth');
-        localStorage.removeItem('token');
+        sessionStorage.removeItem('isAuth');
+        sessionStorage.removeItem('token');
         window.location.reload();
     };
 
@@ -104,7 +104,7 @@ export default function Header(props) {
                                 <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                                     <Tooltip title="Account settings">
                                         <IconButton onClick={handleClickMyProfile} size="small" sx={{ ml: 2 }}>
-                                            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                                            <Avatar sx={{ width: 32, height: 32 }}>{sessionStorage.getItem('name').charAt(0)}</Avatar>
                                         </IconButton>
                                     </Tooltip>
                                 </Box>
