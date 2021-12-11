@@ -24,12 +24,14 @@
     },
     "Register":{
         "Register":"Sign Up",
-        "Name":"Name",
+        "Name":"UserName",
         "Password": "Password",
         "ConfirmPassword": "Confirm Password",
         "Email":"Email",
         "Error": "Passwords are not equal",
-        "ErrorMessage": "Incorrect User or Password"
+        "ErrorMessage": "Incorrect User or Password",
+        "CheckEmail": "Check your Email",
+        "UserExists": "User or Email already exist"
     },
     "Home":{
         "H1": "Live and Study in Tokyo!",

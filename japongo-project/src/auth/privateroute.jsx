@@ -1,6 +1,5 @@
 import { Route, Redirect } from "react-router";
-import { useContext, useEffect, useState } from "react";
-import {userContext} from '../context/user-context/user-context.js'
+import {  useEffect, useState } from "react";
 
 
 
@@ -12,24 +11,36 @@ export default function PrivateRoute({ children, ...rest }) {
             "Authorization": sessionStorage.getItem('token'),
         }
     })
-    if(r.ok){
-      const d = await r.json();
-      updateUserData(d)
-      sessionStorage.setItem('mail', d.email);
-      sessionStorage.setItem('name', d.name);
-    }
+    // if(r.ok){
+    //   const d = await r.json();
+    //   updateUserData(d)
+    // }
     
     return r.status
 }
 
     const [status, setStatus] = useState(null);
-    const [userData, updateUserData] = useContext(userContext);
+    // const [, updateUserData] = useContext(UserContext);
 
     
 
-    useEffect(async()=>{
-        setStatus(await getStatus());
+    // const fetchFunction = async()=>{
+    //   setStatus(await getStatus());
+    // };
+    // fetchFunction();
+    
+
+    useEffect(()=>{
+      const fetchFunction = async()=>{
+        const data = await getStatus();
+        setStatus(data);
+      };
+      fetchFunction();
+      return ()=>setStatus(null) 
     },[])
+
+
+    
 
    
 

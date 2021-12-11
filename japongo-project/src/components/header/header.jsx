@@ -26,7 +26,7 @@ import Avatar from '@mui/material/Avatar';
 export default function Header(props) {
 
     const [t, i18n] = useTranslation('global');
-    const [isAuth] = useContext(AuthContext);
+    const [isAuth, updateIsAuth] = useContext(AuthContext);
     let history = useHistory();
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -50,7 +50,10 @@ export default function Header(props) {
     const handleLogout = (e)=>{
         sessionStorage.removeItem('isAuth');
         sessionStorage.removeItem('token');
-        window.location.reload();
+        sessionStorage.removeItem('name');
+        sessionStorage.removeItem('mail');
+        updateIsAuth(false);
+        history.push('login');
     };
 
 
@@ -85,8 +88,8 @@ export default function Header(props) {
                             }}
                             sx={{ minWidth: '500px' }}
                         >
-                            <MenuItem onClick={handleClose}><Link to='/escuelas'>{t("Header.Schools")}</Link></MenuItem>
-                            <MenuItem onClick={handleClose}><Link to='/alojamientos'>{t("Header.Accommodation")}</Link></MenuItem>
+                            <MenuItem onClick={handleClose}><Link to='/schools'>{t("Header.Schools")}</Link></MenuItem>
+                            <MenuItem onClick={handleClose}><Link to='/accommodation'>{t("Header.Accommodation")}</Link></MenuItem>
                             <MenuItem onClick={handleClose}><Link to='/login'>{t("Header.Login")}</Link></MenuItem>
                             <MenuItem onClick={handleClose} >{t("Header.AboutUs")}</MenuItem>
                             <MenuItem onClick={handleClose} ><Link to='/legal'>{t("Header.Legal")}</Link></MenuItem>
@@ -104,7 +107,7 @@ export default function Header(props) {
                                 <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                                     <Tooltip title="Account settings">
                                         <IconButton onClick={handleClickMyProfile} size="small" sx={{ ml: 2 }}>
-                                            <Avatar sx={{ width: 32, height: 32 }}>{sessionStorage.getItem('name').charAt(0)}</Avatar>
+                                            <Avatar sx={{ width: 32, height: 32 }}>{sessionStorage.getItem('name')?.charAt(0)?? ''}</Avatar>
                                         </IconButton>
                                     </Tooltip>
                                 </Box>

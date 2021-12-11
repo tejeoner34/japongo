@@ -70,6 +70,9 @@ function App() {
                 <Route path='/about-us'>
                   <AboutUsPage></AboutUsPage>
                 </Route>
+                <Route exact path='/'>
+                  <HomePage></HomePage>
+                </Route>
                 <UserProvider value={null}>
                 <PrivateRoute path='/my-profile'>
                   <MyProfile></MyProfile>
@@ -81,9 +84,7 @@ function App() {
                   <CourseDetailPage/>
                 </PrivateRoute>
                 </UserProvider>
-                <Route path='/'>
-                  <HomePage></HomePage>
-                </Route>
+                
               </Switch>
               <Footer></Footer>
             </Grid>

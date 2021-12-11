@@ -11,14 +11,16 @@ function Register(){
 
     const [t] = useTranslation('global');
     const [errorMessage, updateErrorMessage] = useState('');
+    const [userExists, updateUserExists] = useState('');
     const [error, setError] = useState(false);
+    const [validateEmailMessage, updateValidateEmailMessage] = useState(false);
 
     const handleSubmit = (e)=>{
         e.preventDefault();
 
         if(e.target.password.value === e.target.repeatedPassword.value){
 
-            console.log('ok')
+           
             const options = {
                 method: "POST",
                 headers: {
@@ -33,9 +35,14 @@ function Register(){
               };
               // llamo al registro
               fetch("http://localhost:4567/auth/register", options)
-                .then((r) => r.json())
-                .then((d) => console.log(d)); 
-              updateErrorMessage('');
+                .then(r => {
+                  r.status===201 && updateValidateEmailMessage(true);
+                  r.json()})
+                .then(d =>{
+                  d!=='ok' && updateUserExists(t("Register.UserExists"))
+                  
+                }); 
+                
             } else {
               // Muestro al usuario el error de que las passwords no coinciden
               updateErrorMessage(t("Register.Error"));
@@ -45,13 +52,12 @@ function Register(){
     }
 
     return(
+      
         <Grid container item xs={12} md={5} direction="column"
             alignItems="center"
             justifyContent="center">
             <Paper sx={{ width: '100%', textAlign: 'center', display: 'flex', justifyContent: 'center', padding: 2 }} elevation={10}>
-
-
-                <form className='login-form' onSubmit={handleSubmit}>
+              {validateEmailMessage? (<h2>{t("Register.CheckEmail")}</h2>):(<form className='login-form' onSubmit={handleSubmit}>
                     <div className='avatar-container'>
                     <Avatar><LockIcon></LockIcon></Avatar>
                     </div>
@@ -60,12 +66,12 @@ function Register(){
                     <TextField required type='text' name='name' label={t("Register.Name")} variant="outlined" />
                     <TextField error={error} required type='password' name='password' label={t('Register.Password')} variant="outlined" />
                     <TextField error={error}  required type='password' name='repeatedPassword' label={t('Register.ConfirmPassword')} variant="outlined" />
+                    <Typography color='red'>{errorMessage}</Typography>
+                    <Typography color='red'>{userExists}</Typography>
                     <Button variant='contained' type='submit' color='primary'>{t('Register.Register')}</Button>
-                    <Typography>{errorMessage}</Typography>
+                    
                     {/* <Typography>{t('Login.HaveAccount')} <Link to='/register'>Sign up</Link></Typography> */}
-                    </form>
-
-
+                    </form>) }
             </Paper>
         </Grid>
     )

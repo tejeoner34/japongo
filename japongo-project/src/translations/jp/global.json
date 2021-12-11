@@ -25,12 +25,16 @@
     },
     "Register":{
         "Register":"登録",
-        "Name":"名前",
+        "Name":"ユーザー",
         "Password": "パスワード",
         "ConfirmPassword": "パスワード確認",
         "Email": "メール",
         "Error":"パスワードには問題はあります",
-        "ErrorMessage": "パスワードには問題はあります"
+        "ErrorMessage": "パスワードには問題はあります",
+        "CheckEmail": "メールをチェックしてください。",
+        "UserExists": "ユーザーまたはメールアドレスはすでに存在します"
+
+
 
     },
     "Home":{

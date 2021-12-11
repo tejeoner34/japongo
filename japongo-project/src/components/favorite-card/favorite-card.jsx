@@ -1,5 +1,5 @@
 
-import { popoverClasses, Typography, Button } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import { useHistory } from "react-router";
 import './favorite-card.css';
 
@@ -21,14 +21,14 @@ export default function FavoriteCard(props){
             },
             body: JSON.stringify({
               email: sessionStorage.getItem('mail'), 
-              course: props?.data
+              course: props.data
             }),
           };
-        fetch(`http://localhost:4567/user/fav`, options)
+        fetch('http://localhost:4567/user/fav', options)
           .then(r=>r.json())
-          .then(d=>
-              props.onFavRemove(d)
-              );
+          .then(d=> {
+            console.log(d)
+            props.onFavRemove(d)})
     }
     
     return(
