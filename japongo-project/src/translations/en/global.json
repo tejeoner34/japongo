@@ -96,7 +96,16 @@
     },
     "Profile":{
         "Hello":"Hello",
-        "Favorite": "Your Favorite Courses" 
+        "Favorite": "Your Favorite Courses",
+        "Options": {
+            "Button":"Options",
+            "Delete": "Delete Account",
+            "Edit": "Edit Data",
+            "Description": "To delete you Account enter your password here",
+            "Cancel": "Cancel",
+            "DeleteAccount":"Delete",
+            "IncorrectPassword": "Incorrect Password"
+        }
         
     }
 }
