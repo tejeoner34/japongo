@@ -15,7 +15,8 @@
     },
     "Login": {
         "Access": "アックセス",
-        "HaveAccount": "¿アカウントはありませんか?"
+        "HaveAccount": "¿アカウントはありませんか?",
+        "Remember": "アカウントを覚える"
     },
     "Validation":{
         "Loading":"ロード中",
@@ -104,11 +105,18 @@
         "Options": {
             "Button":"設定",
             "Delete": "アカウントを削除",
-            "Edit": "アカウントを編集",
+            "Edit": "パスワードの変更",
             "Description": "アカウントを削除するにはパスワードを入力する必要です",
             "Cancel": "キャンセル",
             "DeleteAccount":"削除",
-            "IncorrectPassword": "不正なパスワード"
+            "IncorrectPassword": "不正なパスワード",
+            "UpdatePass": "パスワードの変更",
+            "UpdateButton": "変更",
+            "UpdateDescription": "パスワードを変更するにはパスワードを入力する必要です",
+            "NewPassword": "新しいパスワード",
+            "PasswordUpdated": "パスワードを変更しました"
+
+
 
         }
     }
