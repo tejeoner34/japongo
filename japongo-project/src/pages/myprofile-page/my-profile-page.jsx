@@ -91,7 +91,7 @@ export default function MyProfile() {
                 'Content-type': 'application/json' // aviso a mi servidor que le envio los datos en formato JSON
             },
             body: JSON.stringify({ // Genero el body como string
-                email: sessionStorage.getItem('mail'), // obtengo el value de un input por su name
+                email: sessionStorage.getItem('mail')??localStorage.getItem('mail'), // obtengo el value de un input por su name
                 password: e.target.password.value
             })
 
@@ -114,7 +114,7 @@ export default function MyProfile() {
                 'Content-type': 'application/json' // aviso a mi servidor que le envio los datos en formato JSON
             },
             body: JSON.stringify({ // Genero el body como string
-                email: sessionStorage.getItem('mail'), // obtengo el value de un input por su name
+                email: sessionStorage.getItem('mail')??localStorage.getItem('mail'), // obtengo el value de un input por su name
                 password: e.target.password.value,
                 newPassword: e.target.newPassword.value
             })
@@ -137,7 +137,7 @@ export default function MyProfile() {
     useEffect(() => {
         fetch('http://localhost:4567/user/', {
             headers: {
-                "Authorization": sessionStorage.getItem('token'),
+                "Authorization": sessionStorage.getItem('token')??localStorage.getItem('token'),
             }
         })
             .then(r => r.json())
@@ -225,7 +225,7 @@ export default function MyProfile() {
         <Fragment>
             <Box component='div' sx={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '90%' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: '2rem', width: '90%', alignItems: 'end', justifyContent: 'space-between' }}>
-                    <h1>{t("Profile.Hello")} {sessionStorage.getItem('name')}</h1>
+                    <h1>{t("Profile.Hello")} {sessionStorage.getItem('name')??localStorage.getItem('name')}</h1>
                     <div>
                         <Button
                             id="demo-positioned-button"

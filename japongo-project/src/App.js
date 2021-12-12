@@ -37,7 +37,7 @@ function App() {
 
 
   return (
-    <AuthProvider value={sessionStorage.getItem('isAuth') ?? false}>
+    <AuthProvider value={sessionStorage.getItem('isAuth')??localStorage.getItem('isAuth')??false}>
       <ThemeProvider theme={isDark ? darkTheme : theme}>
         <BrowserRouter>
           <Paper sx={{ borderRadius: "0" }} style={{ minHeight: '100vh' }}>
