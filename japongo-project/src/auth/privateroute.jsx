@@ -8,7 +8,7 @@ export default function PrivateRoute({ children, ...rest }) {
   async function getStatus(){
     const r = await fetch('http://localhost:4567/user/', {
         headers: {
-            "Authorization": sessionStorage.getItem('token'),
+            "Authorization": sessionStorage.getItem('token')??localStorage.getItem('token'),
         }
     })
     // if(r.ok){

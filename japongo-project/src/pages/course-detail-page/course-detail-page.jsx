@@ -33,7 +33,7 @@ export default function CourseDetailPage() {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        name: sessionStorage.getItem('name'),
+        name: sessionStorage.getItem('name')??localStorage.getItem('name'),
         comment: comment
       }),
     };
@@ -53,7 +53,7 @@ export default function CourseDetailPage() {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        email: sessionStorage.getItem('mail'),
+        email: sessionStorage.getItem('mail')??localStorage.getItem('mail'),
         course: course
       }),
     };

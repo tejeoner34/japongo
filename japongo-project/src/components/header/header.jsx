@@ -52,6 +52,10 @@ export default function Header(props) {
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('name');
         sessionStorage.removeItem('mail');
+        localStorage.removeItem('isAuth');
+        localStorage.removeItem('token');
+        localStorage.removeItem('name');
+        localStorage.removeItem('mail');
         updateIsAuth(false);
         history.push('login');
     };
@@ -107,7 +111,7 @@ export default function Header(props) {
                                 <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                                     <Tooltip title="Account settings">
                                         <IconButton onClick={handleClickMyProfile} size="small" sx={{ ml: 2 }}>
-                                            <Avatar sx={{ width: 32, height: 32 }}>{sessionStorage.getItem('name')?.charAt(0)?? ''}</Avatar>
+                                            <Avatar sx={{ width: 32, height: 32 }}>{sessionStorage.getItem('name')?.charAt(0)??localStorage.getItem('name')?.charAt(0)?? ''}</Avatar>
                                         </IconButton>
                                     </Tooltip>
                                 </Box>

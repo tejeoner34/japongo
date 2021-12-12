@@ -20,7 +20,7 @@ export default function FavoriteCard(props){
               "Content-type": "application/json", 
             },
             body: JSON.stringify({
-              email: sessionStorage.getItem('mail'), 
+              email: sessionStorage.getItem('mail')??localStorage.getItem('mail'), 
               course: props.data
             }),
           };
