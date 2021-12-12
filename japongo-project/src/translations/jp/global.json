@@ -25,12 +25,16 @@
     },
     "Register":{
         "Register":"登録",
-        "Name":"名前",
+        "Name":"ユーザー",
         "Password": "パスワード",
         "ConfirmPassword": "パスワード確認",
         "Email": "メール",
         "Error":"パスワードには問題はあります",
-        "ErrorMessage": "パスワードには問題はあります"
+        "ErrorMessage": "パスワードには問題はあります",
+        "CheckEmail": "メールをチェックしてください。",
+        "UserExists": "ユーザーまたはメールアドレスはすでに存在します"
+
+
 
     },
     "Home":{
@@ -96,6 +100,16 @@
     },
     "Profile":{
         "Hello":"こんにちは",
-        "Favorite": "お気に入り"
+        "Favorite": "お気に入り",
+        "Options": {
+            "Button":"設定",
+            "Delete": "アカウントを削除",
+            "Edit": "アカウントを編集",
+            "Description": "アカウントを削除するにはパスワードを入力する必要です",
+            "Cancel": "キャンセル",
+            "DeleteAccount":"削除",
+            "IncorrectPassword": "不正なパスワード"
+
+        }
     }
 }

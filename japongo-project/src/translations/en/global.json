@@ -24,12 +24,14 @@
     },
     "Register":{
         "Register":"Sign Up",
-        "Name":"Name",
+        "Name":"UserName",
         "Password": "Password",
         "ConfirmPassword": "Confirm Password",
         "Email":"Email",
         "Error": "Passwords are not equal",
-        "ErrorMessage": "Incorrect User or Password"
+        "ErrorMessage": "Incorrect User or Password",
+        "CheckEmail": "Check your Email",
+        "UserExists": "User or Email already exist"
     },
     "Home":{
         "H1": "Live and Study in Tokyo!",
@@ -94,7 +96,16 @@
     },
     "Profile":{
         "Hello":"Hello",
-        "Favorite": "Your Favorite Courses" 
+        "Favorite": "Your Favorite Courses",
+        "Options": {
+            "Button":"Options",
+            "Delete": "Delete Account",
+            "Edit": "Edit Data",
+            "Description": "To delete you Account enter your password here",
+            "Cancel": "Cancel",
+            "DeleteAccount":"Delete",
+            "IncorrectPassword": "Incorrect Password"
+        }
         
     }
 }

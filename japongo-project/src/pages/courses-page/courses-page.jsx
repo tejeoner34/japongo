@@ -11,7 +11,6 @@ export default function CoursesPage() {
         fetch('http://localhost:4567/courses/')
             .then(r => r.json())
             .then(d => {
-                console.log(d)
                 setCourses(oldvalue => oldvalue.concat(d));
                 setCoursesOriginal(oldvalue=> oldvalue.concat(d));
             })
@@ -21,11 +20,11 @@ export default function CoursesPage() {
     const [courseOriginal, setCoursesOriginal] = useState([]);
     
 
-    const [value, setValue] = useState(0);
+    // const [value, setValue] = useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+    // const handleChange = (event, newValue) => {
+    //     setValue(newValue);
+    // };
 
     const handleSubmit = (e)=>{
         e.preventDefault();

@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
 import CommentCard from '../../components/comment-card/comment-card';
 import './course-detail-page.css';
-import { userContext } from '../../context/user-context/user-context';
+import { UserContext } from '../../context/user-context/user-context';
 
 
 
@@ -15,14 +15,14 @@ export default function CourseDetailPage() {
   const { id } = useParams();
   const [course, updateCourse] = useState({});
   const [t] = useTranslation('global');
-  const [userData, updateUserData] = useContext(userContext);
+  const [, updateUserData] = useContext(UserContext);
   const [isAdd, setIsAdd] = useState(true);
 
   useEffect(() => {
     fetch(`http://localhost:4567/courses/course?id=${id}`)
       .then(r => r.json())
       .then(d => updateCourse({ ...d }))
-  }, []);
+  },);
 
   const onCommentPost = (e) => {
     e.preventDefault();
