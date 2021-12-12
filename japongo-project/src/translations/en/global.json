@@ -14,7 +14,8 @@
     },
     "Login": {
         "Access": "Sign in",
-        "HaveAccount": "You do not have an account?"
+        "HaveAccount": "You do not have an account?",
+        "Remember": "Remember me"
     },
     "Validation":{
         "Loading": "Loading",
@@ -100,11 +101,16 @@
         "Options": {
             "Button":"Options",
             "Delete": "Delete Account",
-            "Edit": "Edit Data",
+            "Edit": "Update Password",
             "Description": "To delete you Account enter your password here",
             "Cancel": "Cancel",
             "DeleteAccount":"Delete",
-            "IncorrectPassword": "Incorrect Password"
+            "IncorrectPassword": "Incorrect Password",
+            "UpdatePass": "Update Password",
+            "UpdateButton": "Update",
+            "UpdateDescription": "To create a new password please enter your current password first",
+            "NewPassword": "New Password",
+            "PasswordUpdated": "Password was updated"
         }
         
     }

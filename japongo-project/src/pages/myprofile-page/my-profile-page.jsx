@@ -96,15 +96,42 @@ export default function MyProfile() {
             })
 
         }
-
         fetch('http://localhost:4567/user/', options)
             .then(r => {
                 if (r.ok) { history.push('/login') } else { setIncorrectPass(t("Profile.Options.IncorrectPassword")) }
                 return r.json()
             })
             .then(d => console.log(d))
+    };
 
+    const onPasswordChange = (e)=>{
+        e.preventDefault();
+        console.log(e.target.password.value)
+        console.log(e.target.newPassword.value)
+        const options = {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json' // aviso a mi servidor que le envio los datos en formato JSON
+            },
+            body: JSON.stringify({ // Genero el body como string
+                email: sessionStorage.getItem('mail'), // obtengo el value de un input por su name
+                password: e.target.password.value,
+                newPassword: e.target.newPassword.value
+            })
 
+        }
+        fetch('http://localhost:4567/user/', options)
+            .then(r => {
+                if (r.ok) { 
+                    setIncorrectPass(t("Profile.Options.PasswordUpdated"));
+                    setTimeout(()=>{
+                        handleCloseDialogPassword()
+                    }, 1000)
+                     
+                } else { setIncorrectPass(t("Profile.Options.IncorrectPassword")) }
+                return r.json()
+            })
+            .then(d => console.log(d))
     }
 
     useEffect(() => {
@@ -139,6 +166,18 @@ export default function MyProfile() {
 
     const handleCloseDialog = () => {
         setOpenDialog(false);
+    };
+
+
+    //import from MUI. Update password Dialog
+    const [openDialogPassword, setOpenDialogPassword] = useState(false);
+
+    const handleClickOpenPassword = () => {
+        setOpenDialogPassword(true);
+    };
+
+    const handleCloseDialogPassword = () => {
+        setOpenDialogPassword(false);
     };
 
 
@@ -213,32 +252,66 @@ export default function MyProfile() {
                             }}
                         >
                             <MenuItem onClick={handleClickOpen}>{t("Profile.Options.Delete")}</MenuItem>
-                            <Dialog  open={openDialog} onClose={handleCloseDialog}>
+                            <Dialog open={openDialog} onClose={handleCloseDialog}>
                                 <DialogTitle>{t("Profile.Options.Delete")}</DialogTitle>
                                 <form onSubmit={onAccountDelete}>
-                                <DialogContent>
-                                    <DialogContentText>
-                                    {t("Profile.Options.Description")}
-                                    </DialogContentText>
-                                    <TextField
-                                        autoFocus
-                                        margin="dense"
-                                        id="password"
-                                        name='password'
-                                        label={t("Register.Password")}
-                                        type="password"
-                                        fullWidth
-                                        variant="standard"
-                                    />
-                                </DialogContent>
-                                <Typography textAlign={'center'} color='red'>{incorrectPass}</Typography>
-                                <DialogActions>
-                                    <Button onClick={handleCloseDialog}>{t("Profile.Options.Cancel")}</Button>
-                                    <Button type="submit" >{t("Profile.Options.DeleteAccount")}</Button>
-                                </DialogActions>
+                                    <DialogContent>
+                                        <DialogContentText>
+                                            {t("Profile.Options.Description")}
+                                        </DialogContentText>
+                                        <TextField
+                                            autoFocus
+                                            margin="dense"
+                                            id="password"
+                                            name='password'
+                                            label={t("Register.Password")}
+                                            type="password"
+                                            fullWidth
+                                            variant="standard"
+                                        />
+                                    </DialogContent>
+                                    <Typography textAlign={'center'} color='red'>{incorrectPass}</Typography>
+                                    <DialogActions>
+                                        <Button onClick={handleCloseDialog}>{t("Profile.Options.Cancel")}</Button>
+                                        <Button type="submit" >{t("Profile.Options.DeleteAccount")}</Button>
+                                    </DialogActions>
                                 </form>
                             </Dialog>
-                            <MenuItem onClick={handleClose}>{t("Profile.Options.Edit")}</MenuItem>
+                            <MenuItem onClick={handleClickOpenPassword}>{t("Profile.Options.Edit")}</MenuItem>
+                            <Dialog open={openDialogPassword} onClose={handleCloseDialogPassword}>
+                                <DialogTitle>{t("Profile.Options.UpdatePass")}</DialogTitle>
+                                <form onSubmit={onPasswordChange}>
+                                    <DialogContent>
+                                        <DialogContentText>
+                                            {t("Profile.Options.UpdateDescription")}
+                                        </DialogContentText>
+                                        <TextField
+                                            autoFocus
+                                            margin="dense"
+                                            id="password"
+                                            name='password'
+                                            label={t("Register.Password")}
+                                            type="password"
+                                            fullWidth
+                                            variant="standard"
+                                        />
+                                        <TextField
+                                            margin="dense"
+                                            id="newPassword"
+                                            name='newPassword'
+                                            label={t("Profile.Options.NewPassword")}
+                                            type="password"
+                                            fullWidth
+                                            variant="standard"
+                                        />
+                                    </DialogContent>
+                                    <Typography textAlign={'center'} color='red'>{incorrectPass}</Typography>
+                                    <DialogActions>
+                                        <Button onClick={handleCloseDialogPassword}>{t("Profile.Options.Cancel")}</Button>
+                                        <Button type="submit" >{t("Profile.Options.UpdateButton")}</Button>
+                                    </DialogActions>
+                                </form>
+                            </Dialog>
                         </Menu>
                     </div>
 

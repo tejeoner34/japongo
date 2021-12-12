@@ -8,19 +8,20 @@ import TextField from '@mui/material/TextField';
 import { useTranslation } from 'react-i18next';
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../auth/auth.context.js'
-
-
-
-
-
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 function Login() {
 
     const [, updateIsAuth] = useContext(AuthContext);
     const [t] = useTranslation('global');
     const [errorMessage, setErrorMessage] = useState('');
+    const [checked, setChecked] = useState(false);
     let history = useHistory();
 
+    const handleCheck = (e)=>{
+        setChecked(!checked)
+    }
 
     const handleSubmit = (e) => { // gestiono el submit del formulario
         e.preventDefault();
@@ -47,12 +48,23 @@ function Login() {
                     return r.json()
                 })
                 .then(d => {
-                    if (d !== undefined) {
+                    if (d !== undefined && !checked) {
                         sessionStorage.setItem('token', 'Bearer ' + d.token);
                         sessionStorage.setItem('mail', d.email);
                         sessionStorage.setItem('name', d.name);
                         updateIsAuth(true)
                         sessionStorage.setItem('isAuth', true);
+                        history.push("/courses");
+                    }else if(d !== undefined && checked){
+                        sessionStorage.setItem('token', 'Bearer ' + d.token);
+                        sessionStorage.setItem('mail', d.email);
+                        sessionStorage.setItem('name', d.name);
+                        localStorage.setItem('token', 'Bearer ' + d.token);
+                        localStorage.setItem('mail', d.email);
+                        localStorage.setItem('name', d.name);
+                        updateIsAuth(true)
+                        sessionStorage.setItem('isAuth', true);
+                        localStorage.setItem('isAuth', true);
                         history.push("/courses");
                     }
                 });
@@ -101,6 +113,7 @@ function Login() {
                     <h2>Login</h2>
                     <TextField id="email" name='email' required type='email' label={t("Register.Email")} variant="outlined" />
                     <TextField id="password" name='password' required type='password' label={t('Register.Password')} variant="outlined" />
+                    <FormControlLabel control={<Checkbox checked={checked} onChange={handleCheck} />} label={t("Login.Remember")} />
                     <Typography color='error'>{errorMessage}</Typography>
                     <Button variant='contained' type='submit' color='primary'>{t('Login.Access')}</Button>
                     <Typography>{t('Login.HaveAccount')} <Link to='/register'>Sign up</Link></Typography>
