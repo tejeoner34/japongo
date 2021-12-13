@@ -20,6 +20,8 @@ import CoursesPage from './pages/courses-page/courses-page';
 import CourseDetailPage from './pages/course-detail-page/course-detail-page';
 import Footer from './components/footer/footer';
 import UserProvider from './context/user-context/user-provider';
+import ForgotPasswordPage from './pages/forgot-password-page/forgot-password-page';
+import ResetPassword from './pages/reset-password-page/reset-password-page';
 
 
 
@@ -57,6 +59,12 @@ function App() {
                 </Route>
                 <Route path='/login'>
                   <Login></Login>
+                </Route>
+                <Route path='/forgot-password'>
+                  <ForgotPasswordPage></ForgotPasswordPage>
+                </Route>
+                <Route path='/reset-password'>
+                  <ResetPassword></ResetPassword>
                 </Route>
                 <Route path="/validate-mail">
                   <ValidateEmail></ValidateEmail>

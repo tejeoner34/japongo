@@ -116,7 +116,8 @@ function Login() {
                     <FormControlLabel control={<Checkbox checked={checked} onChange={handleCheck} />} label={t("Login.Remember")} />
                     <Typography color='error'>{errorMessage}</Typography>
                     <Button variant='contained' type='submit' color='primary'>{t('Login.Access')}</Button>
-                    <Typography>{t('Login.HaveAccount')} <Link to='/register'>Sign up</Link></Typography>
+                    <Typography>{t('Login.HaveAccount')} <Link to='/register'>{t('Login.SignUp')}</Link></Typography>
+                    <Typography><Link to='/forgot-password'>{t('Login.ForgotPassword')}</Link></Typography>
                 </Box>
 
 
