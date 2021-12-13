@@ -1,18 +1,28 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import './map-component.css'
 
-// export default function TokyoMap() {
 
-//     return (
-//         <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
-//             <TileLayer
-//                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-//                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-//             />
-//             <Marker position={[51.505, -0.09]}>
-//                 <Popup>
-//                     A pretty CSS3 popup. <br /> Easily customizable.
-//                 </Popup>
-//             </Marker>
-//         </MapContainer>
-//     )
-// }
+
+export default function TokyoMap(props) {
+
+    console.log(props?.data)
+
+    return (
+        <MapContainer center={[35.68138269737581, 139.7684809508418]} zoom={10} scrollWheelZoom={true}>
+  <TileLayer
+    
+    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  />
+
+  {props.data?.map(s=>(
+      <Marker position={[s?.lat, s?.lon]}>
+      <Popup>
+        {s?.lat} <br /> Easily customizable.
+      </Popup>
+    </Marker>
+  ))}
+  
+</MapContainer>
+    )
+}

@@ -138,6 +138,16 @@
             "Message": "新しいパスワードを入力してください",
             "UpdatePassword": "パスワードを変更"
 
+        },
+        "Schools":{
+            "Card":{
+                "Intensity": "強度",
+                "Cafeteria": "カフェ",
+                "Wifi": "Wi-Fi",
+                "JobSupport": "仕事サポート",
+                "Button": "詳しく"
+            },
+            "Title": "東京で学校を見つけよう"
         }
 
 }
