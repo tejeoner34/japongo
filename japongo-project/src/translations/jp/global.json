@@ -16,7 +16,10 @@
     "Login": {
         "Access": "アックセス",
         "HaveAccount": "¿アカウントはありませんか?",
-        "Remember": "アカウントを覚える"
+        "Remember": "アカウントを覚える",
+        "ForgotPassword": "パスワードを忘れました?",
+        "SignUp": "アカウントを作成する"
+
     },
     "Validation":{
         "Loading":"ロード中",
@@ -119,5 +122,22 @@
 
 
         }
-    }
+    },
+    "ForgotPassword": {
+        "Title": "パスワードアシスタント",
+        "Message": "アカウントに関連付けられているEメールアドレスを入力してください。",
+        "Email": "E メールアドレス",
+        "SendEmail": "メールを送る",
+        "EmailError": "このメールは存在していません",
+        "EmailSent": "受信トレイをチェックしてください",
+        "Error": "失敗"
+
+
+        },
+        "ResetPassword": {
+            "Message": "新しいパスワードを入力してください",
+            "UpdatePassword": "パスワードを変更"
+
+        }
+
 }

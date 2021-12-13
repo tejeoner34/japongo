@@ -15,7 +15,9 @@
     "Login": {
         "Access": "Sign in",
         "HaveAccount": "You do not have an account?",
-        "Remember": "Remember me"
+        "Remember": "Remember me",
+        "ForgotPassword": "Forgot your password?",
+        "SignUp": "Sign up"
     },
     "Validation":{
         "Loading": "Loading",
@@ -113,5 +115,19 @@
             "PasswordUpdated": "Password was updated"
         }
         
+    },
+    "ForgotPassword":{
+        "Title": "Forgot Password",
+        "Message": "Enter the email address connected to yout account",
+        "Email": "Email",
+        "SendEmail": "Send Email",
+        "EmailError": "Email does not exist",
+        "EmailSent": "Check your Email inbox",
+        "Error": "Error"
+    },
+    "ResetPassword": {
+        "Message": "Please enter your new password",
+        "UpdatePassword": "Update Password"
     }
+
 }
