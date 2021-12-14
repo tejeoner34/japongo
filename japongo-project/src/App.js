@@ -22,6 +22,7 @@ import Footer from './components/footer/footer';
 import UserProvider from './context/user-context/user-provider';
 import ForgotPasswordPage from './pages/forgot-password-page/forgot-password-page';
 import ResetPassword from './pages/reset-password-page/reset-password-page';
+import SchoolDetailPage from './pages/school-detail-page/school-detail-page';
 
 
 
@@ -50,9 +51,13 @@ function App() {
               <Grid item container xs={12}>
                 <Header isDark={isDark} onThemeChange={onThemeChange} />
               </Grid>
+              <main>
               <Switch>
                 <Route path='/schools'>
                   <EscuelasPage></EscuelasPage>
+                </Route>
+                <Route path='/school/:id'>
+                  <SchoolDetailPage></SchoolDetailPage>
                 </Route>
                 <Route path='/accommodation'>
                   <AlojamientoPage></AlojamientoPage>
@@ -94,6 +99,7 @@ function App() {
                 </UserProvider>
                 
               </Switch>
+              </main>
               <Footer></Footer>
             </Grid>
           </Paper>

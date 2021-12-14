@@ -33,10 +33,10 @@ export default function PrivateRoute({ children, ...rest }) {
     useEffect(()=>{
       const fetchFunction = async()=>{
         const data = await getStatus();
-        setStatus(data);
+         setStatus(data);
       };
       fetchFunction();
-      return ()=>setStatus(null) 
+      
     },[])
 
 

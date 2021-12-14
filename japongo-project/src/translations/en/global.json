@@ -10,7 +10,8 @@
         "AboutUs": "About Us",
         "Legal": "Legal",
         "Login": "Login",
-        "Menu": "Menu"
+        "Menu": "Menu", 
+        "Courses": "Online Courses"
     },
     "Login": {
         "Access": "Sign in",
@@ -138,6 +139,20 @@
             "Button": "Details"
         },
         "Title": "Find your School in Tokyo"
+    },
+    "SchoolDetail":{
+        "Introduction": "About the School",
+        "Description": "School description",
+        "Support":"From personal consultation in regards to study and elective choices, the school provides above and beyond support in regards to employment. Specific counseling is offered to the student even after their language studies.",
+        "Wifi": "Free Wifi is available to students.",
+        "Cafeteria": "There is a Cafe inside the school",
+        "Beginner": "There is a beginner course",
+        "Characteristics": "Characteristics",
+        "Male":"Male",
+        "Female":"Female",
+        "Age":"Age",
+        "Send": "Send",
+        "Message": "We have received your data and will shortly contact you"
     }
 
 }

@@ -15,8 +15,8 @@ export default function TokyoMap(props) {
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
 
-  {props.data?.map(s=>(
-      <Marker position={[s?.lat, s?.lon]}>
+  {props.data?.map((s,i)=>(
+      <Marker key={i} position={[s?.lat, s?.lon]}>
       <Popup>
         {s?.lat} <br /> Easily customizable.
       </Popup>

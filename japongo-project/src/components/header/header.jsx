@@ -94,19 +94,19 @@ export default function Header(props) {
                         >
                             <MenuItem onClick={handleClose}><Link to='/schools'>{t("Header.Schools")}</Link></MenuItem>
                             <MenuItem onClick={handleClose}><Link to='/accommodation'>{t("Header.Accommodation")}</Link></MenuItem>
-                            <MenuItem onClick={handleClose}><Link to='/login'>{t("Header.Login")}</Link></MenuItem>
+                            <MenuItem onClick={handleClose}><Link to='/courses'>{t("Header.Courses")}</Link></MenuItem>
                             <MenuItem onClick={handleClose} >{t("Header.AboutUs")}</MenuItem>
                             <MenuItem onClick={handleClose} ><Link to='/legal'>{t("Header.Legal")}</Link></MenuItem>
                         </Menu>
                     </Box>
-                    <Box sx={{ columnGap: '30px', display: 'flex', justifyContent: 'space-between' }}>
+                    <Box sx={{ columnGap: '30px', display: 'flex', justifyContent: 'space-between', alignItems:'center' }}>
                         {/* <LanguageSelect /> */}
-                        <select onChange={(e) => i18n.changeLanguage(e.target.value)} name="lang" id="language">
+                        <select onChange={(e) => {i18n.changeLanguage(e.target.value);localStorage.setItem('lang', e.target.value)}} value={localStorage.getItem('lang')??'en'} name="lang" id="language">
                             <option value="en">EN</option>
                             <option value="jp">JP</option>
                         </select>
                         <SwitchComponent isDard={props.isDark} onThemeChange={props.onThemeChange} />
-                        {isAuth &&
+                        {isAuth ?
                             <React.Fragment>
                                 <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                                     <Tooltip title="Account settings">
@@ -152,17 +152,10 @@ export default function Header(props) {
                                     <MenuItem onClick={()=>history.push('/my-profile')}>
                                         <Avatar /> {t("Header.Profile")}
                                     </MenuItem>
-                                    <MenuItem>
-                                        <Avatar /> {t("Header.Account")}
-                                    </MenuItem>
+                                    
                                     <Divider />
                                     
-                                    <MenuItem>
-                                        <ListItemIcon>
-                                            <Settings fontSize="small" />
-                                        </ListItemIcon>
-                                        {t("Header.Settings")}
-                                    </MenuItem>
+                                    
                                     <MenuItem onClick={handleLogout}>
                                         <ListItemIcon>
                                             <Logout fontSize="small" />
@@ -171,6 +164,10 @@ export default function Header(props) {
                                     </MenuItem>
                                 </Menu>
                             </React.Fragment>
+                            :
+                            <Typography 
+                            onClick={()=>history.push('/login')}
+                            sx={{cursor:'pointer'}}>{t("Header.Login")}</Typography>
 
                         }
                         {/* <Button color="inherit">Login</Button> */}

@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid, Typography, Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import TokyoMap from '../../components/map-component/map-component.jsx';
 import SchoolsCard from '../../components/schools-card/schools-card.jsx';
@@ -28,7 +28,13 @@ function EscuelasPage() {
                 <Typography variant='h1' color='common.white' sx={{ position: 'absolute' }}>{t("Schools.Title")}</Typography>
             </div>
             <TokyoMap data={schools}></TokyoMap>
-            {schools?.map((s, i) => <SchoolsCard key={i} data={s}></SchoolsCard>)}
+            <Box component='div'
+            display='flex'
+            flexWrap='wrap'
+            gap={2}
+            justifyContent='center'>
+                {schools?.map((s, i) => <SchoolsCard key={i} data={s}></SchoolsCard>)}
+            </Box>
 
 
         </Grid>

@@ -10,8 +10,8 @@
         "AboutUs": "会社について",
         "Legal": "Legal",
         "Login": "ログイン",
-        "Menu": "メニュー"
-
+        "Menu": "メニュー",
+        "Courses": "オンライン授業"
     },
     "Login": {
         "Access": "アックセス",
@@ -19,49 +19,44 @@
         "Remember": "アカウントを覚える",
         "ForgotPassword": "パスワードを忘れました?",
         "SignUp": "アカウントを作成する"
-
     },
-    "Validation":{
-        "Loading":"ロード中",
-        "Ok":"メールが検証されました",
-        "Error":"このEメールアドレスを持つアカウントが見つかりません"
-
+    "Validation": {
+        "Loading": "ロード中",
+        "Ok": "メールが検証されました",
+        "Error": "このEメールアドレスを持つアカウントが見つかりません"
     },
-    "Register":{
-        "Register":"登録",
-        "Name":"ユーザー",
+    "Register": {
+        "Register": "登録",
+        "Name": "ユーザー",
         "Password": "パスワード",
         "ConfirmPassword": "パスワード確認",
         "Email": "メール",
-        "Error":"パスワードには問題はあります",
+        "Error": "パスワードには問題はあります",
         "ErrorMessage": "パスワードには問題はあります",
         "CheckEmail": "メールをチェックしてください。",
         "UserExists": "ユーザーまたはメールアドレスはすでに存在します"
-
-
-
     },
-    "Home":{
+    "Home": {
         "H1": "東京で日本語勉強しよう！",
-        "Steps":{
+        "Steps": {
             "Title": "どうしたらいいですか？",
             "One": {
                 "Title": "探す",
                 "Body": "好きな学校を探す"
             },
-            "Two":{
+            "Two": {
                 "Title": "予約",
-                "Body":"好きな学校を見つけたら、コンタクトフォームを入力して予約する"
+                "Body": "好きな学校を見つけたら、コンタクトフォームを入力して予約する"
             },
-            "Three":{
+            "Three": {
                 "Title": "リラックス",
                 "Body": "これからはリラックスしながらエクスペリエンスが始まるまで待つ"
             }
         },
-        "FirstStep":{
+        "FirstStep": {
             "Banner": "第一歩",
-            "SchoolCard":{
-                "Title":"学校を選ぼう",
+            "SchoolCard": {
+                "Title": "学校を選ぼう",
                 "Button": "学校"
             },
             "AccommodationCard": {
@@ -73,54 +68,51 @@
                 "Button": "授業"
             }
         },
-        "Reviews":{
+        "Reviews": {
             "Banner": "レビュー",
-            "Steps":{
-                "Back":"前",
-                "Next":"次"
+            "Steps": {
+                "Back": "前",
+                "Next": "次"
             }
         }
     },
-    "CoursesPage":{
+    "CoursesPage": {
         "Banner": "オンライン授業",
-        "SearchBar":{
+        "SearchBar": {
             "Placeholder": "",
             "Button": "探す",
             "Level": "レベル"
         }
     },
-    "CoursePage":{
-        "Comment":{
+    "CoursePage": {
+        "Comment": {
             "PlaceHolder": "コメント",
             "Button": "投稿"
         },
-        "Info":{
+        "Info": {
             "Duration": "時間",
             "Comment": "コメント",
             "Button": "お気に入り",
-            "NotAddedMessage":"もうお気に入りに追加しました",
+            "NotAddedMessage": "もうお気に入りに追加しました",
             "AddedMessage": "お気に入りに追加しました"
         }
     },
-    "Profile":{
-        "Hello":"こんにちは",
+    "Profile": {
+        "Hello": "こんにちは",
         "Favorite": "お気に入り",
         "Options": {
-            "Button":"設定",
+            "Button": "設定",
             "Delete": "アカウントを削除",
             "Edit": "パスワードの変更",
             "Description": "アカウントを削除するにはパスワードを入力する必要です",
             "Cancel": "キャンセル",
-            "DeleteAccount":"削除",
+            "DeleteAccount": "削除",
             "IncorrectPassword": "不正なパスワード",
             "UpdatePass": "パスワードの変更",
             "UpdateButton": "変更",
             "UpdateDescription": "パスワードを変更するにはパスワードを入力する必要です",
             "NewPassword": "新しいパスワード",
             "PasswordUpdated": "パスワードを変更しました"
-
-
-
         }
     },
     "ForgotPassword": {
@@ -131,23 +123,33 @@
         "EmailError": "このメールは存在していません",
         "EmailSent": "受信トレイをチェックしてください",
         "Error": "失敗"
-
-
+    },
+    "ResetPassword": {
+        "Message": "新しいパスワードを入力してください",
+        "UpdatePassword": "パスワードを変更"
+    },
+    "Schools": {
+        "Card": {
+            "Intensity": "強度",
+            "Cafeteria": "カフェ",
+            "Wifi": "Wi-Fi",
+            "JobSupport": "仕事サポート",
+            "Button": "詳しく"
         },
-        "ResetPassword": {
-            "Message": "新しいパスワードを入力してください",
-            "UpdatePassword": "パスワードを変更"
-
-        },
-        "Schools":{
-            "Card":{
-                "Intensity": "強度",
-                "Cafeteria": "カフェ",
-                "Wifi": "Wi-Fi",
-                "JobSupport": "仕事サポート",
-                "Button": "詳しく"
-            },
-            "Title": "東京で学校を見つけよう"
-        }
-
+        "Title": "東京で学校を見つけよう"
+    },
+    "SchoolDetail": {
+        "Introduction": "学校について",
+        "Description": "詳細",
+        "Support": "勉強や選択の選択に関する個人的な相談から、学校は雇用に関して以上のサポートを提供します。語学学習後も、学生に特別なカウンセリングを提供しています。",
+        "Wifi": "学生は無料Wi-Fiを利用できます。",
+        "Cafeteria": "学校の施設の中にカフェがあります",
+        "Beginner": "初級コースがあります",
+        "Characteristics": "特徴",
+        "Male": "男",
+        "Female": "女",
+        "Age": "年齢",
+        "Send":"送る",
+        "Message": "電子メールを受け取りました、すぐに連絡します"
+    }
 }
