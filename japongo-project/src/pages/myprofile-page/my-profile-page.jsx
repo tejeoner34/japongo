@@ -184,44 +184,7 @@ export default function MyProfile() {
 
     return (
 
-        // <Grid item container justifyContent='center' flexDirection='column' alignItems='center' rowGap={3}>
-        //     <h1>{t("Profile.Hello")} {sessionStorage.getItem('name')}</h1>
-        //     <Box sx={{ bgcolor: 'background.paper', width: 500 }}>
-
-
-        //         <AppBar position="static">
-        //             <Tabs
-        //                 value={value}
-        //                 onChange={handleChange}
-        //                 indicatorColor="secondary"
-        //                 textColor="inherit"
-        //                 variant="fullWidth"
-        //                 aria-label="full width tabs example"
-        //             >
-        //                 <Tab label={t("Profile.Favorite")} {...a11yProps(0)} />
-        //                 <Tab label="Item Two" {...a11yProps(1)} />
-        //                 <Tab label="Item Three" {...a11yProps(2)} />
-        //             </Tabs>
-        //         </AppBar>
-        //         <SwipeableViews
-        //             axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        //             index={value}
-        //             onChangeIndex={handleChangeIndex}
-        //         >
-        //             <Box value={value} index={0} dir={theme.direction}>
-        //                 <div className="profile__favorite-cards">
-        //                     {userData?.favs?.map((e, i) => <li key={i}><FavoriteCard onFavRemove={onFavRemove} data={e} /></li>)}
-        //                 </div>
-        //             </Box>
-        //             <TabPanel value={value} index={1} dir={theme.direction}>
-        //                 Item Two
-        //             </TabPanel>
-        //             <TabPanel value={value} index={2} dir={theme.direction}>
-        //                 Item Three
-        //             </TabPanel>
-        //         </SwipeableViews>
-        //     </Box>
-        // </Grid>
+        
         <Fragment>
             <Box component='div' sx={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '90%' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: '2rem', width: '90%', alignItems: 'end', justifyContent: 'space-between' }}>
@@ -316,7 +279,8 @@ export default function MyProfile() {
                     </div>
 
                 </Box>
-                <Box component='div'>
+                <Box component='div'
+                >
                     <Typography variant='h3'>{t("Profile.Favorite")}</Typography>
                     <ul className="profile__favorite-cards">
                         {userData?.favs?.map((e, i) => <li key={i}><FavoriteCard onFavRemove={onFavRemove} data={e} /></li>)}

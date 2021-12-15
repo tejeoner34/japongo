@@ -20,11 +20,11 @@ export default function HomePage() {
         fetch('http://localhost:4567/reviews/')
         .then(r=>r.json())
         .then(d=>{
-            setReviews(oldvalue=> oldvalue.concat(d))
+            setReviews(d)
         })
     },[]);
 
-    const [reviews, setReviews] = useState([])
+    const [reviews, setReviews] = useState(null)
 
     const [t] = useTranslation('global');
 
@@ -85,11 +85,11 @@ export default function HomePage() {
                 <Typography variant='h1' color='common.white' sx={{ position: 'absolute' }}>{t("Home.Reviews.Banner")}</Typography>
             </div>
             <Stack direction={{ xs: 'row', sm: 'row' }} spacing={2} rowGap={4} sx={{overflowX:'hidden'}}>
-                {reviews?.map((e,i)=> <ReviewCard key={i} data={e}/>)}
+                {reviews&&(reviews?.map((e,i)=> <ReviewCard key={i} data={e}/>))}
             </Stack>
 
             <Stack>
-                <ReviewCardSlider data={reviews}/>
+                {reviews&&<ReviewCardSlider data={reviews}/>}
             </Stack>
 
         </Grid>

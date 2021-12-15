@@ -12,6 +12,7 @@ import ChildCareIcon from '@mui/icons-material/ChildCare';
 import { useTranslation } from 'react-i18next';
 import { serverUrl } from '../../global/global-variable';
 import './school-detail-page.css';
+import AccommodationMap from '../../components/map-component/map-component-accommodation';
 
 
 
@@ -20,6 +21,7 @@ export default function SchoolDetailPage() {
 
 
     const [school, updateSchool] = useState(null);
+    const [accommodations, updateAcommodations] = useState([]);
 
     const [infoSentMessage, updateInfoSentMessage] = useState('')
 
@@ -30,37 +32,43 @@ export default function SchoolDetailPage() {
     useEffect(() => {
         fetch(`http://localhost:4567/schools/school?id=${id}`)
             .then(r => r.json())
-            .then(d => updateSchool({ ...d }))
-    });
+            .then(d => {
+                updateSchool({ ...d });
+                fetch(`http://localhost:4567/accommodation?lat=${d.lat}&lon=${d.lon}`)
+                .then(r => r.json())
+                .then(d => updateAcommodations(oldvalue => oldvalue.concat(d)))
+            })
 
-    const handleInfoSubmit = (e)=>{
+    }, []);
+
+
+
+
+    const handleInfoSubmit = (e) => {
         e.preventDefault();
-        const options={
+        const options = {
             method: "POST",
             headers: {
-              "Content-type": "application/json", 
+                "Content-type": "application/json",
             },
             body: JSON.stringify({
-             
-              email: e.target.email.value, 
-              name: e.target.name.value,
-              gender: e.target.gender.value,
-              age: e.target.age.value,
-              token: id
+
+                email: e.target.email.value,
+                name: e.target.name.value,
+                gender: e.target.gender.value,
+                age: e.target.age.value,
+                token: id
             })
         }
         fetch('http://localhost:4567/info', options)
-        .then(r=>{
-            if(r.ok)updateInfoSentMessage(t("SchoolDetail.Message"));
-            return r.json()
-        })
+            .then(r => {
+                if (r.ok) updateInfoSentMessage(t("SchoolDetail.Message"));
+                return r.json()
+            })
     }
 
     return (
-        <Grid container item xs={12} md={5} direction="column"
-            alignItems="center"
-            justifyContent="center"
-            rowGap={3}>
+        <Grid container justifyContent='center' flexDirection='column' alignItems='center' rowGap={4}>
             <div className='home__banner' style={{ maxHeight: '300px' }}>
                 {school && <img className='home__banner__img' src={serverUrl + `/school/${school?.img?.banner}`} alt={school?.img?.banner} />}
                 <div className='home__banner__background'></div>
@@ -121,7 +129,7 @@ export default function SchoolDetailPage() {
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                         display='flex'
-                        
+
                     >
                         <Typography variant='h4'>{t("SchoolDetail.Characteristics")}</Typography>
                     </AccordionSummary>
@@ -152,6 +160,11 @@ export default function SchoolDetailPage() {
                     </AccordionDetails>
                 </Accordion>
             </div>
+            <Divider sx={{ padding: '10px', width: '40%', borderBottomWidth: 2, }} />
+
+            <Typography variant='h2'>{t("Header.Accommodation")}</Typography>
+            <Typography>{t("SchoolDetail.Accommodation")}</Typography>
+            {school && <AccommodationMap school={school} lat={school?.lat} lon={school?.lon} data={accommodations}></AccommodationMap>}
             <Paper sx={{ width: '70%', textAlign: 'center', display: 'flex', justifyContent: 'center', padding: 2 }} elevation={10}>
                 <form className='login-form' onSubmit={handleInfoSubmit}>
                     <div className='avatar-container'>
@@ -161,14 +174,14 @@ export default function SchoolDetailPage() {
                     <TextField required type='email' name='email' label={t("Register.Email")} variant="outlined" />
                     <TextField required type='text' name='name' label={t("Register.Name")} variant="outlined" />
                     <div>
-                    <input name='gender' value='male' type='radio' id='male'/>
-                    <label id='male' htmlFor='male'>{t("SchoolDetail.Male")}</label>
+                        <input name='gender' value='male' type='radio' id='male' />
+                        <label id='male' htmlFor='male'>{t("SchoolDetail.Male")}</label>
                     </div>
                     <div>
-                    <input name='gender' value='female' type='radio' id='female'/>
-                    <label id='female' htmlFor='female'>{t("SchoolDetail.Female")}</label>
+                        <input name='gender' value='female' type='radio' id='female' />
+                        <label id='female' htmlFor='female'>{t("SchoolDetail.Female")}</label>
                     </div>
-                    <TextField name='age' type='number'InputProps={{ inputProps: { min: 18, max: 100 } }} label={t("SchoolDetail.Age")} ></TextField>
+                    <TextField name='age' type='number' InputProps={{ inputProps: { min: 18, max: 100 } }} label={t("SchoolDetail.Age")} ></TextField>
                     {infoSentMessage}
                     <Button variant='contained' type='submit' color='primary'>{t('SchoolDetail.Send')}</Button>
 

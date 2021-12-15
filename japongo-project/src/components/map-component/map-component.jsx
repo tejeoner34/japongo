@@ -5,10 +5,10 @@ import './map-component.css'
 
 export default function TokyoMap(props) {
 
-    console.log(props?.data)
+   
 
     return (
-        <MapContainer center={[35.68138269737581, 139.7684809508418]} zoom={10} scrollWheelZoom={true}>
+        <MapContainer center={[props.lat, props.lon]} zoom={11} scrollWheelZoom={true}>
   <TileLayer
     
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -18,7 +18,9 @@ export default function TokyoMap(props) {
   {props.data?.map((s,i)=>(
       <Marker key={i} position={[s?.lat, s?.lon]}>
       <Popup>
-        {s?.lat} <br /> Easily customizable.
+      <p className='map__popup__name'>{s.name}</p>
+  
+         
       </Popup>
     </Marker>
   ))}

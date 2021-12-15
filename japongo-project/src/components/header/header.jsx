@@ -13,7 +13,6 @@ import SwitchComponent from '../switch/switch-component';
 import MenuItem from '@mui/material/MenuItem';
 import { AuthContext } from '../../auth/auth.context';
 import Tooltip from '@mui/material/Tooltip';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
@@ -66,7 +65,7 @@ export default function Header(props) {
         <Box component='div' sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar sx={{ columnGap: '30px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                    <Typography xs={12} variant='h3'>
+                    <Typography sx={{cursor:'pointer'}} onClick={()=>history.push('/')} xs={12} variant='h3'>
                         JaponGo
                     </Typography>
                 </Toolbar>
@@ -92,11 +91,11 @@ export default function Header(props) {
                             }}
                             sx={{ minWidth: '500px' }}
                         >
-                            <MenuItem onClick={handleClose}><Link to='/schools'>{t("Header.Schools")}</Link></MenuItem>
-                            <MenuItem onClick={handleClose}><Link to='/accommodation'>{t("Header.Accommodation")}</Link></MenuItem>
-                            <MenuItem onClick={handleClose}><Link to='/courses'>{t("Header.Courses")}</Link></MenuItem>
+                            <Link  to='/'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Home")}</Typography></MenuItem></Link>
+                            <Link  to='/schools'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Schools")}</Typography></MenuItem></Link>
+                            <Link to='/courses'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Courses")}</Typography></MenuItem></Link>
                             <MenuItem onClick={handleClose} >{t("Header.AboutUs")}</MenuItem>
-                            <MenuItem onClick={handleClose} ><Link to='/legal'>{t("Header.Legal")}</Link></MenuItem>
+                            <Link to='/legal'><MenuItem onClick={handleClose} ><Typography color='textPrimary'>{t("Header.Legal")}</Typography></MenuItem></Link>
                         </Menu>
                     </Box>
                     <Box sx={{ columnGap: '30px', display: 'flex', justifyContent: 'space-between', alignItems:'center' }}>

@@ -11,7 +11,8 @@
         "Legal": "Legal",
         "Login": "Login",
         "Menu": "Menu", 
-        "Courses": "Online Courses"
+        "Courses": "Online Courses",
+        "Home":"Home"
     },
     "Login": {
         "Access": "Sign in",
@@ -138,7 +139,10 @@
             "JobSupport": "Job Support",
             "Button": "Details"
         },
-        "Title": "Find your School in Tokyo"
+        "Title": "Find your School in Tokyo",
+        "TokyoDescription": "The capital of Japan and the largest city in the world, Tokyo is the place to be if you love the big city life. There is always something to do, incredible festivals to attend, museums to visit and plenty of places to eat and drink (great for practising your Japanese and meeting new people!). And for such a large metropolis, there are many areas where it can feel surprisingly quiet and tranquil.",
+        "TokyoName":"Tokyo",
+        "Location": "Schools Location"
     },
     "SchoolDetail":{
         "Introduction": "About the School",
@@ -152,7 +156,8 @@
         "Female":"Female",
         "Age":"Age",
         "Send": "Send",
-        "Message": "We have received your data and will shortly contact you"
+        "Message": "We have received your data and will shortly contact you",
+        "Accommodation": "Here you can find a map with the closest accommodations available around this school"
     }
 
 }
