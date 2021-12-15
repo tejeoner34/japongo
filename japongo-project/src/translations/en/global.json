@@ -10,7 +10,9 @@
         "AboutUs": "About Us",
         "Legal": "Legal",
         "Login": "Login",
-        "Menu": "Menu"
+        "Menu": "Menu", 
+        "Courses": "Online Courses",
+        "Home":"Home"
     },
     "Login": {
         "Access": "Sign in",
@@ -128,6 +130,34 @@
     "ResetPassword": {
         "Message": "Please enter your new password",
         "UpdatePassword": "Update Password"
+    },
+    "Schools":{
+        "Card":{
+            "Intensity": "Intensity",
+            "Cafeteria": "Cafateria",
+            "Wifi": "Wifi",
+            "JobSupport": "Job Support",
+            "Button": "Details"
+        },
+        "Title": "Find your School in Tokyo",
+        "TokyoDescription": "The capital of Japan and the largest city in the world, Tokyo is the place to be if you love the big city life. There is always something to do, incredible festivals to attend, museums to visit and plenty of places to eat and drink (great for practising your Japanese and meeting new people!). And for such a large metropolis, there are many areas where it can feel surprisingly quiet and tranquil.",
+        "TokyoName":"Tokyo",
+        "Location": "Schools Location"
+    },
+    "SchoolDetail":{
+        "Introduction": "About the School",
+        "Description": "School description",
+        "Support":"From personal consultation in regards to study and elective choices, the school provides above and beyond support in regards to employment. Specific counseling is offered to the student even after their language studies.",
+        "Wifi": "Free Wifi is available to students.",
+        "Cafeteria": "There is a Cafe inside the school",
+        "Beginner": "There is a beginner course",
+        "Characteristics": "Characteristics",
+        "Male":"Male",
+        "Female":"Female",
+        "Age":"Age",
+        "Send": "Send",
+        "Message": "We have received your data and will shortly contact you",
+        "Accommodation": "Here you can find a map with the closest accommodations available around this school"
     }
 
 }

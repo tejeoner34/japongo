@@ -4,18 +4,19 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import {serverUrl} from '../../global/global-variable.js'
 import './review-card.css'
 
 export default function ReviewCard(props) {
   return (
     <Card className='review-card' sx={{ maxWidth: 345, minWidth: 270 }}>
       <CardActionArea>
-        <CardMedia
+        {props.data&&<CardMedia
           component="img"
           height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
-          alt="green iguana"
-        />
+          image={serverUrl+`/review-avatar/${props.data?.img}`}
+          alt={props.data?.img}
+        />}
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {props.data.name}

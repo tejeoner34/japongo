@@ -22,6 +22,8 @@ import Footer from './components/footer/footer';
 import UserProvider from './context/user-context/user-provider';
 import ForgotPasswordPage from './pages/forgot-password-page/forgot-password-page';
 import ResetPassword from './pages/reset-password-page/reset-password-page';
+import SchoolDetailPage from './pages/school-detail-page/school-detail-page';
+import ScrollToTop from './components/scrollToTop.js';
 
 
 
@@ -30,17 +32,23 @@ function App() {
 
 
 
-  const [isDark, setDark] = useState(false);
+  const [isDark, setDark] = useState(JSON.parse(sessionStorage.getItem('isDark'))??false);
+
 
   const onThemeChange = () => {
-    setDark(!isDark);
+    setDark(()=>{
+      sessionStorage.setItem('isDark', !isDark)
+      return !isDark
+    });
+    
+
   }
 
 
 
   return (
     <AuthProvider value={sessionStorage.getItem('isAuth')??localStorage.getItem('isAuth')??false}>
-      <ThemeProvider theme={isDark ? darkTheme : theme}>
+      <ThemeProvider theme={isDark===true ? darkTheme : theme}>
         <BrowserRouter>
           <Paper sx={{ borderRadius: "0" }} style={{ minHeight: '100vh' }}>
             <Grid container direction="column"
@@ -50,9 +58,14 @@ function App() {
               <Grid item container xs={12}>
                 <Header isDark={isDark} onThemeChange={onThemeChange} />
               </Grid>
+              <ScrollToTop />
+              <main>
               <Switch>
                 <Route path='/schools'>
                   <EscuelasPage></EscuelasPage>
+                </Route>
+                <Route path='/school/:id'>
+                  <SchoolDetailPage></SchoolDetailPage>
                 </Route>
                 <Route path='/accommodation'>
                   <AlojamientoPage></AlojamientoPage>
@@ -94,6 +107,7 @@ function App() {
                 </UserProvider>
                 
               </Switch>
+              </main>
               <Footer></Footer>
             </Grid>
           </Paper>

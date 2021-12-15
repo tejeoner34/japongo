@@ -1,0 +1,22 @@
+.leaflet-container{
+    width: 80%;
+    max-width: 800px;
+    height: 40vh;
+}
+
+.map__popup__img-container{
+    width: 80%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.map__popup__img-container img{
+    width: 100%;
+}
+
+.map__popup__name{
+    color: red;
+    font-size: 1.2rem;
+
+}
+
