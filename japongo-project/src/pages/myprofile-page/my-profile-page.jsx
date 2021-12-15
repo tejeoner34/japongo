@@ -1,6 +1,6 @@
 import { useContext, Fragment, useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Skeleton, Stack } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { UserContext } from "../../context/user-context/user-context.js";
 import FavoriteCard from "../../components/favorite-card/favorite-card.jsx";
@@ -77,6 +77,7 @@ export default function MyProfile() {
     const [userData, updateUserData] = useContext(UserContext);
     const history = useHistory();
     const [incorrectPass, setIncorrectPass] = useState('')
+    const [isLoad, setIsLoad] = useState(false);
 
     const onFavRemove = (childata) => {
         updateUserData({ ...childata })
@@ -91,7 +92,7 @@ export default function MyProfile() {
                 'Content-type': 'application/json' // aviso a mi servidor que le envio los datos en formato JSON
             },
             body: JSON.stringify({ // Genero el body como string
-                email: sessionStorage.getItem('mail')??localStorage.getItem('mail'), // obtengo el value de un input por su name
+                email: sessionStorage.getItem('mail') ?? localStorage.getItem('mail'), // obtengo el value de un input por su name
                 password: e.target.password.value
             })
 
@@ -104,7 +105,7 @@ export default function MyProfile() {
             .then(d => console.log(d))
     };
 
-    const onPasswordChange = (e)=>{
+    const onPasswordChange = (e) => {
         e.preventDefault();
         console.log(e.target.password.value)
         console.log(e.target.newPassword.value)
@@ -114,7 +115,7 @@ export default function MyProfile() {
                 'Content-type': 'application/json' // aviso a mi servidor que le envio los datos en formato JSON
             },
             body: JSON.stringify({ // Genero el body como string
-                email: sessionStorage.getItem('mail')??localStorage.getItem('mail'), // obtengo el value de un input por su name
+                email: sessionStorage.getItem('mail') ?? localStorage.getItem('mail'), // obtengo el value de un input por su name
                 password: e.target.password.value,
                 newPassword: e.target.newPassword.value
             })
@@ -122,12 +123,12 @@ export default function MyProfile() {
         }
         fetch('http://localhost:4567/user/', options)
             .then(r => {
-                if (r.ok) { 
+                if (r.ok) {
                     setIncorrectPass(t("Profile.Options.PasswordUpdated"));
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         handleCloseDialogPassword()
                     }, 1000)
-                     
+
                 } else { setIncorrectPass(t("Profile.Options.IncorrectPassword")) }
                 return r.json()
             })
@@ -137,11 +138,15 @@ export default function MyProfile() {
     useEffect(() => {
         fetch('http://localhost:4567/user/', {
             headers: {
-                "Authorization": sessionStorage.getItem('token')??localStorage.getItem('token'),
+                "Authorization": sessionStorage.getItem('token') ?? localStorage.getItem('token'),
             }
         })
             .then(r => r.json())
-            .then(d => updateUserData({ ...d }))
+            .then(d => {
+                updateUserData({ ...d });
+                setIsLoad(true)
+            
+            })
     }, [])
 
 
@@ -184,11 +189,11 @@ export default function MyProfile() {
 
     return (
 
-        
+
         <Fragment>
             <Box component='div' sx={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '90%' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: '2rem', width: '90%', alignItems: 'end', justifyContent: 'space-between' }}>
-                    <h1>{t("Profile.Hello")} {sessionStorage.getItem('name')??localStorage.getItem('name')}</h1>
+                    <h1>{t("Profile.Hello")} {sessionStorage.getItem('name') ?? localStorage.getItem('name')}</h1>
                     <div>
                         <Button
                             id="demo-positioned-button"
@@ -279,13 +284,25 @@ export default function MyProfile() {
                     </div>
 
                 </Box>
-                <Box component='div'
-                >
-                    <Typography variant='h3'>{t("Profile.Favorite")}</Typography>
-                    <ul className="profile__favorite-cards">
-                        {userData?.favs?.map((e, i) => <li key={i}><FavoriteCard onFavRemove={onFavRemove} data={e} /></li>)}
-                    </ul>
-                </Box>
+
+                {
+                    !isLoad ? (
+                        <Stack spacing={1}>
+                            <Skeleton variant="text" />
+                            <Skeleton variant="circular" width={40} height={40} />
+                            <Skeleton variant="rectangular" width={210} height={118} />
+                        </Stack>
+                    ) : (
+                        <Box component='div'
+                        >
+                            <Typography variant='h3'>{t("Profile.Favorite")}</Typography>
+                            <ul className="profile__favorite-cards">
+                                {userData?.favs?.map((e, i) => <li key={i}><FavoriteCard onFavRemove={onFavRemove} data={e} /></li>)}
+                            </ul>
+                        </Box>
+                    )
+                }
+
             </Box>
         </Fragment>
     );
