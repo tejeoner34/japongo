@@ -1,11 +1,10 @@
 import { Typography, Box, Divider } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useContext } from "react";
-import { UserContext } from "../../context/user-context/user-context";
+
 
 export default function CommentCard(props){
     
-    const [userData] = useContext(UserContext);
+    // const [userData] = useContext(UserContext);
 
     const onCommentDelete = (e)=>{
         const options = {
@@ -34,7 +33,7 @@ export default function CommentCard(props){
             }}>
             <Typography variant="h5">{props.data?.name}</Typography>
             <Typography variant="body" sx={{opacity:0.7}}>{props.data?.comment}</Typography>
-            {props.data?.name===userData.name && <DeleteIcon onClick={onCommentDelete}></DeleteIcon>}
+            {props.data?.name===sessionStorage.getItem('name') && <DeleteIcon onClick={onCommentDelete}></DeleteIcon>}
 
             <Divider />
         </Box>

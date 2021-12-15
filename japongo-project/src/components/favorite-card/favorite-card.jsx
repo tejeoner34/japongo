@@ -27,7 +27,7 @@ export default function FavoriteCard(props){
         fetch('http://localhost:4567/user/fav', options)
           .then(r=>r.json())
           .then(d=> {
-            console.log(d)
+            
             props.onFavRemove(d)})
     }
     

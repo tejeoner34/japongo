@@ -14,6 +14,7 @@ export default function CourseDetailPage() {
 
   const { id } = useParams();
   const [course, updateCourse] = useState({});
+  const [control, updateControl] = useState(null);
   const [t] = useTranslation('global');
   const [, updateUserData] = useContext(UserContext);
   const [isAdd, setIsAdd] = useState(true);
@@ -21,8 +22,10 @@ export default function CourseDetailPage() {
   useEffect(() => {
     fetch(`http://localhost:4567/courses/course?id=${id}`)
       .then(r => r.json())
-      .then(d => updateCourse({ ...d }))
-  },);
+      .then(d => {
+        updateCourse({ ...d })
+        updateControl(true)})
+  },[]);
 
   const onCommentPost = (e) => {
     e.preventDefault();
@@ -58,10 +61,10 @@ export default function CourseDetailPage() {
       }),
     };
     fetch(`http://localhost:4567/user/fav`, options)
-      .then(r => r.json())
-      .then(d => {
-        setIsAdd(false);
-        updateUserData({ ...d })})
+      .then(r => {
+        if(r.ok)setIsAdd(false)
+        return r.json()})
+      
       .catch(err => console.log(err))
   };
 
@@ -70,7 +73,7 @@ export default function CourseDetailPage() {
     const [open, setOpen] = useState(false);
   
     const handleClick = () => {
-      setTimeout(()=>setOpen(true),1000)
+      setTimeout(()=>setOpen(true),1500)
       ;
     };
   
@@ -99,7 +102,7 @@ export default function CourseDetailPage() {
 
   return (
     <Grid container justifyContent='center' flexDirection='column' alignItems='center' rowGap={4}>
-      <ReactPlayer width='60%' maxwidth='600px' url={`https://www.youtube.com/watch?v=${course?.video}`} />
+      {control&&<ReactPlayer width='60%' maxwidth='600px' url={`https://www.youtube.com/watch?v=${course?.video}`} />}
       <Box
         component='div'
         sx={{

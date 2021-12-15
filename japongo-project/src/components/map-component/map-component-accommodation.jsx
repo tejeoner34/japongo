@@ -13,7 +13,7 @@ export default function AccommodationMap(props) {
 
    const leafletIcon = L.icon({
        iconUrl: school,
-       iconSize:[35,45]
+       iconSize:[35,45],
        
    })
 
