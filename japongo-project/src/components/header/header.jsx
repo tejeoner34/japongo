@@ -17,6 +17,7 @@ import Logout from '@mui/icons-material/Logout';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Avatar from '@mui/material/Avatar';
+import { LangContext } from '../../context/lang-context/lang-context';
 
 
 
@@ -27,6 +28,7 @@ export default function Header(props) {
     const [t, i18n] = useTranslation('global');
     const [isAuth, updateIsAuth] = useContext(AuthContext);
     let history = useHistory();
+    const [, updateLang] = useContext(LangContext)
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [anchorEl2, setAnchorEl2] = useState(null);
@@ -96,11 +98,12 @@ export default function Header(props) {
                             <Link to='/courses'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Courses")}</Typography></MenuItem></Link>
                             <MenuItem onClick={handleClose} >{t("Header.AboutUs")}</MenuItem>
                             <Link to='/legal'><MenuItem onClick={handleClose} ><Typography color='textPrimary'>{t("Header.Legal")}</Typography></MenuItem></Link>
+                            <Link to='/privacy-policy'><MenuItem onClick={handleClose} ><Typography color='textPrimary'>{t("Header.PrivacyPolicy")}</Typography></MenuItem></Link>
                         </Menu>
                     </Box>
                     <Box sx={{ columnGap: '30px', display: 'flex', justifyContent: 'space-between', alignItems:'center' }}>
                         {/* <LanguageSelect /> */}
-                        <select onChange={(e) => {i18n.changeLanguage(e.target.value);localStorage.setItem('lang', e.target.value)}} value={localStorage.getItem('lang')??'en'} name="lang" id="language">
+                        <select onChange={(e) => {i18n.changeLanguage(e.target.value);localStorage.setItem('lang', e.target.value);updateLang(e.target.value)}} value={localStorage.getItem('lang')??'en'} name="lang" id="language">
                             <option value="en">EN</option>
                             <option value="jp">JP</option>
                         </select>

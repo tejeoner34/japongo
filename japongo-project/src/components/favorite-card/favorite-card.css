@@ -1,6 +1,13 @@
 .favorite-card{
     max-width: 250px;
     border: 1px solid gray;
+    overflow: hidden;
+    border-radius: 7px;
+    transition: 0.3s;
+}
+
+.favorite-card:hover{
+    transform: scale(1.02);
 }
 
 .favorite-card__img-container{
@@ -15,4 +22,7 @@
 
 .favorite-card__info-container{
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    
 }

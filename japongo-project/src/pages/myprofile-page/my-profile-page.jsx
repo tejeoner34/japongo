@@ -1,6 +1,6 @@
 import { useContext, Fragment, useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
-import { Box, Typography, Skeleton, Stack } from "@mui/material";
+import { Box, Typography, Skeleton, Stack, Paper } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { UserContext } from "../../context/user-context/user-context.js";
 import FavoriteCard from "../../components/favorite-card/favorite-card.jsx";
@@ -306,13 +306,20 @@ export default function MyProfile() {
                             <Skeleton variant="rectangular" width={210} height={118} />
                         </Stack>
                     ) : (
+                        <Paper elevation={3} sx={{padding:'1rem'}}>
                         <Box component='div'
+                        display={'flex'}
+                        flexDirection={'column'}
+                        gap={2}
+                        sx={{alignItems:{xs:'center'}}}
+
                         >
                             <Typography variant='h3'>{t("Profile.Favorite")}</Typography>
                             <ul className="profile__favorite-cards">
                                 {userData?.favs?.map((e, i) => <li key={i}><FavoriteCard onFavRemove={onFavRemove} data={e} /></li>)}
                             </ul>
                         </Box>
+                        </Paper>
                     )
                 }
 

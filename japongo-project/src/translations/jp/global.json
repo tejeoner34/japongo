@@ -12,7 +12,8 @@
         "Login": "ログイン",
         "Menu": "メニュー",
         "Courses": "オンライン授業",
-        "Home":"ホーム"
+        "Home":"ホーム",
+        "PrivacyPolicy": "プライバシーポリシー"
     },
     "Login": {
         "Access": "アックセス",
