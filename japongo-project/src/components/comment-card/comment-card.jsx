@@ -33,7 +33,7 @@ export default function CommentCard(props){
             }}>
             <Typography variant="h5">{props.data?.name}</Typography>
             <Typography variant="body" sx={{opacity:0.7}}>{props.data?.comment}</Typography>
-            {props.data?.name===sessionStorage.getItem('name') && <DeleteIcon onClick={onCommentDelete}></DeleteIcon>}
+            {props.data?.name===sessionStorage.getItem('name') && <span title="delete"><DeleteIcon  sx={{cursor:'pointer'}} onClick={onCommentDelete}></DeleteIcon></span>}
 
             <Divider />
         </Box>

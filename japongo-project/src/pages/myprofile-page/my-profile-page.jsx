@@ -1,6 +1,6 @@
 import { useContext, Fragment, useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
-import { Box, Typography, Skeleton, Stack } from "@mui/material";
+import { Box, Typography, Skeleton, Stack, Paper } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { UserContext } from "../../context/user-context/user-context.js";
 import FavoriteCard from "../../components/favorite-card/favorite-card.jsx";
@@ -85,7 +85,6 @@ export default function MyProfile() {
 
     const onAccountDelete = (e) => {
         e.preventDefault();
-        console.log(e.target.password.value)
         const options = {
             method: 'DELETE',
             headers: {
@@ -103,6 +102,20 @@ export default function MyProfile() {
                 return r.json()
             })
             .then(d => console.log(d))
+
+
+            const optionsDeleteAllComments = {
+                method: 'PATCH',
+                headers: {
+                    'Content-type': 'application/json' // aviso a mi servidor que le envio los datos en formato JSON
+                },
+                body: JSON.stringify({ // Genero el body como string
+                    name: sessionStorage.getItem('name') ?? localStorage.getItem('name'), // obtengo el value de un input por su name
+                })
+    
+            }
+        fetch('http://localhost:4567/courses', optionsDeleteAllComments)
+        .then(r=>console.log(r))
     };
 
     const onPasswordChange = (e) => {
@@ -293,13 +306,20 @@ export default function MyProfile() {
                             <Skeleton variant="rectangular" width={210} height={118} />
                         </Stack>
                     ) : (
+                        <Paper elevation={3} sx={{padding:'1rem'}}>
                         <Box component='div'
+                        display={'flex'}
+                        flexDirection={'column'}
+                        gap={2}
+                        sx={{alignItems:{xs:'center'}}}
+
                         >
                             <Typography variant='h3'>{t("Profile.Favorite")}</Typography>
                             <ul className="profile__favorite-cards">
                                 {userData?.favs?.map((e, i) => <li key={i}><FavoriteCard onFavRemove={onFavRemove} data={e} /></li>)}
                             </ul>
                         </Box>
+                        </Paper>
                     )
                 }
 

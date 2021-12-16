@@ -17,7 +17,7 @@ export default function CourseCard2(props){
 
     return(
         
-            <div className='course-card__container'>
+            <div className='course-card__container' onClick={handleClick}>
                 <div className='course-card__img-container'>
                     <img src={props.data?.img} alt={props.data?.description} />
                 </div>

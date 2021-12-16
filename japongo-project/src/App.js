@@ -11,6 +11,7 @@ import Login from './pages/login-page/login-page';
 import Register from './pages/register-page/register.page';
 import HomePage from './pages/home-page/home-page';
 import LegalPage from './pages/legal-page/legal.page';
+import PrivacyPolicyPage from './pages/privacy-policy-page/privacy-policy-page';
 import ValidateEmail from './pages/validation-page/validate-email';
 import MyProfile from './pages/myprofile-page/my-profile-page';
 import PrivateRoute from './auth/privateroute';
@@ -24,6 +25,8 @@ import ForgotPasswordPage from './pages/forgot-password-page/forgot-password-pag
 import ResetPassword from './pages/reset-password-page/reset-password-page';
 import SchoolDetailPage from './pages/school-detail-page/school-detail-page';
 import ScrollToTop from './components/scrollToTop.js';
+import LangProvider from './context/lang-context/lang-provider';
+
 
 
 
@@ -55,6 +58,7 @@ function App() {
               alignItems="center"
               justifyContent="center"
             >
+              <LangProvider value={localStorage.getItem('lang')??'en'}>
               <Grid item container xs={12}>
                 <Header isDark={isDark} onThemeChange={onThemeChange} />
               </Grid>
@@ -88,9 +92,13 @@ function App() {
                 <Route path='/legal'>
                   <LegalPage></LegalPage>
                 </Route>
+                <Route path='/privacy-policy'>
+                  <PrivacyPolicyPage></PrivacyPolicyPage>
+                </Route>
                 <Route path='/about-us'>
                   <AboutUsPage></AboutUsPage>
                 </Route>
+               
                 <Route exact path='/'>
                   <HomePage></HomePage>
                 </Route>
@@ -108,6 +116,7 @@ function App() {
                 
               </Switch>
               </main>
+              </LangProvider>
               <Footer></Footer>
             </Grid>
           </Paper>

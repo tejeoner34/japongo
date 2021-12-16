@@ -12,7 +12,8 @@
         "Login": "Login",
         "Menu": "Menu", 
         "Courses": "Online Courses",
-        "Home":"Home"
+        "Home":"Home",
+        "PrivacyPolicy": "Privacy Policy"
     },
     "Login": {
         "Access": "Sign in",

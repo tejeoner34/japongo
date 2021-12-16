@@ -11,7 +11,7 @@ export default function OnlineCourseCard() {
     const history = useHistory();
 
     return (
-        <div className='home__info-card'>
+        <div className='home__info-card' onClick={()=>history.push('/courses')}>
         <div className='home__info-card__img-div school__card'>
             <img className='home__info-card__img school__card__img' src={onlineCourseImg} alt="" />
             <div className='home__info-card__background school__card__background'></div>
