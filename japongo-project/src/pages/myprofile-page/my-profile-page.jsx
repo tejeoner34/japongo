@@ -14,6 +14,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
+import { serverUrl } from "../../global/global-variable.js";
 
 
 
@@ -207,6 +208,7 @@ export default function MyProfile() {
             <Box component='div' sx={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '90%' }}>
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: '2rem', width: '90%', alignItems: 'end', justifyContent: 'space-between' }}>
                     <h1>{t("Profile.Hello")} {sessionStorage.getItem('name') ?? localStorage.getItem('name')}</h1>
+                    <img src={serverUrl+`/user-avatar/${userData?.file?.filename}`} alt={userData?.file?.fieldname} />
                     <div>
                         <Button
                             id="demo-positioned-button"
