@@ -85,7 +85,6 @@ export default function MyProfile() {
 
     const onAccountDelete = (e) => {
         e.preventDefault();
-        console.log(e.target.password.value)
         const options = {
             method: 'DELETE',
             headers: {
@@ -103,6 +102,20 @@ export default function MyProfile() {
                 return r.json()
             })
             .then(d => console.log(d))
+
+
+            const optionsDeleteAllComments = {
+                method: 'PATCH',
+                headers: {
+                    'Content-type': 'application/json' // aviso a mi servidor que le envio los datos en formato JSON
+                },
+                body: JSON.stringify({ // Genero el body como string
+                    name: sessionStorage.getItem('name') ?? localStorage.getItem('name'), // obtengo el value de un input por su name
+                })
+    
+            }
+        fetch('http://localhost:4567/courses', optionsDeleteAllComments)
+        .then(r=>console.log(r))
     };
 
     const onPasswordChange = (e) => {

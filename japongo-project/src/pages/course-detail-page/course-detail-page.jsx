@@ -10,11 +10,13 @@ import { UserContext } from '../../context/user-context/user-context';
 
 
 
+
 export default function CourseDetailPage() {
 
   const { id } = useParams();
   const [course, updateCourse] = useState({});
   const [control, updateControl] = useState(null);
+  const [inputValue, updateInputValue] = useState('');
   const [t] = useTranslation('global');
   const [, updateUserData] = useContext(UserContext);
   const [isAdd, setIsAdd] = useState(true);
@@ -29,7 +31,8 @@ export default function CourseDetailPage() {
 
   const onCommentPost = (e) => {
     e.preventDefault();
-    const comment = e.target.comment.value;
+    let comment = e.target.comment.value;
+
     const options = {
       method: "POST",
       headers: {
@@ -43,6 +46,10 @@ export default function CourseDetailPage() {
     fetch(`http://localhost:4567/courses/course?id=${id}`, options)
       .then(r => r.json())
       .then(d => updateCourse({ ...d }));
+
+      document.getElementById("create-course-form").reset();
+      updateInputValue('')
+
   };
 
   const onDeleteComment = (childata)=>{
@@ -133,9 +140,9 @@ export default function CourseDetailPage() {
         <Typography variant='h3' sx={{ marginBottom: '1rem' }} fontWeight={600}>{t("CoursePage.Info.Comment")}</Typography>
         {course.comments?.map((e, i) => <CommentCard key={i} data={e} id={id} onDeleteComment={onDeleteComment}></CommentCard>)}
       </Box>
-      <form onSubmit={onCommentPost} className='course-detail__form'>
-        <TextField inputProps={{ style: { fontSize: 16 } }} sx={{ width: '100%' }} id="comment" name='comment' required type='textarea' label={t("CoursePage.Comment.PlaceHolder")} variant="outlined" />
-        <Button variant='contained' type='submit' color='primary'>{t('CoursePage.Comment.Button')}</Button>
+      <form id="create-course-form" onSubmit={onCommentPost} className='course-detail__form'>
+        <TextField onChange={(e)=>updateInputValue(e.target.value)} inputProps={{ style: { fontSize: 16 } }} sx={{ width: '100%' }} id="comment" name='comment' required type='textarea' label={t("CoursePage.Comment.PlaceHolder")} variant="outlined" />
+        <Button disabled={inputValue===''?true:false} variant='contained' type='submit' color='primary'>{t('CoursePage.Comment.Button')}</Button>
       </form>
 
     </Grid>

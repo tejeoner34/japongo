@@ -38,7 +38,7 @@ export default function FavoriteCard(props){
                     <img src={props.data?.img} alt={props.data?.description} />
                 </div>
                 <div className='favorite-card__info-container'>
-                    <Typography onClick={handleClick} variant='h4'>{props.data?.name}</Typography>
+                    <Typography sx={{cursor:'pointer'}} onClick={handleClick} variant='h4'>{props.data?.name}</Typography>
                     <Typography variant='body'>{props.data?.description}</Typography>
                     <Button onClick={handleRemove}>Remove</Button>
                 </div>
