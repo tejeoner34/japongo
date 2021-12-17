@@ -36,7 +36,9 @@
         "Error": "パスワードには問題はあります",
         "ErrorMessage": "パスワードには問題はあります",
         "CheckEmail": "メールをチェックしてください。",
-        "UserExists": "ユーザーまたはメールアドレスはすでに存在します"
+        "UserExists": "ユーザーまたはメールアドレスはすでに存在します",
+        "Avatar": "プロファイルの写真"
+
     },
     "Home": {
         "H1": "東京で日本語勉強しよう！",
@@ -102,6 +104,8 @@
     "Profile": {
         "Hello": "こんにちは",
         "Favorite": "お気に入り",
+        "EditBackground": "写真を編集",
+        "EditBackgroundMessage": "新しい写真を選んでください",
         "Options": {
             "Button": "設定",
             "Delete": "アカウントを削除",
