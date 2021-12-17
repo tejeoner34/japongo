@@ -15,67 +15,14 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import { serverUrl } from "../../global/global-variable.js";
-
-
-
-
-
-// function TabPanel(props) {
-//     const { children, value, index, ...other } = props;
-
-//     return (
-//         <div
-//             role="tabpanel"
-//             hidden={value !== index}
-//             id={`full-width-tabpanel-${index}`}
-//             aria-labelledby={`full-width-tab-${index}`}
-//             {...other}
-//         >
-//             {value === index && (
-//                 <Box sx={{ p: 3 }}>
-//                     <Typography>{children}</Typography>
-//                 </Box>
-//             )}
-//         </div>
-//     );
-// }
-
-// TabPanel.propTypes = {
-//     children: PropTypes.node,
-//     index: PropTypes.number.isRequired,
-//     value: PropTypes.number.isRequired,
-// };
-
-// function a11yProps(index) {
-//     return {
-//         id: `full-width-tab-${index}`,
-//         'aria-controls': `full-width-tabpanel-${index}`,
-//     };
-// }
-
-
-
-
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 export default function MyProfile() {
-
-    //material ui imports
-
-    // const theme = useTheme();
-    // const [value, setValue] = useState(0);
-    // const handleChange = (event, newValue) => {
-    //     setValue(newValue);
-    // };
-
-    // const handleChangeIndex = (index) => {
-    //     setValue(index);
-    // };
-
-    //
 
 
     const [t] = useTranslation('global');
     const [userData, updateUserData] = useContext(UserContext);
+    const [control, setControl] = useState(null);
     const history = useHistory();
     const [incorrectPass, setIncorrectPass] = useState('')
     const [isLoad, setIsLoad] = useState(false);
@@ -105,18 +52,18 @@ export default function MyProfile() {
             .then(d => console.log(d))
 
 
-            const optionsDeleteAllComments = {
-                method: 'PATCH',
-                headers: {
-                    'Content-type': 'application/json' // aviso a mi servidor que le envio los datos en formato JSON
-                },
-                body: JSON.stringify({ // Genero el body como string
-                    name: sessionStorage.getItem('name') ?? localStorage.getItem('name'), // obtengo el value de un input por su name
-                })
-    
-            }
+        const optionsDeleteAllComments = {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json' // aviso a mi servidor que le envio los datos en formato JSON
+            },
+            body: JSON.stringify({ // Genero el body como string
+                name: sessionStorage.getItem('name') ?? localStorage.getItem('name'), // obtengo el value de un input por su name
+            })
+
+        }
         fetch('http://localhost:4567/courses', optionsDeleteAllComments)
-        .then(r=>console.log(r))
+            .then(r => console.log(r))
     };
 
     const onPasswordChange = (e) => {
@@ -157,9 +104,11 @@ export default function MyProfile() {
         })
             .then(r => r.json())
             .then(d => {
+                console.log(d)
                 updateUserData({ ...d });
+                setControl(true)
                 setIsLoad(true)
-            
+
             })
     }, [])
 
@@ -200,104 +149,201 @@ export default function MyProfile() {
     };
 
 
+    // dialog to edit background picture
+
+    const [openBackgroundImgDialog, setOpenBackgroundImgDialog] = useState(false);
+
+    const handleOpenBackgroundImgDialog = ()=>{
+        setOpenBackgroundImgDialog(true);
+    }
+
+    const closeBackgroundImgDialog=()=>{
+        setOpenBackgroundImgDialog(false)
+    }
+
+    // dialog to edit avatar
+
+    const [openAvatarImgDialog, setOpenAvatarImgDialog] = useState(false);
+
+    const handleOpenAvatarDialog = ()=>{
+        setOpenAvatarImgDialog(true);
+    };
+
+    const handleCloseAvatarDialog= ()=>{
+        setOpenAvatarImgDialog(false);
+    };
+
+    const onAvatarChange= (e)=>{
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const name = sessionStorage.getItem('name')?? localStorage.getItem('name')
+        formData.append("name", name )        
+        const options = {
+            method: "PATCH",
+            // headers: {
+            //   "Content-type": "multipart/form-data", // aviso a mi servidor que le envio los datos en formato JSON
+            // },
+            body: formData
+          };
+
+        fetch('http://localhost:4567/user/change-avatar', options)
+        .then(r=>r.json())
+        .then(d=>{
+            updateUserData(d);
+            setOpenAvatarImgDialog(false)})
+
+    };
+
+    const onBackgroundImgChange = (e)=>{
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const name = sessionStorage.getItem('name')?? localStorage.getItem('name')
+        formData.append("name", name )        
+        const options = {
+            method: "PATCH",
+            // headers: {
+            //   "Content-type": "multipart/form-data", // aviso a mi servidor que le envio los datos en formato JSON
+            // },
+            body: formData
+          };
+
+        fetch('http://localhost:4567/user/change-background', options)
+        .then(r=>r.json())
+        .then(d=>{
+            updateUserData(d);
+            setOpenBackgroundImgDialog(false)})
+    }
+
+    const styleBackground = {
+        backgroundImage: "url(" + serverUrl + `/profile-background/${userData?.profileBackgroundImg}` + ")",
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
+    };
+
+    const styleAvatar = {
+        backgroundImage: "url(" + serverUrl + `/user-avatar/${userData?.file?.filename}` + ")",
+        backgroundPosition: 'center',
+        backgroundSize: 'cover'
+    };
 
     return (
 
 
         <Fragment>
-            <Box component='div' sx={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '90%' }}>
-                <Box sx={{ display: 'flex', flexDirection: 'row', gap: '2rem', width: '90%', alignItems: 'end', justifyContent: 'space-between' }}>
-                    <h1>{t("Profile.Hello")} {sessionStorage.getItem('name') ?? localStorage.getItem('name')}</h1>
-                    <img src={serverUrl+`/user-avatar/${userData?.file?.filename}`} alt={userData?.file?.fieldname} />
-                    <div>
-                        <Button
-                            id="demo-positioned-button"
-                            aria-controls="demo-positioned-menu"
-                            aria-haspopup="true"
-                            aria-expanded={open ? 'true' : undefined}
-                            onClick={handleClick}
-                        >
-                            {t("Profile.Options.Button")}
-                        </Button>
-                        <Menu
-                            id="demo-positioned-menu"
-                            aria-labelledby="demo-positioned-button"
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleClose}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                        >
-                            <MenuItem onClick={handleClickOpen}>{t("Profile.Options.Delete")}</MenuItem>
-                            <Dialog open={openDialog} onClose={handleCloseDialog}>
-                                <DialogTitle>{t("Profile.Options.Delete")}</DialogTitle>
-                                <form onSubmit={onAccountDelete}>
-                                    <DialogContent>
-                                        <DialogContentText>
-                                            {t("Profile.Options.Description")}
-                                        </DialogContentText>
-                                        <TextField
-                                            autoFocus
-                                            margin="dense"
-                                            id="password"
-                                            name='password'
-                                            label={t("Register.Password")}
-                                            type="password"
-                                            fullWidth
-                                            variant="standard"
-                                        />
-                                    </DialogContent>
-                                    <Typography textAlign={'center'} color='red'>{incorrectPass}</Typography>
-                                    <DialogActions>
-                                        <Button onClick={handleCloseDialog}>{t("Profile.Options.Cancel")}</Button>
-                                        <Button type="submit" >{t("Profile.Options.DeleteAccount")}</Button>
-                                    </DialogActions>
-                                </form>
-                            </Dialog>
-                            <MenuItem onClick={handleClickOpenPassword}>{t("Profile.Options.Edit")}</MenuItem>
-                            <Dialog open={openDialogPassword} onClose={handleCloseDialogPassword}>
-                                <DialogTitle>{t("Profile.Options.UpdatePass")}</DialogTitle>
-                                <form onSubmit={onPasswordChange}>
-                                    <DialogContent>
-                                        <DialogContentText>
-                                            {t("Profile.Options.UpdateDescription")}
-                                        </DialogContentText>
-                                        <TextField
-                                            autoFocus
-                                            margin="dense"
-                                            id="password"
-                                            name='password'
-                                            label={t("Register.Password")}
-                                            type="password"
-                                            fullWidth
-                                            variant="standard"
-                                        />
-                                        <TextField
-                                            margin="dense"
-                                            id="newPassword"
-                                            name='newPassword'
-                                            label={t("Profile.Options.NewPassword")}
-                                            type="password"
-                                            fullWidth
-                                            variant="standard"
-                                        />
-                                    </DialogContent>
-                                    <Typography textAlign={'center'} color='red'>{incorrectPass}</Typography>
-                                    <DialogActions>
-                                        <Button onClick={handleCloseDialogPassword}>{t("Profile.Options.Cancel")}</Button>
-                                        <Button type="submit" >{t("Profile.Options.UpdateButton")}</Button>
-                                    </DialogActions>
-                                </form>
-                            </Dialog>
-                        </Menu>
+            <Box component='div' sx={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%' }}>
+                <Box sx={{
+                    display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%',
+                    alignItems: 'flex-start',
+                    justifyContent: 'space-between',
+                    position: 'relative'
+                }}>
+                    {control && <div className="profile__background-img__container"
+                        style={styleBackground}>
+                        {/* <img src={serverUrl + `/profile-background/${userData?.profileBackgroundImg}`} alt="" /> */}
+                    </div>}
+                    <div className="profile__info__container">
+                        <div>
+                            <h1>{t("Profile.Hello")} {sessionStorage.getItem('name') ?? localStorage.getItem('name')}</h1>
+                            <div>
+                                <Button
+                                    id="demo-positioned-button"
+                                    aria-controls="demo-positioned-menu"
+                                    aria-haspopup="true"
+                                    aria-expanded={open ? 'true' : undefined}
+                                    onClick={handleClick}
+                                >
+                                    {t("Profile.Options.Button")}
+                                </Button>
+                                <Menu
+                                    id="demo-positioned-menu"
+                                    aria-labelledby="demo-positioned-button"
+                                    anchorEl={anchorEl}
+                                    open={open}
+                                    onClose={handleClose}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'left',
+                                    }}
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'left',
+                                    }}
+                                >
+                                    <MenuItem onClick={handleClickOpen}>{t("Profile.Options.Delete")}</MenuItem>
+                                    <Dialog open={openDialog} onClose={handleCloseDialog}>
+                                        <DialogTitle>{t("Profile.Options.Delete")}</DialogTitle>
+                                        <form onSubmit={onAccountDelete}>
+                                            <DialogContent>
+                                                <DialogContentText>
+                                                    {t("Profile.Options.Description")}
+                                                </DialogContentText>
+                                                <TextField
+                                                    autoFocus
+                                                    margin="dense"
+                                                    id="password"
+                                                    name='password'
+                                                    label={t("Register.Password")}
+                                                    type="password"
+                                                    fullWidth
+                                                    variant="standard"
+                                                />
+                                            </DialogContent>
+                                            <Typography textAlign={'center'} color='red'>{incorrectPass}</Typography>
+                                            <DialogActions>
+                                                <Button onClick={handleCloseDialog}>{t("Profile.Options.Cancel")}</Button>
+                                                <Button type="submit" >{t("Profile.Options.DeleteAccount")}</Button>
+                                            </DialogActions>
+                                        </form>
+                                    </Dialog>
+                                    <MenuItem onClick={handleClickOpenPassword}>{t("Profile.Options.Edit")}</MenuItem>
+                                    <Dialog open={openDialogPassword} onClose={handleCloseDialogPassword}>
+                                        <DialogTitle>{t("Profile.Options.UpdatePass")}</DialogTitle>
+                                        <form onSubmit={onPasswordChange}>
+                                            <DialogContent>
+                                                <DialogContentText>
+                                                    {t("Profile.Options.UpdateDescription")}
+                                                </DialogContentText>
+                                                <TextField
+                                                    autoFocus
+                                                    margin="dense"
+                                                    id="password"
+                                                    name='password'
+                                                    label={t("Register.Password")}
+                                                    type="password"
+                                                    fullWidth
+                                                    variant="standard"
+                                                />
+                                                <TextField
+                                                    margin="dense"
+                                                    id="newPassword"
+                                                    name='newPassword'
+                                                    label={t("Profile.Options.NewPassword")}
+                                                    type="password"
+                                                    fullWidth
+                                                    variant="standard"
+                                                />
+                                            </DialogContent>
+                                            <Typography textAlign={'center'} color='red'>{incorrectPass}</Typography>
+                                            <DialogActions>
+                                                <Button onClick={handleCloseDialogPassword}>{t("Profile.Options.Cancel")}</Button>
+                                                <Button type="submit" >{t("Profile.Options.UpdateButton")}</Button>
+                                            </DialogActions>
+                                        </form>
+                                    </Dialog>
+                                </Menu>
+                            </div>
+                        </div>
                     </div>
-
+                    {control && <div className="profile__info__img-container" style={styleAvatar}>
+                        {/* <img src={serverUrl + `/user-avatar/${userData?.file?.filename}`} alt={userData?.file?.fieldname} /> */}
+                    </div>}
+                    <div onClick={handleOpenBackgroundImgDialog} title={t("Profile.EditBackground")} className="profile__info__img-edit-container">
+                        <CameraAltIcon></CameraAltIcon>
+                    </div>
+                    <div onClick={handleOpenAvatarDialog} title={t("Profile.EditBackground")} className="profile__info__avatar-edit-container">
+                        <CameraAltIcon></CameraAltIcon>
+                    </div>
                 </Box>
 
                 {
@@ -308,23 +354,71 @@ export default function MyProfile() {
                             <Skeleton variant="rectangular" width={210} height={118} />
                         </Stack>
                     ) : (
-                        <Paper elevation={3} sx={{padding:'1rem'}}>
-                        <Box component='div'
-                        display={'flex'}
-                        flexDirection={'column'}
-                        gap={2}
-                        sx={{alignItems:{xs:'center'}}}
+                        <Paper elevation={3} sx={{ padding: '1rem' }}>
+                            <Box component='div'
+                                display={'flex'}
+                                flexDirection={'column'}
+                                gap={2}
+                                sx={{ alignItems: { xs: 'center' } }}
 
-                        >
-                            <Typography variant='h3'>{t("Profile.Favorite")}</Typography>
-                            <ul className="profile__favorite-cards">
-                                {userData?.favs?.map((e, i) => <li key={i}><FavoriteCard onFavRemove={onFavRemove} data={e} /></li>)}
-                            </ul>
-                        </Box>
+                            >
+                                <Typography variant='h3'>{t("Profile.Favorite")}</Typography>
+                                <ul className="profile__favorite-cards">
+                                    {userData?.favs?.map((e, i) => <li key={i}><FavoriteCard onFavRemove={onFavRemove} data={e} /></li>)}
+                                </ul>
+                            </Box>
                         </Paper>
                     )
                 }
 
+                <Dialog open={openBackgroundImgDialog} onClose={closeBackgroundImgDialog}>
+                    <DialogTitle>{t("Profile.EditBackground")}</DialogTitle>
+                    <form onSubmit={onBackgroundImgChange}>
+                        <DialogContent>
+                            <DialogContentText>
+                                {t("Profile.EditBackgroundMessage")}
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="profile-background"
+                                name='profile-background'
+                                label={t("Profile.EditBackground")}
+                                type="file"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={closeBackgroundImgDialog}>{t("Profile.Options.Cancel")}</Button>
+                            <Button type="submit" >{t("Profile.EditBackground")}</Button>
+                        </DialogActions>
+                    </form>
+                </Dialog>
+                <Dialog open={openAvatarImgDialog} onClose={handleCloseAvatarDialog}>
+                    <DialogTitle>{t("Profile.EditBackground")}</DialogTitle>
+                    <form onSubmit={onAvatarChange}>
+                        <DialogContent>
+                            <DialogContentText>
+                                {t("Profile.EditBackgroundMessage")}
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="avatar"
+                                name="avatar"
+                                label={t("Profile.EditBackground")}
+                                type="file"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleCloseAvatarDialog}>{t("Profile.Options.Cancel")}</Button>
+                            <Button type="submit" >{t("Profile.EditBackground")}</Button>
+                        </DialogActions>
+                    </form>
+                </Dialog>
             </Box>
         </Fragment>
     );

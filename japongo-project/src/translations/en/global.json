@@ -37,7 +37,8 @@
         "Error": "Passwords are not equal",
         "ErrorMessage": "Incorrect User or Password",
         "CheckEmail": "Check your Email",
-        "UserExists": "User or Email already exist"
+        "UserExists": "User or Email already exist",
+        "Avatar": "Profile Picture"
     },
     "Home":{
         "H1": "Live and Study in Tokyo!",
@@ -103,6 +104,8 @@
     "Profile":{
         "Hello":"Hello",
         "Favorite": "Your Favorite Courses",
+        "EditBackground": "Edit Image",
+        "EditBackgroundMessage": "Select the new image",
         "Options": {
             "Button":"Options",
             "Delete": "Delete Account",

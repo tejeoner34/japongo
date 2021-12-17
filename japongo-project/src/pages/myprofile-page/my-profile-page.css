@@ -6,3 +6,72 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.profile__background-img__container{
+    width: 100%;
+    height: 300px;
+    max-height: 300px;
+    overflow: hidden;
+    position: relative;
+}
+
+.profile__background-img__container img{
+    width: 100%;
+}
+
+.profile__info__container{
+    display: flex;
+    gap: 2rem;
+    margin-left: 14rem;
+}
+.profile__info__img-container{
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    position: absolute;
+    top: 250px;
+    left: 10px;
+    box-shadow: 5px 5px 15px -7px #000000;
+
+}
+
+.profile__info__img-edit-container{
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    top: 20px;
+    right: 20px;
+    background-color: darkgray;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 5px 5px 15px -7px #000000;
+}
+
+.profile__info__img-edit-container:hover{
+    background-color: gray;
+    color: white
+}
+
+.profile__info__avatar-edit-container{
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    bottom: 0px;
+    left: 150px;
+    background-color: #79acf3;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition:  .7s ease-in-out;
+    box-shadow: 5px 5px 15px -7px #000000;
+}
+
+.profile__info__avatar-edit-container:hover{
+    transform: rotate(360deg) ;
+}
