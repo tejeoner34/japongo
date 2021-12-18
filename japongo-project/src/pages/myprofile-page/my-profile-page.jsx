@@ -26,6 +26,7 @@ export default function MyProfile() {
     const history = useHistory();
     const [incorrectPass, setIncorrectPass] = useState('')
     const [isLoad, setIsLoad] = useState(false);
+    const [imgError, setImgError] = useState('');
 
     const onFavRemove = (childata) => {
         updateUserData({ ...childata })
@@ -104,13 +105,12 @@ export default function MyProfile() {
         })
             .then(r => r.json())
             .then(d => {
-                console.log(d)
                 updateUserData({ ...d });
                 setControl(true)
                 setIsLoad(true)
 
             })
-    }, [])
+    }, [updateUserData])
 
 
 
@@ -153,11 +153,11 @@ export default function MyProfile() {
 
     const [openBackgroundImgDialog, setOpenBackgroundImgDialog] = useState(false);
 
-    const handleOpenBackgroundImgDialog = ()=>{
+    const handleOpenBackgroundImgDialog = () => {
         setOpenBackgroundImgDialog(true);
     }
 
-    const closeBackgroundImgDialog=()=>{
+    const closeBackgroundImgDialog = () => {
         setOpenBackgroundImgDialog(false)
     }
 
@@ -165,64 +165,82 @@ export default function MyProfile() {
 
     const [openAvatarImgDialog, setOpenAvatarImgDialog] = useState(false);
 
-    const handleOpenAvatarDialog = ()=>{
+    const handleOpenAvatarDialog = () => {
         setOpenAvatarImgDialog(true);
     };
 
-    const handleCloseAvatarDialog= ()=>{
+    const handleCloseAvatarDialog = () => {
         setOpenAvatarImgDialog(false);
+        setImgError('')
     };
 
-    const onAvatarChange= (e)=>{
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const name = sessionStorage.getItem('name')?? localStorage.getItem('name')
-        formData.append("name", name )        
-        const options = {
-            method: "PATCH",
-            // headers: {
-            //   "Content-type": "multipart/form-data", // aviso a mi servidor que le envio los datos en formato JSON
-            // },
-            body: formData
-          };
+    const onAvatarChange = (e) => {
 
-        fetch('http://localhost:4567/user/change-avatar', options)
-        .then(r=>r.json())
-        .then(d=>{
-            updateUserData(d);
-            setOpenAvatarImgDialog(false)})
+        e.preventDefault();
+
+        if (e.target[0].files[0].size >= 1*1024*1024) {
+            setImgError(t("Profile.ImgError"))
+        } else {
+
+            console.log(e.target[0].files[0].size);
+            const formData = new FormData(e.currentTarget);
+            const name = sessionStorage.getItem('name') ?? localStorage.getItem('name')
+            formData.append("name", name)
+            const options = {
+                method: "PATCH",
+                // headers: {
+                //   "Content-type": "multipart/form-data", // aviso a mi servidor que le envio los datos en formato JSON
+                // },
+                body: formData
+            };
+
+            fetch('http://localhost:4567/user/change-avatar', options)
+                .then(r => r.json())
+                .then(d => {
+                    updateUserData(d);
+                    setOpenAvatarImgDialog(false)
+                })
+
+            setImgError('')
+
+        }
 
     };
 
-    const onBackgroundImgChange = (e)=>{
+    const onBackgroundImgChange = (e) => {
         e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const name = sessionStorage.getItem('name')?? localStorage.getItem('name')
-        formData.append("name", name )        
-        const options = {
-            method: "PATCH",
-            // headers: {
-            //   "Content-type": "multipart/form-data", // aviso a mi servidor que le envio los datos en formato JSON
-            // },
-            body: formData
-          };
-
-        fetch('http://localhost:4567/user/change-background', options)
-        .then(r=>r.json())
-        .then(d=>{
-            updateUserData(d);
-            setOpenBackgroundImgDialog(false)})
+        
+ 
+        
+            const formData = new FormData(e.currentTarget);
+            const name = sessionStorage.getItem('name') ?? localStorage.getItem('name')
+            formData.append("name", name)
+            const options = {
+                method: "PATCH",
+                // headers: {
+                //   "Content-type": "multipart/form-data", // aviso a mi servidor que le envio los datos en formato JSON
+                // },
+                body: formData
+            };
+    
+            fetch('http://localhost:4567/user/change-background', options)
+                .then(r => r.json())
+                .then(d => {
+                    updateUserData(d);
+                    setOpenBackgroundImgDialog(false)
+                })
+ 
+        
     }
-
     const styleBackground = {
-        backgroundImage: "url(" + serverUrl + `/profile-background/${userData?.profileBackgroundImg}` + ")",
+        backgroundImage: `url("${serverUrl}/profile-background/${userData?.profileBackgroundImg}")`,
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover'
     };
 
     const styleAvatar = {
-        backgroundImage: "url(" + serverUrl + `/user-avatar/${userData?.file?.filename}` + ")",
+        backgroundImage: `url("${serverUrl}/user-avatar/${userData?.file?.filename}")`,
         backgroundPosition: 'center',
         backgroundSize: 'cover'
     };
@@ -385,9 +403,11 @@ export default function MyProfile() {
                                 name='profile-background'
                                 label={t("Profile.EditBackground")}
                                 type="file"
+                                accept='image/jpg'
                                 fullWidth
                                 variant="standard"
                             />
+                            <Typography>{imgError}</Typography>
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={closeBackgroundImgDialog}>{t("Profile.Options.Cancel")}</Button>
@@ -403,6 +423,7 @@ export default function MyProfile() {
                                 {t("Profile.EditBackgroundMessage")}
                             </DialogContentText>
                             <TextField
+                                inputProps={{ accept: ["image/jpeg", "image/png"] }}
                                 autoFocus
                                 margin="dense"
                                 id="avatar"
@@ -412,6 +433,7 @@ export default function MyProfile() {
                                 fullWidth
                                 variant="standard"
                             />
+                            <Typography>{imgError}</Typography>
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleCloseAvatarDialog}>{t("Profile.Options.Cancel")}</Button>

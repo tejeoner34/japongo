@@ -15,8 +15,21 @@
 }
 
 .map__popup__name{
-    color: red;
+    color: #3a2525ed;
     font-size: 1.2rem;
 
 }
 
+.leaflet-popup-content{
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .6rem;
+    max-height: 200px;
+    max-width: 230px;
+}
+
+.leaflet-popup-content p{
+    margin: 0;
+}

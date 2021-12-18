@@ -16,10 +16,12 @@ export default function CoursesPage() {
         fetch('http://localhost:4567/courses/')
             .then(r => r.json())
             .then(d => {
+                console.log(d)
                 setCourses(oldvalue => oldvalue.concat(d));
                 setCoursesOriginal(oldvalue => {
-                    oldvalue.concat(d);
                     setIsLoad(true);
+                   return oldvalue.concat(d);
+                    
                 });
             })
     }, []);
@@ -36,7 +38,9 @@ export default function CoursesPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         let data = e.target.course.value.toLowerCase();
-        const filtered = courseOriginal.filter(e => e.name.toLowerCase().includes(data))
+        console.log(courses)
+        const filtered = courseOriginal?.filter(e => e.name.toLowerCase().includes(data))
+        console.log(filtered)
         setCourses(filtered)
 
     }

@@ -27,6 +27,15 @@ function ReviewCardSlider(props) {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
+    const styleBackground = {
+        backgroundImage: `url("${serverUrl}/review-avatar/${props?.data?.[activeStep]?.img}")`,
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        height: '140px',
+        width: '140px',
+        borderRadius:'50%'
+      };
    
 
     return (
@@ -58,9 +67,8 @@ function ReviewCardSlider(props) {
             flexDirection='column'
             alignItems='center'
             >
-            <div className='review-card-slider__img-container'>
-            {props.data&&<img src={serverUrl+`/review-avatar/${props?.data?.[activeStep]?.img}`} alt="" />}
-            </div>
+            {props?.data&&<div style={styleBackground} >
+            </div>}
             {props?.data?.[activeStep]?.body}
                 {/* {props.data?.map((step, index) => (
                     <div key={step.name}>

@@ -39,7 +39,7 @@ export default function SchoolDetailPage() {
                 .then(d => updateAcommodations(oldvalue => oldvalue.concat(d)))
             })
 
-    }, []);
+    }, [id]);
 
 
 

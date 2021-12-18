@@ -59,6 +59,7 @@
         },
         "FirstStep":{
             "Banner": "First Step",
+            "Description": "You can choose between looking for an school in Japan or you can start by using out online courses mean while",
             "SchoolCard":{
                 "Title":"Choose a School",
                 "Button": "Schools"
@@ -106,6 +107,7 @@
         "Favorite": "Your Favorite Courses",
         "EditBackground": "Edit Image",
         "EditBackgroundMessage": "Select the new image",
+        "ImgError":"Image size/format is not valid",
         "Options": {
             "Button":"Options",
             "Delete": "Delete Account",
@@ -146,7 +148,8 @@
         "Title": "Find your School in Tokyo",
         "TokyoDescription": "The capital of Japan and the largest city in the world, Tokyo is the place to be if you love the big city life. There is always something to do, incredible festivals to attend, museums to visit and plenty of places to eat and drink (great for practising your Japanese and meeting new people!). And for such a large metropolis, there are many areas where it can feel surprisingly quiet and tranquil.",
         "TokyoName":"Tokyo",
-        "Location": "Schools Location"
+        "Location": "Schools Location",
+        "MoreInfo":"More info"
     },
     "SchoolDetail":{
         "Introduction": "About the School",

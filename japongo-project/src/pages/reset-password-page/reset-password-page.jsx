@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation, useHistory } from "react-router-dom"; 
-import Login from "../login-page/login-page";
 import { useTranslation } from 'react-i18next';
 import { Typography, Grid, Box, Paper, TextField, Button } from "@mui/material";
 

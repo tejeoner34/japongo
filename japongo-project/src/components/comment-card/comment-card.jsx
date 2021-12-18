@@ -31,10 +31,21 @@ export default function CommentCard(props){
             maxWidth:'500px',
             marginTop:'1rem'
             }}>
+              <Box
+              display='flex'
+              justifyContent='space-between'
+              >
+              <Box 
+              display={'flex'}
+              flexDirection={'column'}
+              gap={1.5}>
             <Typography variant="h5">{props.data?.name}</Typography>
             <Typography variant="body" sx={{opacity:0.7}}>{props.data?.comment}</Typography>
+            </Box>
+            <Box>
             {props.data?.name===sessionStorage.getItem('name') && <span title="delete"><DeleteIcon  sx={{cursor:'pointer'}} onClick={onCommentDelete}></DeleteIcon></span>}
-
+            </Box>
+            </Box>
             <Divider />
         </Box>
     )

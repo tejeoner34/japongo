@@ -41,22 +41,22 @@ export default function HomePage() {
                 <Box>
                     <Typography fontWeight={500} variant='h2'>{t("Home.Steps.Title")}</Typography>
                 </Box>
-                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} rowGap={4}>
-                    <Stack direction='row'>
+                <Stack direction={{ xs: 'column', sm: 'row' }}  spacing={2} rowGap={4}>
+                    <Stack sx={{width:'100%'}} direction='row'>
                         <LooksOneIcon color='primary' sx={{ fontSize: 40 }} />
                         <Stack>
                             <Typography fontWeight={600}>{t("Home.Steps.One.Title")}</Typography>
                             <Typography>{t("Home.Steps.One.Body")}</Typography>
                         </Stack>
                     </Stack>
-                    <Stack direction='row'>
+                    <Stack  sx={{width:'100%'}} direction='row'>
                         <LooksTwoIcon color='primary' sx={{ fontSize: 40 }} />
                         <Stack>
                             <Typography fontWeight={600}>{t("Home.Steps.Two.Title")}</Typography>
                             <Typography>{t("Home.Steps.Two.Body")}</Typography>
                         </Stack>
                     </Stack>
-                    <Stack direction='row'>
+                    <Stack  sx={{width:'100%'}} direction='row'>
                         <Looks3Icon color='primary' sx={{ fontSize: 40 }} />
                         <Stack>
                             <Typography fontWeight={600}>{t("Home.Steps.Three.Title")}</Typography>
@@ -72,11 +72,12 @@ export default function HomePage() {
                 <div className='home__card__background'></div>
                 <Typography variant='h1' color='common.white' sx={{ position: 'absolute' }}>{t("Home.FirstStep.Banner")}</Typography>
             </div>
+            <Typography sx={{maxWidth:'70%'}} variant='h5'>{t("Home.FirstStep.Description")}</Typography>
             <Divider sx={{ padding: '10px', width: '70%', borderBottomWidth: 2, }} />
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} rowGap={4}>
                 <SchoolCard/>
                 <OnlineCourseCard/>
-                <AccommodationCard/>
+                {/* <AccommodationCard/> */}
             </Stack>
             <Divider sx={{ padding: '10px', width: '70%', borderBottomWidth: 2, }} />
             <div className='home__card'>

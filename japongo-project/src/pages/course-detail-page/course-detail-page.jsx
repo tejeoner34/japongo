@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import ReactPlayer from 'react-player';
+import ReactPlayer from 'react-player/youtube';
 import { TextField, Button, Grid, Box, Typography, Snackbar, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
 import CommentCard from '../../components/comment-card/comment-card';
 import './course-detail-page.css';
-import { UserContext } from '../../context/user-context/user-context';
+// import { UserContext } from '../../context/user-context/user-context';
 
 
 
@@ -18,7 +18,7 @@ export default function CourseDetailPage() {
   const [control, updateControl] = useState(null);
   const [inputValue, updateInputValue] = useState('');
   const [t] = useTranslation('global');
-  const [, updateUserData] = useContext(UserContext);
+  // const [, updateUserData] = useContext(UserContext);
   const [isAdd, setIsAdd] = useState(true);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function CourseDetailPage() {
       .then(d => {
         updateCourse({ ...d })
         updateControl(true)})
-  },[]);
+  },[id]);
 
   const onCommentPost = (e) => {
     e.preventDefault();
@@ -109,7 +109,8 @@ export default function CourseDetailPage() {
 
   return (
     <Grid container justifyContent='center' flexDirection='column' alignItems='center' rowGap={4}>
-      {control&&<ReactPlayer width='60%' maxwidth='600px' url={`https://www.youtube.com/watch?v=${course?.video}`} />}
+      {control&&<ReactPlayer width='60%' maxwidth='600px' url={`https://www.youtube.com/watch?v=${course?.video}`}
+      config={{ youtube: { playerVars: { origin: 'https://www.youtube.com' } } }} />}
       <Box
         component='div'
         sx={{
