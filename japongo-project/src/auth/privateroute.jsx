@@ -1,5 +1,5 @@
 import { Route, Redirect } from "react-router";
-import {  useEffect, useState } from "react";
+import {  useState } from "react";
 
 
 
@@ -21,7 +21,7 @@ export default function PrivateRoute({ children, ...rest }) {
 
     const [status, setStatus] = useState(null);
     // const [, updateUserData] = useContext(UserContext);
-
+    const isAuth = sessionStorage.getItem('token')??localStorage.getItem('token')??null;
     
 
     // const fetchFunction = async()=>{
@@ -29,15 +29,19 @@ export default function PrivateRoute({ children, ...rest }) {
     // };
     // fetchFunction();
     
-
-    useEffect(()=>{
-      const fetchFunction = async()=>{
-        const data = await getStatus();
-         setStatus(data);
-      };
-      fetchFunction();
-      
-    },[])
+if(isAuth !== null){
+  
+    const fetchFunction = async()=>{
+      const data = await getStatus();
+       setStatus(data);
+    };
+    fetchFunction();
+    
+ 
+}else{
+  window.location.href= process.env.PUBLIC_URL + '/login'
+}
+    
 
 
     

@@ -9,7 +9,6 @@ import Looks3Icon from '@mui/icons-material/Looks3';
 import SchoolCard from "../../components/cards/school-card/school-card";
 import ReviewsBanner from '../../img/home-reviews-banner.jpg';
 import OnlineCourseCard from "../../components/cards/online-course-card/online-course-card";
-import AccommodationCard from "../../components/cards/accommodation-card/accommodation-card";
 import ReviewCard from "../../components/reviews-card/reviews-card";
 import ReviewCardSlider from "../../components/review-card-slider/review-card-slider";
 import { useEffect, useState } from "react";

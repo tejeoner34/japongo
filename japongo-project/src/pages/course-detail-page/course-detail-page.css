@@ -10,3 +10,15 @@
 .course-detail__form button{
     max-width: 6rem;
 }
+
+.youtube-player{
+    width:60%;
+    max-width:600px;
+}
+
+@media (max-width:600px){
+    .youtube-player{
+        width: 100%;
+    }
+
+}

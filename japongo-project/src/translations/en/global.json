@@ -164,7 +164,10 @@
         "Age":"Age",
         "Send": "Send",
         "Message": "We have received your data and will shortly contact you",
-        "Accommodation": "Here you can find a map with the closest accommodations available around this school"
+        "Accommodation": "Here you can find a map with the closest accommodations available around this school",
+        "MoreInfo": "Contact us if you are interested in this school!",
+        "NameLabel": "Name",
+        "AddInfo": "Give us more information about yourself!"
     }
 
 }

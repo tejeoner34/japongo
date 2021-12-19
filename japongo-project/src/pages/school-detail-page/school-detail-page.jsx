@@ -57,6 +57,7 @@ export default function SchoolDetailPage() {
                 name: e.target.name.value,
                 gender: e.target.gender.value,
                 age: e.target.age.value,
+                userComment: e.target.userComment.value,
                 token: id
             })
         }
@@ -67,12 +68,16 @@ export default function SchoolDetailPage() {
             })
     }
 
+    // const interval = setInterval(() => {
+    //     setIsEnglish(!isEnglish)
+    // }, 5000);
+
     return (
         <Grid container justifyContent='center' flexDirection='column' alignItems='center' rowGap={4}>
             <div className='home__banner' style={{ maxHeight: '300px' }}>
                 {school && <img className='home__banner__img' src={serverUrl + `/school/${school?.img?.banner}`} alt={school?.img?.banner} />}
                 <div className='home__banner__background'></div>
-                <Typography variant='h1' color='common.white' sx={{ position: 'absolute' }}>{school?.name}</Typography>
+                <Typography variant='h1' color='common.white' sx={{ position: 'absolute',marginLeft:'1rem',marginRight:'1rem', textAlign:'center' }}>{school?.name}</Typography>
             </div>
             <Box className='introduction-container' component='div'
                 display={'flex'}
@@ -133,7 +138,7 @@ export default function SchoolDetailPage() {
                     >
                         <Typography variant='h4'>{t("SchoolDetail.Characteristics")}</Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails sx={{textAlign:'center'}}>
                         {school?.characteristics?.beginners &&
                             <div className='school-detail__accordion__content'>
                                 <ChildCareIcon sx={{ fontSize: 60 }}></ChildCareIcon>
@@ -161,18 +166,22 @@ export default function SchoolDetailPage() {
                 </Accordion>
             </div>
             <Divider sx={{ padding: '10px', width: '40%', borderBottomWidth: 2, }} />
-
+                             
             <Typography variant='h2'>{t("Header.Accommodation")}</Typography>
-            <Typography>{t("SchoolDetail.Accommodation")}</Typography>
+            <Typography sx={{marginLeft:'1rem',marginRight:'1rem'}}>{t("SchoolDetail.Accommodation")}</Typography>
             {school && <AccommodationMap school={school} lat={school?.lat} lon={school?.lon} data={accommodations}></AccommodationMap>}
-            <Paper sx={{ width: '70%', textAlign: 'center', display: 'flex', justifyContent: 'center', padding: 2 }} elevation={10}>
-                <form className='login-form' onSubmit={handleInfoSubmit}>
+            <Divider sx={{ padding: '10px', width: '40%', borderBottomWidth: 2, }} />
+
+            <Typography sx={{marginLeft:'1rem',marginRight:'1rem'}} variant='h4'>{t("SchoolDetail.MoreInfo")}</Typography>
+            <Paper sx={{ width: {xs: '100%', md:'70%'}, textAlign: 'center', display: 'flex', justifyContent: 'center', padding: 2 }} elevation={10}>
+                <form className='login-form more-info-form'  onSubmit={handleInfoSubmit}>
                     <div className='avatar-container'>
                         <Typography></Typography>
                     </div>
-                    <h2>{t('Register.Register')}</h2>
+                    <h2 className='info-form__h2-english'>I want more Info!</h2>
+                    <h2 className='info-form__h2-japanese'>情報をもっと欲しい！</h2>
                     <TextField required type='email' name='email' label={t("Register.Email")} variant="outlined" />
-                    <TextField required type='text' name='name' label={t("Register.Name")} variant="outlined" />
+                    <TextField required type='text' name='name' label={t("SchoolDetail.NameLabel")} variant="outlined" />
                     <div>
                         <input name='gender' value='male' type='radio' id='male' />
                         <label id='male' htmlFor='male'>{t("SchoolDetail.Male")}</label>
@@ -182,6 +191,7 @@ export default function SchoolDetailPage() {
                         <label id='female' htmlFor='female'>{t("SchoolDetail.Female")}</label>
                     </div>
                     <TextField name='age' type='number' InputProps={{ inputProps: { min: 18, max: 100 } }} label={t("SchoolDetail.Age")} ></TextField>
+                    <textarea name='userComment' style={{minWidth:'200px', minHeight:'100px'}} placeholder={t("SchoolDetail.AddInfo")} ></textarea>
                     {infoSentMessage}
                     <Button variant='contained' type='submit' color='primary'>{t('SchoolDetail.Send')}</Button>
 

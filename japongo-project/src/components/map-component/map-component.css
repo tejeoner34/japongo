@@ -17,6 +17,7 @@
 .map__popup__name{
     color: #3a2525ed;
     font-size: 1.2rem;
+    text-decoration: underline;
 
 }
 
@@ -32,4 +33,13 @@
 
 .leaflet-popup-content p{
     margin: 0;
+}
+
+.map__popup__characteristics{
+    width: 100%;
+}
+
+.map__popup__characteristics li{
+    list-style-type: circle;
+    margin-left: 1rem;
 }

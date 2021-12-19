@@ -16,7 +16,6 @@ export default function CoursesPage() {
         fetch('http://localhost:4567/courses/')
             .then(r => r.json())
             .then(d => {
-                console.log(d)
                 setCourses(oldvalue => oldvalue.concat(d));
                 setCoursesOriginal(oldvalue => {
                     setIsLoad(true);

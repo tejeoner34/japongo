@@ -34,10 +34,12 @@ export default function AccommodationMap(props) {
       <Marker key={i} position={[s?.location.lat, s?.location.lng]}>
       <Popup>
           <p className='map__popup__name'>{s.name}</p> 
-          {s.amenities.length>0&&<p>{t("SchoolDetail.Characteristics")}</p>}
+          <div className='map__popup__characteristics'>
+          {s.amenities.length>0&&<b>{t("SchoolDetail.Characteristics")}</b>}
           <ul>
           {s.amenities.map((e,i)=><li key={i}>{e}</li>)}  
           </ul>      
+          </div>
       </Popup>
     </Marker>
   ))}

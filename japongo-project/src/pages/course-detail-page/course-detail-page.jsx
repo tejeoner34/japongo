@@ -105,11 +105,16 @@ export default function CourseDetailPage() {
       </React.Fragment>
     );
 
+    const style = {
+  
+      maxwidth:'600px',
+
+    }
 
 
   return (
     <Grid container justifyContent='center' flexDirection='column' alignItems='center' rowGap={4}>
-      {control&&<ReactPlayer width='60%' maxwidth='600px' url={`https://www.youtube.com/watch?v=${course?.video}`}
+      {control&&<ReactPlayer style={style} width='100%' maxwidth='600px' url={`https://www.youtube.com/watch?v=${course?.video}`}
       config={{ youtube: { playerVars: { origin: 'https://www.youtube.com' } } }} />}
       <Box
         component='div'
