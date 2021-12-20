@@ -13,7 +13,8 @@
         "Menu": "Menu", 
         "Courses": "Online Courses",
         "Home":"Home",
-        "PrivacyPolicy": "Privacy Policy"
+        "PrivacyPolicy": "Privacy Policy",
+        "AccountSettings": "Account Settings"
     },
     "Login": {
         "Access": "Sign in",
@@ -121,7 +122,8 @@
             "UpdateDescription": "To create a new password please enter your current password first",
             "NewPassword": "New Password",
             "PasswordUpdated": "Password was updated"
-        }
+        },
+        "RemoveFav": "Remove"
         
     },
     "ForgotPassword":{

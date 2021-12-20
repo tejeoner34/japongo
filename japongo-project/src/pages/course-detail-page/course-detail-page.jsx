@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router';
 import ReactPlayer from 'react-player/youtube';
 import { TextField, Button, Grid, Box, Typography, Snackbar, IconButton } from '@mui/material';
@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import CommentCard from '../../components/comment-card/comment-card';
 import './course-detail-page.css';
 import CircularProgress from '@mui/material/CircularProgress';
+import { UserContext } from '../../context/user-context/user-context';
 
 // import { UserContext } from '../../context/user-context/user-context';
 
@@ -22,7 +23,8 @@ export default function CourseDetailPage() {
   const [t] = useTranslation('global');
   // const [, updateUserData] = useContext(UserContext);
   const [isAdd, setIsAdd] = useState(true);
-  const [isLoad, setIsLoad] = useState(false)
+  const [isLoad, setIsLoad] = useState(false);
+  const [userData] = useContext(UserContext);
 
 
   useEffect(() => {
@@ -47,7 +49,8 @@ export default function CourseDetailPage() {
       },
       body: JSON.stringify({
         name: sessionStorage.getItem('name') ?? localStorage.getItem('name'),
-        comment: comment
+        comment: comment,
+        img: userData?.file.filename
       }),
     };
     fetch(`http://localhost:4567/courses/course?id=${id}`, options)

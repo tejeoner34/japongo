@@ -22,11 +22,11 @@ export default function MyProfile() {
 
     const [t] = useTranslation('global');
     const [userData, updateUserData] = useContext(UserContext);
-    const [control, setControl] = useState(null);
     const history = useHistory();
     const [incorrectPass, setIncorrectPass] = useState('')
     const [isLoad, setIsLoad] = useState(false);
     const [imgError, setImgError] = useState('');
+    const token = sessionStorage.getItem('token') ?? localStorage.getItem('token');
 
     const onFavRemove = (childata) => {
         updateUserData({ ...childata })
@@ -43,7 +43,6 @@ export default function MyProfile() {
                 email: sessionStorage.getItem('mail') ?? localStorage.getItem('mail'), // obtengo el value de un input por su name
                 password: e.target.password.value
             })
-
         }
         fetch('http://localhost:4567/user/', options)
             .then(r => {
@@ -51,8 +50,6 @@ export default function MyProfile() {
                 return r.json()
             })
             .then(d => console.log(d))
-
-
         const optionsDeleteAllComments = {
             method: 'PATCH',
             headers: {
@@ -61,7 +58,6 @@ export default function MyProfile() {
             body: JSON.stringify({ // Genero el body como string
                 name: sessionStorage.getItem('name') ?? localStorage.getItem('name'), // obtengo el value de un input por su name
             })
-
         }
         fetch('http://localhost:4567/courses', optionsDeleteAllComments)
             .then(r => console.log(r))
@@ -69,8 +65,6 @@ export default function MyProfile() {
 
     const onPasswordChange = (e) => {
         e.preventDefault();
-        console.log(e.target.password.value)
-        console.log(e.target.newPassword.value)
         const options = {
             method: 'PATCH',
             headers: {
@@ -89,30 +83,29 @@ export default function MyProfile() {
                     setIncorrectPass(t("Profile.Options.PasswordUpdated"));
                     setTimeout(() => {
                         handleCloseDialogPassword()
-                    }, 1000)
+                        setIncorrectPass('')
+                    }, 1500);
+                    
 
                 } else { setIncorrectPass(t("Profile.Options.IncorrectPassword")) }
                 return r.json()
             })
-            .then(d => console.log(d))
+           
     }
 
     useEffect(() => {
         fetch('http://localhost:4567/user/', {
             headers: {
-                "Authorization": sessionStorage.getItem('token') ?? localStorage.getItem('token'),
+                "Authorization": token,
             }
         })
-            .then(r => r.json())
+            .then(r =>{
+               return r.json()})
             .then(d => {
                 updateUserData({ ...d });
-                setControl(true)
                 setIsLoad(true)
-
             })
-    }, [updateUserData])
-
-
+    }, [updateUserData, token])
 
     //import from MUI. Options button
     const [anchorEl, setAnchorEl] = useState(null);
@@ -125,7 +118,6 @@ export default function MyProfile() {
     };
 
     //import from MUI. Delete Dialog
-
     const [openDialog, setOpenDialog] = useState(false);
 
     const handleClickOpen = () => {
@@ -150,7 +142,6 @@ export default function MyProfile() {
 
 
     // dialog to edit background picture
-
     const [openBackgroundImgDialog, setOpenBackgroundImgDialog] = useState(false);
 
     const handleOpenBackgroundImgDialog = () => {
@@ -162,7 +153,6 @@ export default function MyProfile() {
     }
 
     // dialog to edit avatar
-
     const [openAvatarImgDialog, setOpenAvatarImgDialog] = useState(false);
 
     const handleOpenAvatarDialog = () => {
@@ -175,14 +165,10 @@ export default function MyProfile() {
     };
 
     const onAvatarChange = (e) => {
-
         e.preventDefault();
-
         if (e.target[0].files[0].size >= 1*1024*1024) {
             setImgError(t("Profile.ImgError"))
         } else {
-
-            console.log(e.target[0].files[0].size);
             const formData = new FormData(e.currentTarget);
             const name = sessionStorage.getItem('name') ?? localStorage.getItem('name')
             formData.append("name", name)
@@ -193,25 +179,18 @@ export default function MyProfile() {
                 // },
                 body: formData
             };
-
             fetch('http://localhost:4567/user/change-avatar', options)
                 .then(r => r.json())
                 .then(d => {
                     updateUserData(d);
                     setOpenAvatarImgDialog(false)
                 })
-
             setImgError('')
-
         }
-
     };
 
     const onBackgroundImgChange = (e) => {
         e.preventDefault();
-        
- 
-        
             const formData = new FormData(e.currentTarget);
             const name = sessionStorage.getItem('name') ?? localStorage.getItem('name')
             formData.append("name", name)
@@ -222,15 +201,12 @@ export default function MyProfile() {
                 // },
                 body: formData
             };
-    
             fetch('http://localhost:4567/user/change-background', options)
                 .then(r => r.json())
                 .then(d => {
                     updateUserData(d);
                     setOpenBackgroundImgDialog(false)
                 })
- 
-        
     }
     const styleBackground = {
         backgroundImage: `url("${serverUrl}/profile-background/${userData?.profileBackgroundImg}")`,
@@ -246,8 +222,6 @@ export default function MyProfile() {
     };
 
     return (
-
-
         <Fragment>
             <Box component='div' sx={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%' }}>
                 <Box sx={{
@@ -256,10 +230,10 @@ export default function MyProfile() {
                     justifyContent: 'space-between',
                     position: 'relative'
                 }}>
-                    {control && <div className="profile__background-img__container"
+                    <div className="profile__background-img__container"
                         style={styleBackground}>
                         {/* <img src={serverUrl + `/profile-background/${userData?.profileBackgroundImg}`} alt="" /> */}
-                    </div>}
+                    </div>
                     <div className="profile__info__container">
                         <div>
                             <h1>{t("Profile.Hello")} {sessionStorage.getItem('name') ?? localStorage.getItem('name')}</h1>
@@ -353,9 +327,9 @@ export default function MyProfile() {
                             </div>
                         </div>
                     </div>
-                    {control && <div className="profile__info__img-container" style={styleAvatar}>
+                    <div className="profile__info__img-container" style={styleAvatar}>
                         {/* <img src={serverUrl + `/user-avatar/${userData?.file?.filename}`} alt={userData?.file?.fieldname} /> */}
-                    </div>}
+                    </div>
                     <div onClick={handleOpenBackgroundImgDialog} title={t("Profile.EditBackground")} className="profile__info__img-edit-container">
                         <CameraAltIcon></CameraAltIcon>
                     </div>
@@ -363,7 +337,6 @@ export default function MyProfile() {
                         <CameraAltIcon></CameraAltIcon>
                     </div>
                 </Box>
-
                 {
                     !isLoad ? (
                         <Stack spacing={1}>
@@ -388,7 +361,6 @@ export default function MyProfile() {
                         </Paper>
                     )
                 }
-
                 <Dialog open={openBackgroundImgDialog} onClose={closeBackgroundImgDialog}>
                     <DialogTitle>{t("Profile.EditBackground")}</DialogTitle>
                     <form onSubmit={onBackgroundImgChange}>

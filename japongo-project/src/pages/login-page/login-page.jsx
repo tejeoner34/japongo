@@ -1,5 +1,5 @@
 import { Paper, Grid, Button, Typography } from '@mui/material';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import './login-page.css';
 import LockIcon from '@mui/icons-material/Lock';
 import Avatar from '@mui/material/Avatar';
@@ -19,7 +19,7 @@ function Login() {
     const [checked, setChecked] = useState(false);
     let history = useHistory();
 
-    const handleCheck = (e)=>{
+    const handleCheck = (e) => {
         setChecked(!checked)
     }
 
@@ -48,20 +48,23 @@ function Login() {
                     return r.json()
                 })
                 .then(d => {
-                    if (d !== undefined && !checked) {
+                   
+                    if (d !== 'Usuario/Contraseña erróneos' && !checked) {
                         sessionStorage.setItem('token', 'Bearer ' + d.token);
                         sessionStorage.setItem('mail', d.email);
                         sessionStorage.setItem('name', d.name);
+                        document.cookie =`avatar=${d.file.filename}` 
                         updateIsAuth(true)
                         sessionStorage.setItem('isAuth', true);
                         history.push("/courses");
-                    }else if(d !== undefined && checked){
+                    } else if (d !== 'Usuario/Contraseña erróneos' && checked) {
                         sessionStorage.setItem('token', 'Bearer ' + d.token);
                         sessionStorage.setItem('mail', d.email);
                         sessionStorage.setItem('name', d.name);
                         localStorage.setItem('token', 'Bearer ' + d.token);
                         localStorage.setItem('mail', d.email);
                         localStorage.setItem('name', d.name);
+                        document.cookie =`avatar=${d.file.filename}` 
                         updateIsAuth(true)
                         sessionStorage.setItem('isAuth', true);
                         localStorage.setItem('isAuth', true);
@@ -116,8 +119,10 @@ function Login() {
                     <FormControlLabel control={<Checkbox checked={checked} onChange={handleCheck} />} label={t("Login.Remember")} />
                     <Typography color='error'>{errorMessage}</Typography>
                     <Button variant='contained' type='submit' color='primary'>{t('Login.Access')}</Button>
-                    <Typography>{t('Login.HaveAccount')} <Link to='/register'>{t('Login.SignUp')}</Link></Typography>
-                    <Typography><Link to='/forgot-password'>{t('Login.ForgotPassword')}</Link></Typography>
+                    <Typography >{t('Login.HaveAccount')}</Typography>
+                    <Typography sx={{ cursor: 'pointer' }} onClick={() => history.push('/register')} color='primary' >{t('Login.SignUp')}</Typography>
+                    <Typography sx={{ cursor: 'pointer' }} color={'primary'} onClick={() => history.push('/forgot-password')}>{t('Login.ForgotPassword')}</Typography>
+
                 </Box>
 
 

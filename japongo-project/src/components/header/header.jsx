@@ -12,12 +12,12 @@ import { useTranslation } from 'react-i18next';
 import SwitchComponent from '../switch/switch-component';
 import MenuItem from '@mui/material/MenuItem';
 import { AuthContext } from '../../auth/auth.context';
-import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Avatar from '@mui/material/Avatar';
 import { LangContext } from '../../context/lang-context/lang-context';
+import { serverUrl } from '../../global/global-variable';
 
 
 
@@ -28,7 +28,9 @@ export default function Header(props) {
     const [t, i18n] = useTranslation('global');
     const [isAuth, updateIsAuth] = useContext(AuthContext);
     let history = useHistory();
-    const [, updateLang] = useContext(LangContext)
+    const [, updateLang] = useContext(LangContext);
+    // const [userData] = useContext(UserContext);
+    const cookieArray = document.cookie.split('=');
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [anchorEl2, setAnchorEl2] = useState(null);
@@ -58,9 +60,19 @@ export default function Header(props) {
         localStorage.removeItem('name');
         localStorage.removeItem('mail');
         updateIsAuth(false);
-        history.push('login');
+        history.push('/login');
     };
 
+    
+    const styleAvatar = {
+        backgroundImage: `url("${serverUrl}/user-avatar/${cookieArray[1]}")`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        width:'40px',
+        height:'40px',
+        borderRadius:'50%',
+        cursor:'pointer'
+    };
 
 
     return (
@@ -111,11 +123,14 @@ export default function Header(props) {
                         {isAuth ?
                             <React.Fragment>
                                 <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                                    <Tooltip title="Account settings">
+                                    <div onClick={handleClickMyProfile} title={t("Header.AccountSettings")} style={styleAvatar}>
+
+                                    </div>
+                                    {/* <Tooltip title="Account settings">
                                         <IconButton onClick={handleClickMyProfile} size="small" sx={{ ml: 2 }}>
                                             <Avatar sx={{ width: 32, height: 32 }}>{sessionStorage.getItem('name')?.charAt(0)??localStorage.getItem('name')?.charAt(0)?? ''}</Avatar>
                                         </IconButton>
-                                    </Tooltip>
+                                    </Tooltip> */}
                                 </Box>
                                 <Menu
                                     anchorEl={anchorEl2}

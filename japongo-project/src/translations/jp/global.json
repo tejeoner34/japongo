@@ -13,7 +13,8 @@
         "Menu": "メニュー",
         "Courses": "オンライン授業",
         "Home":"ホーム",
-        "PrivacyPolicy": "プライバシーポリシー"
+        "PrivacyPolicy": "プライバシーポリシー",
+        "AccountSettings": "アカウントの設定"
     },
     "Login": {
         "Access": "アックセス",
@@ -121,7 +122,8 @@
             "UpdateDescription": "パスワードを変更するにはパスワードを入力する必要です",
             "NewPassword": "新しいパスワード",
             "PasswordUpdated": "パスワードを変更しました"
-        }
+        },
+        "RemoveFav": "削除"
     },
     "ForgotPassword": {
         "Title": "パスワードアシスタント",

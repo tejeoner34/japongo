@@ -2,12 +2,14 @@
 import { Typography, Button } from "@mui/material";
 import { useHistory } from "react-router";
 import './favorite-card.css';
+import { useTranslation } from "react-i18next";
 
 
 
 export default function FavoriteCard(props){
 
     const history = useHistory();
+    const [t] = useTranslation('global')
 
     const handleClick = (e)=>{
         history.push(`/course/${props.data?._id}`)
@@ -40,7 +42,7 @@ export default function FavoriteCard(props){
                 <div className='favorite-card__info-container'>
                     <Typography sx={{cursor:'pointer'}} onClick={handleClick} variant='h4'>{props.data?.name}</Typography>
                     <Typography variant='body'>{props.data?.description}</Typography>
-                    <Button onClick={handleRemove}>Remove</Button>
+                    <Button onClick={handleRemove}>{t("Profile.RemoveFav")}</Button>
                 </div>
             </div>
       
