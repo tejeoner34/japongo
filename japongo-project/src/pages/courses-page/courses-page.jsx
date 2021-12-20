@@ -18,14 +18,12 @@ export default function CoursesPage() {
             .then(d => {
                 setCourses(oldvalue => oldvalue.concat(d));
                 setCoursesOriginal(oldvalue => {
-                    oldvalue.concat(d);
                     setIsLoad(true);
+                   return oldvalue.concat(d);
+                    
                 });
             })
     }, []);
-
-    
-
 
     // const [value, setValue] = useState(0);
 
@@ -36,9 +34,8 @@ export default function CoursesPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         let data = e.target.course.value.toLowerCase();
-        const filtered = courseOriginal.filter(e => e.name.toLowerCase().includes(data))
+        const filtered = courseOriginal?.filter(e => e.name.toLowerCase().includes(data))
         setCourses(filtered)
-
     }
 
 

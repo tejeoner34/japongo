@@ -8,18 +8,20 @@ import './schools-card.css'
 import { serverUrl } from "../../global/global-variable";
 
 
+
 export default function SchoolsCard(props){
 
     const history = useHistory();
     const [t] = useTranslation('global');
 
+ 
     return(
         <div className="school-card">
             <div className="school-card__background-container">
                 <img src={serverUrl+`/school/${props.data?.img.card}`} alt={props.data?.img.card} />
                 <div className="school-card__background"></div>
             </div>
-        <div className="school-card__info">
+        <div  className="school-card__info">
             <Typography sx={{fontSize:'1.7rem'}} >{props.data?.name}</Typography>
             <Typography sx={{fontSize:'1.3rem'}}>{t("Schools.Card.Intensity")}: {props.data?.intensity}</Typography>
             {props.data?.characteristics.cafeteria && <Typography sx={{fontSize:'1.3rem'}}><LocalCafeIcon></LocalCafeIcon> {t("Schools.Card.Cafeteria")}</Typography>}

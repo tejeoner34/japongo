@@ -10,3 +10,28 @@
 .course-detail__form button{
     max-width: 6rem;
 }
+
+
+.css-8atqhb{
+    max-width: 600px;
+}
+
+.course-detail__info-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* .youtube-player{
+    width:60%;
+    max-width:600px;
+} */
+
+@media (max-width:600px){
+    .youtube-player{
+        width: 100%;
+    }
+
+}

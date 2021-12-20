@@ -7,6 +7,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
+
+}
+
+.school-card:hover{
+    -webkit-box-shadow: 1px 1px 15px 5px #FFB2B2; 
+box-shadow: 1px 1px 15px 5px #FFB2B2;
 }
 
 .school-card__background-container{

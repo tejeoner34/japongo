@@ -20,7 +20,7 @@ function EscuelasPage() {
     }, [])
 
     return (
-        <Grid container justifyContent='center' flexDirection='column' alignItems='center' rowGap={3}>
+        <Grid item container justifyContent='center' flexDirection='column' alignItems='center' rowGap={3}>
             <div className='home__banner' style={{ maxHeight: '300px' }}>
                 <img className='home__banner__img' src={backgorund} alt="" />
                 <div className='home__banner__background'></div>

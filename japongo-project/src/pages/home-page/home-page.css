@@ -4,8 +4,35 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    max-height: 500px;
+    max-height: 300px;
     overflow-y: hidden;
+}
+
+.home__banner-animation{
+    animation: slide 1s 
+
+}
+
+@keyframes slide {
+    0%{
+        transform:translate(1000px,0)
+    }
+    100%{
+        transform: translate(0,0);
+    }
+}
+
+.home__how-it-works{
+    animation: slideUp 2s
+}
+
+@keyframes slideUp{
+    0%{
+        transform:translate(0,300px)
+    }
+    100%{
+        transform: translate(0,0);
+    }
 }
 
 .home__banner__img{

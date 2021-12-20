@@ -11,21 +11,19 @@ function useQuery() {
 
 function ValidateEmail() {
 
-const [t] = useTranslation('global');
+  const [t] = useTranslation('global');
   const query = useQuery(); // obtengo los query params
   const [isLoading, setLoading] = useState(true); // state variable para controlar si estoy llamando al API o no
   const [isEmailValid, setEmailValidity] = useState(false); // use state para controlar si el email es válido o no
-
+  const token = query.get("token");
   useEffect(() => {
     // solo la primera vez llamo a la validación del token, recogiendo el valor por parámetro
-    const token = query.get("token"); // obtengo el query param del token
+     // obtengo el query param del token
     if (token) {
-        console.log('desde fetch')
       // llamamos a nuestro API para hacer check del validity
       fetch(`http://localhost:4567/auth/validate?token=${token}`) // validamos tipo GET pasando el token por query param
         .then((r) => {
           setLoading(false); // dejamos de cargar
-          console.log(r)
           if (!r.ok) throw new Error("No se ha validado correctamente"); // si no okey lanzamos error que captura el catch
           setEmailValidity(true); // si estamos aqui es que el API nos ha dicho que OK al token
         })
@@ -34,7 +32,7 @@ const [t] = useTranslation('global');
       setLoading(false); // dejamos de cargar
       setEmailValidity(false); // mostramos error
     }
-  },[]);
+  },[token]);
 
   return (
     <React.Fragment>

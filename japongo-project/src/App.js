@@ -52,6 +52,7 @@ function App() {
   return (
     <AuthProvider value={sessionStorage.getItem('isAuth')??localStorage.getItem('isAuth')??false}>
       <ThemeProvider theme={isDark===true ? darkTheme : theme}>
+      <UserProvider value={null}>
         <BrowserRouter>
           <Paper sx={{ borderRadius: "0" }} style={{ minHeight: '100vh' }}>
             <Grid container direction="column"
@@ -102,7 +103,7 @@ function App() {
                 <Route exact path='/'>
                   <HomePage></HomePage>
                 </Route>
-                <UserProvider value={null}>
+                
                 <PrivateRoute path='/my-profile'>
                   <MyProfile></MyProfile>
                 </PrivateRoute>
@@ -112,7 +113,6 @@ function App() {
                 <PrivateRoute path='/course/:id'>
                   <CourseDetailPage/>
                 </PrivateRoute>
-                </UserProvider>
                 
               </Switch>
               </main>
@@ -121,6 +121,8 @@ function App() {
             </Grid>
           </Paper>
         </BrowserRouter>
+        </UserProvider>
+
       </ThemeProvider>
     </AuthProvider>
   );

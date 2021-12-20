@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation, useHistory } from "react-router-dom"; 
-import Login from "../login-page/login-page";
 import { useTranslation } from 'react-i18next';
 import { Typography, Grid, Box, Paper, TextField, Button } from "@mui/material";
 
@@ -18,14 +17,11 @@ function ResetPassword() {
     const [error, setError] = useState(false);
     const history = useHistory();
 
-
-
     const handleSubmit = (e)=>{
         e.preventDefault();
         const token = query.get("token");
 
         if(e.target.password.value === e.target.repeatedPassword.value && token){
-            console.log(e.target.password.value)
            
             const options = {
                 method: "PATCH",
@@ -51,9 +47,6 @@ function ResetPassword() {
 
             }
     }
-
-
-
 
     return (
 
