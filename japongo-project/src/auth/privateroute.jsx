@@ -1,6 +1,7 @@
 import { Route, Redirect } from "react-router";
 import {  useEffect, useState, useContext } from "react";
 import { UserContext } from "../context/user-context/user-context";
+import { NotificationContext } from "../context/notification-context/notification-context";
 
 
 
@@ -10,6 +11,7 @@ export default function PrivateRoute({ children, ...rest }) {
 
     const [status, setStatus] = useState(null);
     const [, updateUserData] = useContext(UserContext);
+    const [, updateNotification] = useContext(NotificationContext)
     // const isAuth = sessionStorage.getItem('token')??localStorage.getItem('token')??null;
     
 
@@ -28,7 +30,8 @@ export default function PrivateRoute({ children, ...rest }) {
         })
         if(r.ok){
           const d = await r.json();
-          updateUserData(d)
+          updateUserData(d);
+          updateNotification(d.mentions)
         }
         
         return r.status

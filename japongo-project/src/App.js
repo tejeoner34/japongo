@@ -26,6 +26,7 @@ import ResetPassword from './pages/reset-password-page/reset-password-page';
 import SchoolDetailPage from './pages/school-detail-page/school-detail-page';
 import ScrollToTop from './components/scrollToTop.js';
 import LangProvider from './context/lang-context/lang-provider';
+import NotificationProvider from './context/notification-context/notification-provider'
 
 
 
@@ -53,6 +54,7 @@ function App() {
     <AuthProvider value={sessionStorage.getItem('isAuth')??localStorage.getItem('isAuth')??false}>
       <ThemeProvider theme={isDark===true ? darkTheme : theme}>
       <UserProvider value={null}>
+        <NotificationProvider value={null}>
         <BrowserRouter>
           <Paper sx={{ borderRadius: "0" }} style={{ minHeight: '100vh' }}>
             <Grid container direction="column"
@@ -121,6 +123,7 @@ function App() {
             </Grid>
           </Paper>
         </BrowserRouter>
+        </NotificationProvider>
         </UserProvider>
 
       </ThemeProvider>

@@ -8,6 +8,7 @@ import CommentCard from '../../components/comment-card/comment-card';
 import './course-detail-page.css';
 import CircularProgress from '@mui/material/CircularProgress';
 import { UserContext } from '../../context/user-context/user-context';
+import { serverFetch} from '../../global/global-variable.js'
 
 // import { UserContext } from '../../context/user-context/user-context';
 
@@ -40,6 +41,7 @@ export default function CourseDetailPage() {
 
   const onCommentPost = (e) => {
     e.preventDefault();
+
     let comment = e.target.comment.value;
 
     const options = {
@@ -58,8 +60,32 @@ export default function CourseDetailPage() {
       .then(d => updateCourse({ ...d }));
 
     document.getElementById("create-course-form").reset();
-    updateInputValue('')
+    updateInputValue('');
 
+    const splited = comment.split(' ')
+    const finded = splited.find(e=> e.includes('@'))
+    if(finded!== undefined){
+
+      const name = finded.split('@')[1];
+      const options2 = {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          mention: {
+            course: id,
+            comment: comment,
+            from: sessionStorage.getItem('name') ?? localStorage.getItem('name')
+          },
+          
+        }),
+      };
+      fetch(`${serverFetch}mentions/`, options2)
+        .then(r=>r.json())
+        .then(d=>console.log(d))
+    }
   };
 
   const onDeleteComment = (childata) => {
