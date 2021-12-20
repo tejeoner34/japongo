@@ -17,14 +17,11 @@ function ResetPassword() {
     const [error, setError] = useState(false);
     const history = useHistory();
 
-
-
     const handleSubmit = (e)=>{
         e.preventDefault();
         const token = query.get("token");
 
         if(e.target.password.value === e.target.repeatedPassword.value && token){
-            console.log(e.target.password.value)
            
             const options = {
                 method: "PATCH",
@@ -50,9 +47,6 @@ function ResetPassword() {
 
             }
     }
-
-
-
 
     return (
 

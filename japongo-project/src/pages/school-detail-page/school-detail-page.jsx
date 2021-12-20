@@ -22,11 +22,8 @@ export default function SchoolDetailPage() {
 
     const [school, updateSchool] = useState(null);
     const [accommodations, updateAcommodations] = useState([]);
-
-    const [infoSentMessage, updateInfoSentMessage] = useState('')
-
+    const [infoSentMessage, updateInfoSentMessage] = useState('');
     const { id } = useParams();
-
     const [t] = useTranslation('global');
 
     useEffect(() => {
@@ -40,9 +37,6 @@ export default function SchoolDetailPage() {
             })
 
     }, [id]);
-
-
-
 
     const handleInfoSubmit = (e) => {
         e.preventDefault();
@@ -67,10 +61,6 @@ export default function SchoolDetailPage() {
                 return r.json()
             })
     }
-
-    // const interval = setInterval(() => {
-    //     setIsEnglish(!isEnglish)
-    // }, 5000);
 
     return (
         <Grid container justifyContent='center' flexDirection='column' alignItems='center' rowGap={4}>

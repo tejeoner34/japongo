@@ -30,7 +30,7 @@ export default function HomePage() {
 
     return (
         <Grid container justifyContent='center' flexDirection='column' alignItems='center' rowGap={3}>
-            <div className='home__banner'>
+            <div className='home__banner home__banner-animation'>
                 <img className='home__banner__img' src={backgorund} alt="" />
                 <div className='home__banner__background'></div>
                 <Typography variant='h1' color='common.white' sx={{ position: 'absolute' }}>{t("Home.H1")}</Typography>
@@ -40,7 +40,7 @@ export default function HomePage() {
                 <Box>
                     <Typography fontWeight={500} variant='h2'>{t("Home.Steps.Title")}</Typography>
                 </Box>
-                <Stack direction={{ xs: 'column', sm: 'row' }}  spacing={2} rowGap={4}>
+                <Stack className="home__how-it-works" direction={{ xs: 'column', sm: 'row' }}  spacing={2} rowGap={4}>
                     <Stack sx={{width:'100%'}} direction='row'>
                         <LooksOneIcon color='primary' sx={{ fontSize: 40 }} />
                         <Stack>

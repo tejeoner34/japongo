@@ -25,9 +25,6 @@ export default function CoursesPage() {
             })
     }, []);
 
-    
-
-
     // const [value, setValue] = useState(0);
 
     // const handleChange = (event, newValue) => {
@@ -37,11 +34,8 @@ export default function CoursesPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         let data = e.target.course.value.toLowerCase();
-        console.log(courses)
         const filtered = courseOriginal?.filter(e => e.name.toLowerCase().includes(data))
-        console.log(filtered)
         setCourses(filtered)
-
     }
 
 

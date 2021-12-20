@@ -11,7 +11,8 @@ import { useState } from 'react';
 export default function ForgotPasswordPage() {
 
     const [errorMessage, setErrorMessage] = useState('');
-    const [emailSentMessage, setEmailSentMessage] = useState('')
+    const [emailSentMessage, setEmailSentMessage] = useState('');
+    const [t] = useTranslation('global');
 
     const submitEmail = (e) => {
         e.preventDefault();
@@ -38,9 +39,7 @@ export default function ForgotPasswordPage() {
             })
     }
 
-
-
-    const [t] = useTranslation('global');
+    
 
     return (
         <Grid container item xs={12} md={5} direction="column"

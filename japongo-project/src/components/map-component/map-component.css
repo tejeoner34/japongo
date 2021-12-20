@@ -1,7 +1,7 @@
 .leaflet-container{
     width: 80%;
     max-width: 800px;
-    height: 40vh;
+    height: 400px;
 }
 
 .map__popup__img-container{

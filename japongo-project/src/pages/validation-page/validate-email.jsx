@@ -11,7 +11,7 @@ function useQuery() {
 
 function ValidateEmail() {
 
-const [t] = useTranslation('global');
+  const [t] = useTranslation('global');
   const query = useQuery(); // obtengo los query params
   const [isLoading, setLoading] = useState(true); // state variable para controlar si estoy llamando al API o no
   const [isEmailValid, setEmailValidity] = useState(false); // use state para controlar si el email es válido o no
