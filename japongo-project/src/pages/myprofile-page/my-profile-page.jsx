@@ -354,9 +354,21 @@ export default function MyProfile() {
 
                             >
                                 <Typography variant='h3'>{t("Profile.Favorite")}</Typography>
-                                <ul className="profile__favorite-cards">
+                                {
+                                    userData?.favs?.length > 0?
+                                    <ul className="profile__favorite-cards">
                                     {userData?.favs?.map((e, i) => <li key={i}><FavoriteCard onFavRemove={onFavRemove} data={e} /></li>)}
                                 </ul>
+                                :
+                                <Box display='flex'
+                                     flexDirection={'column'}
+                                     alignItems={'center'}
+                                     rowGap={2}>
+                                    <Typography>{t("Profile.NoFavs.Message")}</Typography>
+                                    <Button onClick={()=>history.push('/courses')} variant='contained'>{t("Profile.NoFavs.Button")}</Button>
+                                </Box>
+                                }
+                                
                             </Box>
                         </Paper>
                     )

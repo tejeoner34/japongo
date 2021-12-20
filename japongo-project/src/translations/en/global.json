@@ -123,7 +123,11 @@
             "NewPassword": "New Password",
             "PasswordUpdated": "Password was updated"
         },
-        "RemoveFav": "Remove"
+        "RemoveFav": "Remove",
+        "NoFavs":{
+            "Message": "You still don´t have any favourite courses, let´s look for some!",
+            "Button": "Search"
+        }
         
     },
     "ForgotPassword":{

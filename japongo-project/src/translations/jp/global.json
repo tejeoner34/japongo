@@ -123,7 +123,11 @@
             "NewPassword": "新しいパスワード",
             "PasswordUpdated": "パスワードを変更しました"
         },
-        "RemoveFav": "削除"
+        "RemoveFav": "削除",
+        "NoFavs":{
+            "Message": "まだお気に入りリストは空です。コースを探そう！",
+            "Button": "探す"
+        }
     },
     "ForgotPassword": {
         "Title": "パスワードアシスタント",
