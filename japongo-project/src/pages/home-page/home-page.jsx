@@ -24,9 +24,7 @@ export default function HomePage() {
     },[]);
 
     const [reviews, setReviews] = useState(null)
-
     const [t] = useTranslation('global');
-
 
     return (
         <Grid container justifyContent='center' flexDirection='column' alignItems='center' rowGap={3}>
@@ -76,7 +74,6 @@ export default function HomePage() {
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} rowGap={4}>
                 <SchoolCard/>
                 <OnlineCourseCard/>
-                {/* <AccommodationCard/> */}
             </Stack>
             <Divider sx={{ padding: '10px', width: '70%', borderBottomWidth: 2, }} />
             <div className='home__card'>
@@ -85,7 +82,7 @@ export default function HomePage() {
                 <Typography variant='h1' color='common.white' sx={{ position: 'absolute' }}>{t("Home.Reviews.Banner")}</Typography>
             </div>
             <Stack direction={{ xs: 'row', sm: 'row' }} spacing={2} rowGap={4} sx={{overflowX:'hidden'}}>
-                {reviews&&(reviews?.map((e,i)=> <ReviewCard key={i} data={e}/>))}
+                {reviews&&(reviews.map((e,i)=> <ReviewCard key={i} data={e}/>))}
             </Stack>
 
             <Stack>

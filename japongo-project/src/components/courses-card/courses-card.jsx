@@ -23,10 +23,10 @@ export default function CoursesCard(props) {
                 width:'80%'
             }}>
                 <Typography variant="h5" component="div">
-                    {props.data?.name}
+                    {props.data.name}
                 </Typography>
                 <Typography variant="body2">
-                    {props.data?.description}
+                    {props.data.description}
                 </Typography>
             </CardContent>
             <CardActions>

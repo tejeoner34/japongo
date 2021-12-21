@@ -15,10 +15,7 @@ import './school-detail-page.css';
 import AccommodationMap from '../../components/map-component/map-component-accommodation';
 
 
-
-
 export default function SchoolDetailPage() {
-
 
     const [school, updateSchool] = useState(null);
     const [accommodations, updateAcommodations] = useState([]);
@@ -32,8 +29,8 @@ export default function SchoolDetailPage() {
             .then(d => {
                 updateSchool({ ...d });
                 fetch(`http://localhost:4567/accommodation?lat=${d.lat}&lon=${d.lon}`)
-                .then(r => r.json())
-                .then(d => updateAcommodations(oldvalue => oldvalue.concat(d)))
+                    .then(r => r.json())
+                    .then(d => updateAcommodations(oldvalue => oldvalue.concat(d)))
             })
 
     }, [id]);
@@ -60,14 +57,20 @@ export default function SchoolDetailPage() {
                 if (r.ok) updateInfoSentMessage(t("SchoolDetail.Message"));
                 return r.json()
             })
+            document.getElementById("more-info-form").reset();
     }
 
     return (
         <Grid container justifyContent='center' flexDirection='column' alignItems='center' rowGap={4}>
             <div className='home__banner' style={{ maxHeight: '300px' }}>
-                {school && <img className='home__banner__img' src={serverUrl + `/school/${school?.img?.banner}`} alt={school?.img?.banner} />}
+                {school && <img className='home__banner__img'
+                    src={serverUrl + `/school/${school.img.banner}`}
+                    alt={school.img.banner} />}
                 <div className='home__banner__background'></div>
-                <Typography variant='h1' color='common.white' sx={{ position: 'absolute',marginLeft:'1rem',marginRight:'1rem', textAlign:'center' }}>{school?.name}</Typography>
+                <Typography variant='h1' color='common.white'
+                    sx={{ position: 'absolute', marginLeft: '1rem', marginRight: '1rem', textAlign: 'center' }}>
+                    {school?.name}
+                </Typography>
             </div>
             <Box className='introduction-container' component='div'
                 display={'flex'}
@@ -80,7 +83,8 @@ export default function SchoolDetailPage() {
                     width={'30%'}
                     minWidth={'200px'}
                 >
-                    {school && <img style={{ width: '100%', borderRadius: '50%' }} src={serverUrl + `/school/${school?.img?.teacher}`} alt={school?.img?.banner} />}
+                    {school && <img style={{ width: '100%', borderRadius: '50%' }}
+                     src={serverUrl + `/school/${school.img.teacher}`} alt={school.img.banner} />}
                 </Box>
                 <Box
                     width={'70%'}
@@ -104,7 +108,8 @@ export default function SchoolDetailPage() {
                     width={'30%'}
                     minWidth={'200px'}
                 >
-                    {school && <img style={{ width: '100%', borderRadius: '50%' }} src={serverUrl + `/school/${school?.img?.description}`} alt={school?.img?.banner} />}
+                    {school && <img style={{ width: '100%', borderRadius: '50%' }}
+                     src={serverUrl + `/school/${school.img.description}`} alt={school.img.banner} />}
                 </Box>
                 <Box
                     width={'70%'}
@@ -128,43 +133,42 @@ export default function SchoolDetailPage() {
                     >
                         <Typography variant='h4'>{t("SchoolDetail.Characteristics")}</Typography>
                     </AccordionSummary>
-                    <AccordionDetails sx={{textAlign:'center'}}>
-                        {school?.characteristics?.beginners &&
+                    <AccordionDetails sx={{ textAlign: 'center' }}>
+                        {school?.characteristics.beginners &&
                             <div className='school-detail__accordion__content'>
                                 <ChildCareIcon sx={{ fontSize: 60 }}></ChildCareIcon>
                                 <Typography>{t("SchoolDetail.Beginner")}</Typography>
                                 <Divider sx={{ padding: '10px', width: '70%', borderBottomWidth: 2, }} />                            </div>}
-                        {school?.characteristics?.wifi &&
+                        {school?.characteristics.wifi &&
                             <div className='school-detail__accordion__content'>
                                 <WifiIcon sx={{ fontSize: 60 }}></WifiIcon>
                                 <Typography>{t("SchoolDetail.Wifi")}</Typography>
                                 <Divider sx={{ padding: '10px', width: '70%', borderBottomWidth: 2, }} />
                             </div>}
-                        {school?.characteristics?.jobSuport &&
+                        {school?.characteristics.jobSuport &&
                             <div className='school-detail__accordion__content'>
                                 <WorkIcon sx={{ fontSize: 60 }}></WorkIcon>
                                 <Typography>{t("SchoolDetail.Support")}</Typography>
                                 <Divider sx={{ padding: '10px', width: '70%', borderBottomWidth: 2, }} />
                             </div>}
-                        {school?.characteristics?.cafeteria &&
+                        {school?.characteristics.cafeteria &&
                             <div className='school-detail__accordion__content'>
                                 <LocalCafeIcon sx={{ fontSize: 60 }}></LocalCafeIcon>
                                 <Typography>{t("SchoolDetail.Cafeteria")}</Typography>
                             </div>}
-
                     </AccordionDetails>
                 </Accordion>
             </div>
             <Divider sx={{ padding: '10px', width: '40%', borderBottomWidth: 2, }} />
-                             
             <Typography variant='h2'>{t("Header.Accommodation")}</Typography>
-            <Typography sx={{marginLeft:'1rem',marginRight:'1rem'}}>{t("SchoolDetail.Accommodation")}</Typography>
-            {school && <AccommodationMap school={school} lat={school?.lat} lon={school?.lon} data={accommodations}></AccommodationMap>}
+            <Typography sx={{ marginLeft: '1rem', marginRight: '1rem' }}>{t("SchoolDetail.Accommodation")}</Typography>
+            {school && <AccommodationMap school={school} lat={school.lat} lon={school.lon} data={accommodations}></AccommodationMap>}
             <Divider sx={{ padding: '10px', width: '40%', borderBottomWidth: 2, }} />
-
-            <Typography sx={{marginLeft:'1rem',marginRight:'1rem'}} variant='h4'>{t("SchoolDetail.MoreInfo")}</Typography>
-            <Paper sx={{ width: {xs: '100%', md:'70%'}, textAlign: 'center', display: 'flex', justifyContent: 'center', padding: 2 }} elevation={10}>
-                <form className='login-form more-info-form'  onSubmit={handleInfoSubmit}>
+            <Typography sx={{ marginLeft: '1rem', marginRight: '1rem' }}
+             variant='h4'>{t("SchoolDetail.MoreInfo")}</Typography>
+            <Paper sx={{ width: { xs: '100%', md: '70%' }, textAlign: 'center', display: 'flex', justifyContent: 'center', padding: 2 }}
+             elevation={10}>
+                <form id='more-info-form' className='login-form more-info-form' onSubmit={handleInfoSubmit}>
                     <div className='avatar-container'>
                         <Typography></Typography>
                     </div>
@@ -181,7 +185,7 @@ export default function SchoolDetailPage() {
                         <label id='female' htmlFor='female'>{t("SchoolDetail.Female")}</label>
                     </div>
                     <TextField name='age' type='number' InputProps={{ inputProps: { min: 18, max: 100 } }} label={t("SchoolDetail.Age")} ></TextField>
-                    <textarea name='userComment' style={{minWidth:'200px', minHeight:'100px'}} placeholder={t("SchoolDetail.AddInfo")} ></textarea>
+                    <textarea name='userComment' style={{ minWidth: '200px', minHeight: '100px' }} placeholder={t("SchoolDetail.AddInfo")} ></textarea>
                     {infoSentMessage}
                     <Button variant='contained' type='submit' color='primary'>{t('SchoolDetail.Send')}</Button>
 

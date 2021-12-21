@@ -28,27 +28,17 @@ import ScrollToTop from './components/scrollToTop.js';
 import LangProvider from './context/lang-context/lang-provider';
 import NotificationProvider from './context/notification-context/notification-provider'
 
-
-
-
 function App() {
 
 
-
-
   const [isDark, setDark] = useState(JSON.parse(sessionStorage.getItem('isDark'))??false);
-
 
   const onThemeChange = () => {
     setDark(()=>{
       sessionStorage.setItem('isDark', !isDark)
       return !isDark
     });
-    
-
   }
-
-
 
   return (
     <AuthProvider value={sessionStorage.getItem('isAuth')??localStorage.getItem('isAuth')??false}>
@@ -101,11 +91,9 @@ function App() {
                 <Route path='/about-us'>
                   <AboutUsPage></AboutUsPage>
                 </Route>
-               
                 <Route exact path='/'>
                   <HomePage></HomePage>
                 </Route>
-                
                 <PrivateRoute path='/my-profile'>
                   <MyProfile></MyProfile>
                 </PrivateRoute>
@@ -115,7 +103,6 @@ function App() {
                 <PrivateRoute path='/course/:id'>
                   <CourseDetailPage/>
                 </PrivateRoute>
-                
               </Switch>
               </main>
               </LangProvider>

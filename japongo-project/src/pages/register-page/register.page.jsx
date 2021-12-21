@@ -19,18 +19,11 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget)
-
     if (e.target.password.value === e.target.repeatedPassword.value) {
-
-
       const options = {
         method: "POST",
-        // headers: {
-        //   "Content-type": "multipart/form-data", // aviso a mi servidor que le envio los datos en formato JSON
-        // },
         body: formData,
       };
-      // llamo al registro
       fetch("http://localhost:4567/auth/register", options)
         .then(r => {
           r.status === 201 && updateValidateEmailMessage(true);
@@ -38,15 +31,17 @@ function Register() {
         })
         .then(d => {
           d !== 'ok' && updateUserExists(t("Register.UserExists"))
-
         });
-
     } else {
-      // Muestro al usuario el error de que las passwords no coinciden
       updateErrorMessage(t("Register.Error"));
       setError(true);
-
     }
+  }
+
+  const inputFileStyle={
+    display:'flex',
+    justifyContent:'center',
+    paddingLeft:'4rem'
   }
 
   return (
@@ -62,18 +57,15 @@ function Register() {
           <h2>{t('Register.Register')}</h2>
           <TextField required type='email' name='email' label={t("Register.Email")} variant="outlined" />
           <TextField required type='text' name='name' label={t("Register.Name")} variant="outlined" />
-          <div>
+          <div style={inputFileStyle}>
             <label htmlFor="avatar"></label>
-            <input type="file" name="avatar" />
+            <input  type="file" name="avatar" />
           </div>
-
           <TextField error={error} required type='password' name='password' label={t('Register.Password')} variant="outlined" />
           <TextField error={error} required type='password' name='repeatedPassword' label={t('Register.ConfirmPassword')} variant="outlined" />
           <Typography color='red'>{errorMessage}</Typography>
           <Typography color='red'>{userExists}</Typography>
           <Button variant='contained' type='submit' color='primary'>{t('Register.Register')}</Button>
-
-          {/* <Typography>{t('Login.HaveAccount')} <Link to='/register'>Sign up</Link></Typography> */}
         </form>)}
       </Paper>
     </Grid>

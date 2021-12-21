@@ -32,8 +32,6 @@ export default function Header(props) {
     let history = useHistory();
     const [, updateLang] = useContext(LangContext);
     const [notification, updateNotification] = useContext(NotificationContext)
-    // const [userData] = useContext(UserContext);
-
     const [anchorEl, setAnchorEl] = useState(null);
     const [anchorEl2, setAnchorEl2] = useState(null);
     const [anchorElNotifications, setAnchorElNotifications] = useState(null);
@@ -64,11 +62,10 @@ export default function Header(props) {
     }
 
 
-    const onNotificationDelete = (childata)=>{
+    const onNotificationDelete = (childata) => {
         let emptyArray = [];
         updateNotification(emptyArray.concat(childata));
     }
-
 
 
     const handleLogout = (e) => {
@@ -76,17 +73,19 @@ export default function Header(props) {
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('name');
         sessionStorage.removeItem('mail');
+        sessionStorage.removeItem('avatar');
         localStorage.removeItem('isAuth');
         localStorage.removeItem('token');
         localStorage.removeItem('name');
         localStorage.removeItem('mail');
+        localStorage.removeItem('avatar');
         updateIsAuth(false);
         history.push('/login');
     };
 
 
     const styleAvatar = {
-        backgroundImage: `url("${serverUrl}/user-avatar/${sessionStorage.getItem('avatar')??localStorage.getItem('avatar')??''}")`,
+        backgroundImage: `url("${serverUrl}/user-avatar/${sessionStorage.getItem('avatar') ?? localStorage.getItem('avatar') ?? ''}")`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         width: '40px',
@@ -127,26 +126,40 @@ export default function Header(props) {
                             sx={{ minWidth: '500px' }}
                         >
                             <Link to='/'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Home")}</Typography></MenuItem></Link>
+                            <Divider />
                             <Link to='/schools'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Schools")}</Typography></MenuItem></Link>
+                            <Divider />
                             <Link to='/courses'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Courses")}</Typography></MenuItem></Link>
-                            <MenuItem onClick={handleClose} >{t("Header.AboutUs")}</MenuItem>
+                            <Divider />
+                            <Link to='/about-us'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.AboutUs")}</Typography></MenuItem></Link>
+                            <Divider />
                             <Link to='/legal'><MenuItem onClick={handleClose} ><Typography color='textPrimary'>{t("Header.Legal")}</Typography></MenuItem></Link>
+                            <Divider />
                             <Link to='/privacy-policy'><MenuItem onClick={handleClose} ><Typography color='textPrimary'>{t("Header.PrivacyPolicy")}</Typography></MenuItem></Link>
                         </Menu>
                     </Box>
                     <Box sx={{ columnGap: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         {/* <LanguageSelect /> */}
-                        <select style={{borderRadius:'5px'}} onChange={(e) => { i18n.changeLanguage(e.target.value); localStorage.setItem('lang', e.target.value); updateLang(e.target.value) }} value={localStorage.getItem('lang') ?? 'en'} name="lang" id="language">
+                        <select style={{ borderRadius: '5px' }}
+                            onChange={(e) => {
+                                i18n.changeLanguage(e.target.value);
+                                localStorage.setItem('lang', e.target.value);
+                                updateLang(e.target.value)
+                            }}
+                            value={localStorage.getItem('lang') ?? 'en'}
+                            name="lang" id="language"
+                        >
                             <option value="en">EN</option>
                             <option value="jp">JP</option>
                         </select>
                         <SwitchComponent isDard={props.isDark} onThemeChange={props.onThemeChange} />
-                        {isAuth ?
+                        {isAuth
+
+                            ?
                             <React.Fragment>
                                 <Box>
                                     <Tooltip title="Account settings">
-
-                                        <Badge sx={{cursor:'pointer'}} onClick={handleClickNotifications}
+                                        <Badge sx={{ cursor: 'pointer' }} onClick={handleClickNotifications}
                                             badgeContent={notification?.length} color="error">
                                             <NotificationsIcon />
                                         </Badge>
@@ -184,37 +197,31 @@ export default function Header(props) {
                                         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                                     >
-                                          
-                                    
 
 
-                                    {
-                                        notification?.length>0&&
-                                        notification?.map((e,i)=>(
-                                            <MenuItem key={i} onClick={()=>{
 
-                                                history.push(`/course/${e.course}`);
-                                                handleCloseNotifications()
-                                            }
+
+                                        {
+                                            notification?.length > 0 &&
+                                            notification?.map((e, i) => (
+                                                <MenuItem key={i} onClick={() => {
+
+                                                    history.push(`/course/${e.course}`);
+                                                    handleCloseNotifications()
+                                                }
                                                 }>
-                                            {/* <Typography>{e.from}</Typography> */}
-                                            <NotificationCard onNotificationDelete={onNotificationDelete} data={e}></NotificationCard>
-                                            <Divider />
-                                        </MenuItem>
-                                        ))
-                                    }
+                                                    {/* <Typography>{e.from}</Typography> */}
+                                                    <NotificationCard onNotificationDelete={onNotificationDelete} data={e}></NotificationCard>
+                                                    <Divider />
+                                                </MenuItem>
+                                            ))
+                                        }
 
                                     </Menu>
                                 </Box>
                                 <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                                     <div onClick={handleClickMyProfile} title={t("Header.AccountSettings")} style={styleAvatar}>
-
                                     </div>
-                                    {/* <Tooltip title="Account settings">
-                                        <IconButton onClick={handleClickMyProfile} size="small" sx={{ ml: 2 }}>
-                                            <Avatar sx={{ width: 32, height: 32 }}>{sessionStorage.getItem('name')?.charAt(0)??localStorage.getItem('name')?.charAt(0)?? ''}</Avatar>
-                                        </IconButton>
-                                    </Tooltip> */}
                                 </Box>
                                 <Menu
                                     anchorEl={anchorEl2}
@@ -269,9 +276,7 @@ export default function Header(props) {
                             <Typography
                                 onClick={() => history.push('/login')}
                                 sx={{ cursor: 'pointer' }}>{t("Header.Login")}</Typography>
-
                         }
-                        {/* <Button color="inherit">Login</Button> */}
                     </Box>
                 </Toolbar>
             </AppBar>
