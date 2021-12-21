@@ -1,6 +1,7 @@
 import { Typography, Box, Divider } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { serverUrl } from "../../global/global-variable";
+import reactStringReplace from 'react-string-replace';
 
 export default function CommentCard(props) {
 
@@ -29,15 +30,13 @@ export default function CommentCard(props) {
     backgroundSize: 'cover',
     height: '80px',
     width: '80px',
-    minWidth:'80px',
+    minWidth: '80px',
     borderRadius: '50%'
   };
 
-  // const newComment = props.data?.comment.split(' ');
-  // const finded = newComment.find(e=> e.includes('@'));
-  // const styled = props.data?.comment?.replace(/\d+/, finded=><span style="color: red"> {finded} </span>)
-  // console.log(finded)
-  // console.log(typeof styled)
+  const newComment = props.data?.comment.split(' ');
+  const finded = newComment.find(e => e.includes('@'));
+  
 
 
   return (
@@ -53,18 +52,20 @@ export default function CommentCard(props) {
         display='flex'
         justifyContent='space-between'
       >
-        <Box 
-        display='flex'
-        gap='1rem'>
-        {props?.data?.img !== undefined && <div style={styleAvatar}>
-        </div>}
         <Box
-          display={'flex'}
-          flexDirection={'column'}
-          gap={1.5}>
-          <Typography variant="h5">{props.data?.name}</Typography>
-          <Typography sx={{opacity:'0.7'}} >{props.data?.comment}</Typography>
-        </Box>
+          display='flex'
+          gap='1rem'>
+          {props?.data?.img !== undefined && <div style={styleAvatar}>
+          </div>}
+          <Box
+            display={'flex'}
+            flexDirection={'column'}
+            gap={1.5}>
+            <Typography variant="h5">{props.data?.name}</Typography>
+            <Typography sx={{ opacity: '0.7' }} >{finded === undefined ? props.data?.comment : reactStringReplace(props.data?.comment, finded, (match, i) => (
+              <b key={i} >{match}</b>
+            ))}</Typography>
+          </Box>
         </Box>
         <Box>
           {props.data?.name === sessionStorage.getItem('name') && <span title="delete"><DeleteIcon sx={{ cursor: 'pointer' }} onClick={onCommentDelete}></DeleteIcon></span>}

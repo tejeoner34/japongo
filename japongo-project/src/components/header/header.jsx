@@ -136,7 +136,7 @@ export default function Header(props) {
                     </Box>
                     <Box sx={{ columnGap: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         {/* <LanguageSelect /> */}
-                        <select onChange={(e) => { i18n.changeLanguage(e.target.value); localStorage.setItem('lang', e.target.value); updateLang(e.target.value) }} value={localStorage.getItem('lang') ?? 'en'} name="lang" id="language">
+                        <select style={{borderRadius:'5px'}} onChange={(e) => { i18n.changeLanguage(e.target.value); localStorage.setItem('lang', e.target.value); updateLang(e.target.value) }} value={localStorage.getItem('lang') ?? 'en'} name="lang" id="language">
                             <option value="en">EN</option>
                             <option value="jp">JP</option>
                         </select>
