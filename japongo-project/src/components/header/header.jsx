@@ -31,9 +31,8 @@ export default function Header(props) {
     const [isAuth, updateIsAuth] = useContext(AuthContext);
     let history = useHistory();
     const [, updateLang] = useContext(LangContext);
-    const [notification] = useContext(NotificationContext)
+    const [notification, updateNotification] = useContext(NotificationContext)
     // const [userData] = useContext(UserContext);
-    const cookieArray = document.cookie.split('=');
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [anchorEl2, setAnchorEl2] = useState(null);
@@ -65,6 +64,11 @@ export default function Header(props) {
     }
 
 
+    const onNotificationDelete = (childata)=>{
+        let emptyArray = [];
+        updateNotification(emptyArray.concat(childata));
+    }
+
 
 
     const handleLogout = (e) => {
@@ -82,7 +86,7 @@ export default function Header(props) {
 
 
     const styleAvatar = {
-        backgroundImage: `url("${serverUrl}/user-avatar/${cookieArray[1]}")`,
+        backgroundImage: `url("${serverUrl}/user-avatar/${sessionStorage.getItem('avatar')??localStorage.getItem('avatar')??''}")`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         width: '40px',
@@ -142,7 +146,7 @@ export default function Header(props) {
                                 <Box>
                                     <Tooltip title="Account settings">
 
-                                        <Badge onClick={handleClickNotifications}
+                                        <Badge sx={{cursor:'pointer'}} onClick={handleClickNotifications}
                                             badgeContent={notification?.length} color="error">
                                             <NotificationsIcon />
                                         </Badge>
@@ -185,9 +189,16 @@ export default function Header(props) {
 
 
                                     {
+                                        notification?.length>0&&
                                         notification?.map((e,i)=>(
-                                            <MenuItem key={i} onClick={handleLogout}>
-                                            <Typography>{e.from}</Typography>
+                                            <MenuItem key={i} onClick={()=>{
+
+                                                history.push(`/course/${e.course}`);
+                                                handleCloseNotifications()
+                                            }
+                                                }>
+                                            {/* <Typography>{e.from}</Typography> */}
+                                            <NotificationCard onNotificationDelete={onNotificationDelete} data={e}></NotificationCard>
                                             <Divider />
                                         </MenuItem>
                                         ))

@@ -21,7 +21,6 @@ export default function PrivateRoute({ children, ...rest }) {
     // fetchFunction();
 
     useEffect(()=>{
-      console.log('private route')
       async function getStatus(){
         const r = await fetch('http://localhost:4567/user/', {
             headers: {
@@ -42,7 +41,7 @@ export default function PrivateRoute({ children, ...rest }) {
       };
       fetchFunction();
     
-    },[updateUserData])
+    },[updateUserData, updateNotification])
 
     
     

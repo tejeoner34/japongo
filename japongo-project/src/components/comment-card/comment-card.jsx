@@ -2,7 +2,6 @@ import { Typography, Box, Divider } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { serverUrl } from "../../global/global-variable";
 
-
 export default function CommentCard(props) {
 
   // const [userData] = useContext(UserContext);
@@ -34,6 +33,13 @@ export default function CommentCard(props) {
     borderRadius: '50%'
   };
 
+  // const newComment = props.data?.comment.split(' ');
+  // const finded = newComment.find(e=> e.includes('@'));
+  // const styled = props.data?.comment?.replace(/\d+/, finded=><span style="color: red"> {finded} </span>)
+  // console.log(finded)
+  // console.log(typeof styled)
+
+
   return (
     <Box component='div'
       sx={{
@@ -57,7 +63,7 @@ export default function CommentCard(props) {
           flexDirection={'column'}
           gap={1.5}>
           <Typography variant="h5">{props.data?.name}</Typography>
-          <Typography variant="body" sx={{ opacity: 0.7 }}>{props.data?.comment}</Typography>
+          <Typography sx={{opacity:'0.7'}} >{props.data?.comment}</Typography>
         </Box>
         </Box>
         <Box>
