@@ -18,9 +18,11 @@ import Divider from '@mui/material/Divider';
 import Avatar from '@mui/material/Avatar';
 import { LangContext } from '../../context/lang-context/lang-context';
 import { serverUrl } from '../../global/global-variable';
-
-
-
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import Badge from '@mui/material/Badge';
+import { NotificationContext } from '../../context/notification-context/notification-context.js'
+import NotificationCard from '../notification-card/notification-card';
+import { Tooltip } from '@mui/material';
 
 
 export default function Header(props) {
@@ -29,13 +31,16 @@ export default function Header(props) {
     const [isAuth, updateIsAuth] = useContext(AuthContext);
     let history = useHistory();
     const [, updateLang] = useContext(LangContext);
+    const [notification, updateNotification] = useContext(NotificationContext)
     // const [userData] = useContext(UserContext);
-    const cookieArray = document.cookie.split('=');
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [anchorEl2, setAnchorEl2] = useState(null);
+    const [anchorElNotifications, setAnchorElNotifications] = useState(null);
     const open = Boolean(anchorEl);
     const open2 = Boolean(anchorEl2)
+    const openNotifications = Boolean(anchorElNotifications)
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -50,7 +55,23 @@ export default function Header(props) {
         setAnchorEl(null);
     };
 
-    const handleLogout = (e)=>{
+    const handleClickNotifications = (event) => {
+        setAnchorElNotifications(event.currentTarget);
+    }
+
+    const handleCloseNotifications = () => {
+        setAnchorElNotifications(null);
+    }
+
+
+    const onNotificationDelete = (childata)=>{
+        let emptyArray = [];
+        updateNotification(emptyArray.concat(childata));
+    }
+
+
+
+    const handleLogout = (e) => {
         sessionStorage.removeItem('isAuth');
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('name');
@@ -63,15 +84,15 @@ export default function Header(props) {
         history.push('/login');
     };
 
-    
+
     const styleAvatar = {
-        backgroundImage: `url("${serverUrl}/user-avatar/${cookieArray[1]}")`,
+        backgroundImage: `url("${serverUrl}/user-avatar/${sessionStorage.getItem('avatar')??localStorage.getItem('avatar')??''}")`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
-        width:'40px',
-        height:'40px',
-        borderRadius:'50%',
-        cursor:'pointer'
+        width: '40px',
+        height: '40px',
+        borderRadius: '50%',
+        cursor: 'pointer'
     };
 
 
@@ -79,7 +100,7 @@ export default function Header(props) {
         <Box component='div' sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar sx={{ columnGap: '30px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                    <Typography sx={{cursor:'pointer'}} onClick={()=>history.push('/')} xs={12} variant='h3'>
+                    <Typography sx={{ cursor: 'pointer' }} onClick={() => history.push('/')} xs={12} variant='h3'>
                         JaponGo
                     </Typography>
                 </Toolbar>
@@ -105,23 +126,86 @@ export default function Header(props) {
                             }}
                             sx={{ minWidth: '500px' }}
                         >
-                            <Link  to='/'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Home")}</Typography></MenuItem></Link>
-                            <Link  to='/schools'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Schools")}</Typography></MenuItem></Link>
+                            <Link to='/'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Home")}</Typography></MenuItem></Link>
+                            <Link to='/schools'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Schools")}</Typography></MenuItem></Link>
                             <Link to='/courses'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Courses")}</Typography></MenuItem></Link>
                             <MenuItem onClick={handleClose} >{t("Header.AboutUs")}</MenuItem>
                             <Link to='/legal'><MenuItem onClick={handleClose} ><Typography color='textPrimary'>{t("Header.Legal")}</Typography></MenuItem></Link>
                             <Link to='/privacy-policy'><MenuItem onClick={handleClose} ><Typography color='textPrimary'>{t("Header.PrivacyPolicy")}</Typography></MenuItem></Link>
                         </Menu>
                     </Box>
-                    <Box sx={{ columnGap: '30px', display: 'flex', justifyContent: 'space-between', alignItems:'center' }}>
+                    <Box sx={{ columnGap: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         {/* <LanguageSelect /> */}
-                        <select onChange={(e) => {i18n.changeLanguage(e.target.value);localStorage.setItem('lang', e.target.value);updateLang(e.target.value)}} value={localStorage.getItem('lang')??'en'} name="lang" id="language">
+                        <select onChange={(e) => { i18n.changeLanguage(e.target.value); localStorage.setItem('lang', e.target.value); updateLang(e.target.value) }} value={localStorage.getItem('lang') ?? 'en'} name="lang" id="language">
                             <option value="en">EN</option>
                             <option value="jp">JP</option>
                         </select>
                         <SwitchComponent isDard={props.isDark} onThemeChange={props.onThemeChange} />
                         {isAuth ?
                             <React.Fragment>
+                                <Box>
+                                    <Tooltip title="Account settings">
+
+                                        <Badge sx={{cursor:'pointer'}} onClick={handleClickNotifications}
+                                            badgeContent={notification?.length} color="error">
+                                            <NotificationsIcon />
+                                        </Badge>
+                                    </Tooltip>
+                                    <Menu
+                                        anchorEl={anchorElNotifications}
+                                        open={openNotifications}
+                                        onClose={handleCloseNotifications}
+                                        PaperProps={{
+                                            elevation: 0,
+                                            sx: {
+                                                overflow: 'visible',
+                                                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                                mt: 1.5,
+                                                '& .MuiAvatar-root': {
+                                                    width: 32,
+                                                    height: 32,
+                                                    ml: -0.5,
+                                                    mr: 1,
+                                                },
+                                                '&:before': {
+                                                    content: '""',
+                                                    display: 'block',
+                                                    position: 'absolute',
+                                                    top: 0,
+                                                    right: 14,
+                                                    width: 10,
+                                                    height: 10,
+                                                    bgcolor: 'background.paper',
+                                                    transform: 'translateY(-50%) rotate(45deg)',
+                                                    zIndex: 0,
+                                                },
+                                            },
+                                        }}
+                                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                                    >
+                                          
+                                    
+
+
+                                    {
+                                        notification?.length>0&&
+                                        notification?.map((e,i)=>(
+                                            <MenuItem key={i} onClick={()=>{
+
+                                                history.push(`/course/${e.course}`);
+                                                handleCloseNotifications()
+                                            }
+                                                }>
+                                            {/* <Typography>{e.from}</Typography> */}
+                                            <NotificationCard onNotificationDelete={onNotificationDelete} data={e}></NotificationCard>
+                                            <Divider />
+                                        </MenuItem>
+                                        ))
+                                    }
+
+                                    </Menu>
+                                </Box>
                                 <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                                     <div onClick={handleClickMyProfile} title={t("Header.AccountSettings")} style={styleAvatar}>
 
@@ -166,13 +250,13 @@ export default function Header(props) {
                                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                                 >
-                                    <MenuItem onClick={()=>history.push('/my-profile')}>
+                                    <MenuItem onClick={() => history.push('/my-profile')}>
                                         <Avatar /> {t("Header.Profile")}
                                     </MenuItem>
-                                    
+
                                     <Divider />
-                                    
-                                    
+
+
                                     <MenuItem onClick={handleLogout}>
                                         <ListItemIcon>
                                             <Logout fontSize="small" />
@@ -182,9 +266,9 @@ export default function Header(props) {
                                 </Menu>
                             </React.Fragment>
                             :
-                            <Typography 
-                            onClick={()=>history.push('/login')}
-                            sx={{cursor:'pointer'}}>{t("Header.Login")}</Typography>
+                            <Typography
+                                onClick={() => history.push('/login')}
+                                sx={{ cursor: 'pointer' }}>{t("Header.Login")}</Typography>
 
                         }
                         {/* <Button color="inherit">Login</Button> */}

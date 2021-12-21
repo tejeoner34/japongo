@@ -53,7 +53,7 @@ function Login() {
                         sessionStorage.setItem('token', 'Bearer ' + d.token);
                         sessionStorage.setItem('mail', d.email);
                         sessionStorage.setItem('name', d.name);
-                        document.cookie =`avatar=${d.file.filename}` 
+                        sessionStorage.setItem('avatar', d.file.filename) 
                         updateIsAuth(true)
                         sessionStorage.setItem('isAuth', true);
                         history.push("/courses");
@@ -64,7 +64,7 @@ function Login() {
                         localStorage.setItem('token', 'Bearer ' + d.token);
                         localStorage.setItem('mail', d.email);
                         localStorage.setItem('name', d.name);
-                        document.cookie =`avatar=${d.file.filename}` 
+                        localStorage.setItem('avatar', d.file.filename) 
                         updateIsAuth(true)
                         sessionStorage.setItem('isAuth', true);
                         localStorage.setItem('isAuth', true);
