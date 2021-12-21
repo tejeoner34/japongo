@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router";
+import { serverUrl } from "../global/global-variable";
 import './style.css';
 
 
@@ -17,9 +18,10 @@ export default function CourseCard2(props){
 
     return(
         
+        
             <div className='course-card__container' onClick={handleClick}>
                 <div className='course-card__img-container'>
-                    <img src={props.data.img} alt={props.data.description} />
+                    <img src={serverUrl + `/courses/${props.data.img}`} alt={props.data.description} />
                 </div>
                 <div className='course-card__info-container'>
                     <Typography onClick={handleClick} variant='h4'>{props.data?.name}</Typography>

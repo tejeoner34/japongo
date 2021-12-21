@@ -3,6 +3,7 @@ import { Typography, Button } from "@mui/material";
 import { useHistory } from "react-router";
 import './favorite-card.css';
 import { useTranslation } from "react-i18next";
+import { serverUrl } from "../../global/global-variable";
 
 
 
@@ -36,7 +37,7 @@ export default function FavoriteCard(props){
         
             <div className='favorite-card'>
                 <div className='favorite-card__img-container'>
-                    <img src={props.data.img} alt={props.data.description} />
+                    <img src={serverUrl + `/courses/${props.data.img}`} alt={props.data.description} />
                 </div>
                 <div className='favorite-card__info-container'>
                     <Typography sx={{cursor:'pointer'}} onClick={handleClick} variant='h4'>{props.data.name}</Typography>
