@@ -7,19 +7,10 @@ import { NotificationContext } from "../context/notification-context/notificatio
 
 export default function PrivateRoute({ children, ...rest }) {
 
- 
-
     const [status, setStatus] = useState(null);
     const [, updateUserData] = useContext(UserContext);
     const [, updateNotification] = useContext(NotificationContext)
-    // const isAuth = sessionStorage.getItem('token')??localStorage.getItem('token')??null;
     
-
-    // const fetchFunction = async()=>{
-    //   setStatus(await getStatus());
-    // };
-    // fetchFunction();
-
     useEffect(()=>{
       async function getStatus(){
         const r = await fetch('http://localhost:4567/user/', {
@@ -43,26 +34,6 @@ export default function PrivateRoute({ children, ...rest }) {
     
     },[updateUserData, updateNotification])
 
-    
-    
-// if(isAuth !== null){
-  
-//     const fetchFunction = async()=>{
-//       const data = await getStatus();
-//        setStatus(data);
-//     };
-//     fetchFunction();
-    
- 
-// }else{
-//   window.location.href= process.env.PUBLIC_URL + '/login'
-// }
-    
-
-
-    
-
-   
 
     return (
         status && (

@@ -16,9 +16,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import { serverUrl } from "../../global/global-variable.js";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import { AuthContext } from '../../auth/auth.context';
+
 
 export default function MyProfile() {
-
 
     const [t] = useTranslation('global');
     const [userData, updateUserData] = useContext(UserContext);
@@ -26,8 +27,7 @@ export default function MyProfile() {
     const [incorrectPass, setIncorrectPass] = useState('')
     const [isLoad, setIsLoad] = useState(false);
     const [imgError, setImgError] = useState('');
-    const token = sessionStorage.getItem('token') ?? localStorage.getItem('token');
-
+    const [, updateIsAuth] = useContext(AuthContext)
     const onFavRemove = (childata) => {
         updateUserData({ ...childata })
     };
@@ -37,30 +37,57 @@ export default function MyProfile() {
         const options = {
             method: 'DELETE',
             headers: {
-                'Content-type': 'application/json' // aviso a mi servidor que le envio los datos en formato JSON
+                'Content-type': 'application/json'
             },
-            body: JSON.stringify({ // Genero el body como string
-                email: sessionStorage.getItem('mail') ?? localStorage.getItem('mail'), // obtengo el value de un input por su name
+            body: JSON.stringify({
+                email: sessionStorage.getItem('mail') ?? localStorage.getItem('mail'),
                 password: e.target.password.value
             })
         }
         fetch('http://localhost:4567/user/', options)
             .then(r => {
-                if (r.ok) { history.push('/login') } else { setIncorrectPass(t("Profile.Options.IncorrectPassword")) }
-                return r.json()
+                if (r.ok) {
+
+                    return r.json()
+
+                } else {
+
+                    setIncorrectPass(t("Profile.Options.IncorrectPassword"))
+                }
+
             })
-            .then(d => console.log(d))
-        const optionsDeleteAllComments = {
-            method: 'PATCH',
-            headers: {
-                'Content-type': 'application/json' // aviso a mi servidor que le envio los datos en formato JSON
-            },
-            body: JSON.stringify({ // Genero el body como string
-                name: sessionStorage.getItem('name') ?? localStorage.getItem('name'), // obtengo el value de un input por su name
+            .then(d => {
+                if (d === 'deleted') {
+                    const optionsDeleteAllComments = {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name: sessionStorage.getItem('name') ?? localStorage.getItem('name'),
+                        })
+                    }
+                    fetch('http://localhost:4567/courses', optionsDeleteAllComments)
+                        .then(r => r.json())
+                        .then(d => {
+                            console.log(d)
+                            sessionStorage.removeItem('isAuth');
+                            sessionStorage.removeItem('token');
+                            sessionStorage.removeItem('name');
+                            sessionStorage.removeItem('mail');
+                            sessionStorage.removeItem('avatar');
+                            localStorage.removeItem('isAuth');
+                            localStorage.removeItem('token');
+                            localStorage.removeItem('name');
+                            localStorage.removeItem('mail');
+                            localStorage.removeItem('avatar');
+                            updateIsAuth(false);
+                            history.push('/login');
+                        })
+                }
             })
-        }
-        fetch('http://localhost:4567/courses', optionsDeleteAllComments)
-            .then(r => console.log(r))
+
+
     };
 
     const onPasswordChange = (e) => {
@@ -68,14 +95,13 @@ export default function MyProfile() {
         const options = {
             method: 'PATCH',
             headers: {
-                'Content-type': 'application/json' // aviso a mi servidor que le envio los datos en formato JSON
+                'Content-type': 'application/json'
             },
-            body: JSON.stringify({ // Genero el body como string
-                email: sessionStorage.getItem('mail') ?? localStorage.getItem('mail'), // obtengo el value de un input por su name
+            body: JSON.stringify({
+                email: sessionStorage.getItem('mail') ?? localStorage.getItem('mail'),
                 password: e.target.password.value,
                 newPassword: e.target.newPassword.value
             })
-
         }
         fetch('http://localhost:4567/user/', options)
             .then(r => {
@@ -85,27 +111,25 @@ export default function MyProfile() {
                         handleCloseDialogPassword()
                         setIncorrectPass('')
                     }, 1500);
-                    
-
                 } else { setIncorrectPass(t("Profile.Options.IncorrectPassword")) }
                 return r.json()
             })
-           
     }
 
     useEffect(() => {
         fetch('http://localhost:4567/user/', {
             headers: {
-                "Authorization": token,
+                "Authorization": sessionStorage.getItem('token') ?? localStorage.getItem('token'),
             }
         })
-            .then(r =>{
-               return r.json()})
+            .then(r => {
+                return r.json()
+            })
             .then(d => {
                 updateUserData({ ...d });
                 setIsLoad(true)
             })
-    }, [updateUserData, token])
+    }, [updateUserData, ])
 
     //import from MUI. Options button
     const [anchorEl, setAnchorEl] = useState(null);
@@ -116,57 +140,42 @@ export default function MyProfile() {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
     //import from MUI. Delete Dialog
     const [openDialog, setOpenDialog] = useState(false);
-
     const handleClickOpen = () => {
         setOpenDialog(true);
     };
-
     const handleCloseDialog = () => {
         setOpenDialog(false);
     };
-
-
     //import from MUI. Update password Dialog
     const [openDialogPassword, setOpenDialogPassword] = useState(false);
-
     const handleClickOpenPassword = () => {
         setOpenDialogPassword(true);
     };
-
     const handleCloseDialogPassword = () => {
         setOpenDialogPassword(false);
     };
-
-
     // dialog to edit background picture
     const [openBackgroundImgDialog, setOpenBackgroundImgDialog] = useState(false);
-
     const handleOpenBackgroundImgDialog = () => {
         setOpenBackgroundImgDialog(true);
     }
-
     const closeBackgroundImgDialog = () => {
         setOpenBackgroundImgDialog(false)
     }
-
     // dialog to edit avatar
     const [openAvatarImgDialog, setOpenAvatarImgDialog] = useState(false);
-
     const handleOpenAvatarDialog = () => {
         setOpenAvatarImgDialog(true);
     };
-
     const handleCloseAvatarDialog = () => {
         setOpenAvatarImgDialog(false);
         setImgError('')
     };
-
     const onAvatarChange = (e) => {
         e.preventDefault();
-        if (e.target[0].files[0].size >= 1*1024*1024) {
+        if (e.target[0].files[0].size >= 1 * 1024 * 1024) {
             setImgError(t("Profile.ImgError"))
         } else {
             const formData = new FormData(e.currentTarget);
@@ -188,35 +197,33 @@ export default function MyProfile() {
             setImgError('')
         }
     };
-
     const onBackgroundImgChange = (e) => {
         e.preventDefault();
-            const formData = new FormData(e.currentTarget);
-            const name = sessionStorage.getItem('name') ?? localStorage.getItem('name')
-            formData.append("name", name)
-            const options = {
-                method: "PATCH",
-                // headers: {
-                //   "Content-type": "multipart/form-data", // aviso a mi servidor que le envio los datos en formato JSON
-                // },
-                body: formData
-            };
-            fetch('http://localhost:4567/user/change-background', options)
-                .then(r => r.json())
-                .then(d => {
-                    updateUserData(d);
-                    setOpenBackgroundImgDialog(false)
-                })
+        const formData = new FormData(e.currentTarget);
+        const name = sessionStorage.getItem('name') ?? localStorage.getItem('name')
+        formData.append("name", name)
+        const options = {
+            method: "PATCH",
+            // headers: {
+            //   "Content-type": "multipart/form-data", // aviso a mi servidor que le envio los datos en formato JSON
+            // },
+            body: formData
+        };
+        fetch('http://localhost:4567/user/change-background', options)
+            .then(r => r.json())
+            .then(d => {
+                updateUserData(d);
+                setOpenBackgroundImgDialog(false)
+            })
     }
     const styleBackground = {
-        backgroundImage: `url("${serverUrl}/profile-background/${userData?.profileBackgroundImg}")`,
+        backgroundImage: `url("${serverUrl}/profile-background/${userData.profileBackgroundImg}")`,
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover'
     };
-
     const styleAvatar = {
-        backgroundImage: `url("${serverUrl}/user-avatar/${userData?.file?.filename}")`,
+        backgroundImage: `url("${serverUrl}/user-avatar/${userData.file.filename}")`,
         backgroundPosition: 'center',
         backgroundSize: 'cover'
     };
@@ -232,7 +239,6 @@ export default function MyProfile() {
                 }}>
                     <div className="profile__background-img__container"
                         style={styleBackground}>
-                        {/* <img src={serverUrl + `/profile-background/${userData?.profileBackgroundImg}`} alt="" /> */}
                     </div>
                     <div className="profile__info__container">
                         <div>
@@ -328,7 +334,6 @@ export default function MyProfile() {
                         </div>
                     </div>
                     <div className="profile__info__img-container" style={styleAvatar}>
-                        {/* <img src={serverUrl + `/user-avatar/${userData?.file?.filename}`} alt={userData?.file?.fieldname} /> */}
                     </div>
                     <div onClick={handleOpenBackgroundImgDialog} title={t("Profile.EditBackground")} className="profile__info__img-edit-container">
                         <CameraAltIcon></CameraAltIcon>
@@ -355,20 +360,20 @@ export default function MyProfile() {
                             >
                                 <Typography variant='h3'>{t("Profile.Favorite")}</Typography>
                                 {
-                                    userData?.favs?.length > 0?
-                                    <ul className="profile__favorite-cards">
-                                    {userData?.favs?.map((e, i) => <li key={i}><FavoriteCard onFavRemove={onFavRemove} data={e} /></li>)}
-                                </ul>
-                                :
-                                <Box display='flex'
-                                     flexDirection={'column'}
-                                     alignItems={'center'}
-                                     rowGap={2}>
-                                    <Typography>{t("Profile.NoFavs.Message")}</Typography>
-                                    <Button onClick={()=>history.push('/courses')} variant='contained'>{t("Profile.NoFavs.Button")}</Button>
-                                </Box>
+                                    userData.favs?.length > 0 ?
+                                        <ul className="profile__favorite-cards">
+                                            {userData.favs.map((e, i) => <li key={i}><FavoriteCard onFavRemove={onFavRemove} data={e} /></li>)}
+                                        </ul>
+                                        :
+                                        <Box display='flex'
+                                            flexDirection={'column'}
+                                            alignItems={'center'}
+                                            rowGap={2}>
+                                            <Typography>{t("Profile.NoFavs.Message")}</Typography>
+                                            <Button onClick={() => history.push('/courses')} variant='contained'>{t("Profile.NoFavs.Button")}</Button>
+                                        </Box>
                                 }
-                                
+
                             </Box>
                         </Paper>
                     )

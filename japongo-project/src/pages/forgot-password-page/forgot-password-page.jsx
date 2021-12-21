@@ -6,8 +6,6 @@ import TextField from '@mui/material/TextField';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 
-
-
 export default function ForgotPasswordPage() {
 
     const [errorMessage, setErrorMessage] = useState('');
@@ -39,15 +37,19 @@ export default function ForgotPasswordPage() {
             })
     }
 
-    
-
     return (
         <Grid container item xs={12} md={5} direction="column"
             alignItems="center"
             justifyContent="center">
-            <Paper sx={{ width: '100%', textAlign: 'center', display: 'flex', justifyContent: 'center', padding: 2 }} elevation={10}>
-
-
+            <Paper sx={
+                {
+                    width: '100%',
+                    textAlign: 'center',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    padding: 2
+                }}
+                elevation={10}>
                 <Box
                     component="form"
                     sx={{
@@ -59,7 +61,6 @@ export default function ForgotPasswordPage() {
                     noValidate
                     autoComplete="off"
                     onSubmit={submitEmail}
-
                 >
                     <div className='avatar-container'>
                         <Avatar><LockIcon></LockIcon></Avatar>
@@ -71,8 +72,6 @@ export default function ForgotPasswordPage() {
                     <Typography color='error'>{emailSentMessage}</Typography>
                     <Button variant='contained' type='submit' color='primary'>{t('ForgotPassword.SendEmail')}</Button>
                 </Box>
-
-
             </Paper>
         </Grid>
     )

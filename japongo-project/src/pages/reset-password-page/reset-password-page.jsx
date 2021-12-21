@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { useLocation, useHistory } from "react-router-dom"; 
+import { useLocation, useHistory } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { Typography, Grid, Box, Paper, TextField, Button } from "@mui/material";
-
-
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -17,35 +15,28 @@ function ResetPassword() {
     const [error, setError] = useState(false);
     const history = useHistory();
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = (e) => {
         e.preventDefault();
         const token = query.get("token");
-
-        if(e.target.password.value === e.target.repeatedPassword.value && token){
-           
+        if (e.target.password.value === e.target.repeatedPassword.value && token) {
             const options = {
                 method: "PATCH",
                 headers: {
-                    'Content-type': 'application/json' // aviso a mi servidor que le envio los datos en formato JSON
+                    'Content-type': 'application/json'
                 },
                 body: JSON.stringify({
-                  password: e.target.password.value,
+                    password: e.target.password.value,
                 }),
-              };
-              // llamo al registro
-              fetch(`http://localhost:4567/auth/resset-password?token=${token}`, options)
-                .then(r=>{
-                    if(r.ok)history.push('/login')
-                    if(!r.ok)updateErrorMessage(t("ForgotPassword.Error"))
+            };
+            fetch(`http://localhost:4567/auth/resset-password?token=${token}`, options)
+                .then(r => {
+                    if (r.ok) history.push('/login')
+                    if (!r.ok) updateErrorMessage(t("ForgotPassword.Error"))
                 })
-                
-                
-            } else {
-              // Muestro al usuario el error de que las passwords no coinciden
-              updateErrorMessage(t("Register.Error"));
-              setError(true);
-
-            }
+        } else {
+            updateErrorMessage(t("Register.Error"));
+            setError(true);
+        }
     }
 
     return (
@@ -54,8 +45,6 @@ function ResetPassword() {
             alignItems="center"
             justifyContent="center">
             <Paper sx={{ width: '100%', textAlign: 'center', display: 'flex', justifyContent: 'center', padding: 2 }} elevation={10}>
-
-
                 <Box
                     component="form"
                     sx={{

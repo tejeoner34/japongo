@@ -1,4 +1,4 @@
-import { Grid, Typography, Box, Divider} from '@mui/material';
+import { Grid, Typography, Box, Divider } from '@mui/material';
 import { useEffect, useState } from 'react';
 import TokyoMap from '../../components/map-component/map-component.jsx';
 import SchoolsCard from '../../components/schools-card/schools-card.jsx';
@@ -27,20 +27,18 @@ function EscuelasPage() {
                 <Typography variant='h1' color='common.white' sx={{ position: 'absolute' }}>{t("Schools.Title")}</Typography>
             </div>
             <Typography variant='h2'>{t("Schools.TokyoName")}</Typography>
-            <Typography sx={{maxWidth:'600px'}}>{t("Schools.TokyoDescription")}</Typography>
+            <Typography sx={{ maxWidth: '600px' }}>{t("Schools.TokyoDescription")}</Typography>
             <Divider sx={{ padding: '10px', width: '40%', borderBottomWidth: 2, }} />
             <Typography variant='h2'>{t("Schools.Location")}</Typography>
 
-            {schools&&<TokyoMap lat={tokyoLat} lon={tokyoLon} data={schools}></TokyoMap>}
+            {schools && <TokyoMap lat={tokyoLat} lon={tokyoLon} data={schools}></TokyoMap>}
             <Box component='div'
-            display='flex'
-            flexWrap='wrap'
-            gap={2}
-            justifyContent='center'>
+                display='flex'
+                flexWrap='wrap'
+                gap={2}
+                justifyContent='center'>
                 {schools?.map((s, i) => <SchoolsCard key={i} data={s}></SchoolsCard>)}
             </Box>
-
-
         </Grid>
 
     )

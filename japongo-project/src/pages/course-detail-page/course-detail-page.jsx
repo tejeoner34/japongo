@@ -8,11 +8,7 @@ import CommentCard from '../../components/comment-card/comment-card';
 import './course-detail-page.css';
 import CircularProgress from '@mui/material/CircularProgress';
 import { UserContext } from '../../context/user-context/user-context';
-import { serverFetch} from '../../global/global-variable.js'
-
-// import { UserContext } from '../../context/user-context/user-context';
-
-
+import { serverFetch } from '../../global/global-variable.js'
 
 
 export default function CourseDetailPage() {
@@ -22,11 +18,9 @@ export default function CourseDetailPage() {
   const [control, updateControl] = useState(null);
   const [inputValue, updateInputValue] = useState('');
   const [t] = useTranslation('global');
-  // const [, updateUserData] = useContext(UserContext);
   const [isAdd, setIsAdd] = useState(true);
   const [isLoad, setIsLoad] = useState(false);
   const [userData] = useContext(UserContext);
-
 
   useEffect(() => {
     fetch(`http://localhost:4567/courses/course?id=${id}`)
@@ -36,14 +30,11 @@ export default function CourseDetailPage() {
         updateControl(true)
         setIsLoad(true)
       })
-    
   }, [id]);
 
   const onCommentPost = (e) => {
     e.preventDefault();
-
     let comment = e.target.comment.value;
-
     const options = {
       method: "POST",
       headers: {
@@ -58,14 +49,11 @@ export default function CourseDetailPage() {
     fetch(`http://localhost:4567/courses/course?id=${id}`, options)
       .then(r => r.json())
       .then(d => updateCourse({ ...d }));
-
     document.getElementById("create-course-form").reset();
     updateInputValue('');
-
     const splited = comment.split(' ')
-    const finded = splited.find(e=> e.includes('@'))
-    if(finded!== undefined){
-
+    const finded = splited.find(e => e.includes('@'))
+    if (finded !== undefined) {
       const name = finded.split('@')[1];
       const options2 = {
         method: "POST",
@@ -79,12 +67,10 @@ export default function CourseDetailPage() {
             comment: comment,
             from: sessionStorage.getItem('name') ?? localStorage.getItem('name')
           },
-          
         }),
       };
       fetch(`${serverFetch}mentions/`, options2)
-        .then(r=>r.json())
-        .then(d=>console.log(d))
+        .then(r => r.json())
     }
   };
 
@@ -106,26 +92,22 @@ export default function CourseDetailPage() {
     fetch(`http://localhost:4567/user/fav`, options)
       .then(r => {
         if (r.ok) setIsAdd(false)
+        if(!r.ok) setIsAdd(true)
         return r.json()
       })
-
       .catch(err => console.log(err))
   };
-
-
 
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
-    setTimeout(() => setOpen(true), 1500)
-      ;
+    setTimeout(() => setOpen(true), 1500);
   };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
   };
 
@@ -143,65 +125,63 @@ export default function CourseDetailPage() {
   );
 
   const style = {
-
     maxwidth: '600px',
-
   }
-
 
   return (
     <Grid item container justifyContent='center' flexDirection='column' alignItems='center' rowGap={4}>
       {
         !isLoad ?
-
           <Box sx={{ display: 'flex' }}>
             <CircularProgress />
           </Box>
-
           :
-        (
-          <Grid item container xs={12} justifyContent={'center'} rowGap={4} sx={{marginTop:'1rem'}} >
-          <Box xs={12} width={'100%'} maxwidth='600px'>
-          {control && <ReactPlayer style={style} width='100%' url={`https://www.youtube.com/watch?v=${course?.video}`}
-            config={{ youtube: { playerVars: { origin: 'https://www.youtube.com' } } }} />}
-        </Box>
-        <Box
-          component='div'
-          width='80%'
-          display='flex'
-          flexDirection='column'
-        >
-          <Typography variant='h1' fontWeight={600}>{course?.name}</Typography>
-          <Typography variant='h5' sx={{ opacity: 0.7 }}>{course?.description}</Typography>
-          <Typography variant='body'>{t("CoursePage.Info.Duration")}: {course?.duration}</Typography>
-          <Typography variant='body'>{t("CoursesPage.SearchBar.Level")}: {course?.level}</Typography>
-          <Button onClick={(e) => { onFavAdd(); handleClick() }}>{t("CoursePage.Info.Button")}</Button>
-          <Snackbar
-            open={open}
-            autoHideDuration={3000}
-            onClose={handleClose}
-            message={isAdd ? (t("CoursePage.Info.NotAddedMessage")) : (t("CoursePage.Info.AddedMessage"))}
-            action={action}
-          />
-        </Box>
-        <Box component='div'
-          width='80%'
-          display='flex'
-          flexDirection='column'
-        >
-          <Typography variant='h3' sx={{ marginBottom: '1rem' }} fontWeight={600}>{t("CoursePage.Info.Comment")}</Typography>
-          {course.comments?.map((e, i) => <CommentCard key={i} data={e} id={id} onDeleteComment={onDeleteComment}></CommentCard>)}
-        </Box>
-        <form id="create-course-form" onSubmit={onCommentPost} className='course-detail__form'>
-          <TextField onChange={(e) => updateInputValue(e.target.value)} inputProps={{ style: { fontSize: 16 } }} sx={{ width: '100%' }} id="comment" name='comment' required type='textarea' label={t("CoursePage.Comment.PlaceHolder")} variant="outlined" />
-          <Button disabled={inputValue === '' ? true : false} variant='contained' type='submit' color='primary'>{t('CoursePage.Comment.Button')}</Button>
-        </form>
-
-        </Grid>
-        )
+          (
+            <Grid item container xs={12} justifyContent={'center'} rowGap={4} sx={{ marginTop: '1rem' }} >
+              <Box xs={12} width={'100%'} maxwidth='600px'>
+                {control && <ReactPlayer style={style} width='100%' url={`https://www.youtube.com/watch?v=${course?.video}`}
+                  config={{ youtube: { playerVars: { origin: 'https://www.youtube.com' } } }} />}
+              </Box>
+              <Box
+                component='div'
+                width='80%'
+                display='flex'
+                flexDirection='column'
+              >
+                <Typography variant='h1' fontWeight={600}>{course.name}</Typography>
+                <Typography variant='h5' sx={{ opacity: 0.7 }}>{course.description}</Typography>
+                <Typography variant='body'>{t("CoursePage.Info.Duration")}: {course.duration}</Typography>
+                <Typography variant='body'>{t("CoursesPage.SearchBar.Level")}: {course.level}</Typography>
+                <Button onClick={(e) => { onFavAdd(); handleClick() }}>{t("CoursePage.Info.Button")}</Button>
+                <Snackbar
+                  open={open}
+                  autoHideDuration={3000}
+                  onClose={handleClose}
+                  message={isAdd ? (t("CoursePage.Info.NotAddedMessage")) : (t("CoursePage.Info.AddedMessage"))}
+                  action={action}
+                />
+              </Box>
+              <Box component='div'
+                width='80%'
+                display='flex'
+                flexDirection='column'
+              >
+                <Typography variant='h3' sx={{ marginBottom: '1rem' }} fontWeight={600}>{t("CoursePage.Info.Comment")}</Typography>
+                {course.comments?.map((e, i) => <CommentCard key={i} data={e} id={id} onDeleteComment={onDeleteComment}></CommentCard>)}
+              </Box>
+              <form id="create-course-form" onSubmit={onCommentPost} className='course-detail__form'>
+                <TextField onChange={(e) => updateInputValue(e.target.value)}
+                  inputProps={{ style: { fontSize: 16 } }} sx={{ width: '100%' }}
+                  id="comment" name='comment' required type='textarea'
+                  label={t("CoursePage.Comment.PlaceHolder")} variant="outlined" />
+                <Button disabled={inputValue === '' ? true : false}
+                  variant='contained' type='submit' color='primary'>{t('CoursePage.Comment.Button')}</Button>
+              </form>
+            </Grid>
+          )
 
       }
-     
+
 
     </Grid>
   )

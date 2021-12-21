@@ -20,21 +20,14 @@ export default function CoursesPage() {
                 setCoursesOriginal(oldvalue => {
                     setIsLoad(true);
                    return oldvalue.concat(d);
-                    
                 });
             })
     }, []);
 
-    // const [value, setValue] = useState(0);
-
-    // const handleChange = (event, newValue) => {
-    //     setValue(newValue);
-    // };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         let data = e.target.course.value.toLowerCase();
-        const filtered = courseOriginal?.filter(e => e.name.toLowerCase().includes(data))
+        const filtered = courseOriginal.filter(e => e.name.toLowerCase().includes(data))
         setCourses(filtered)
     }
 
@@ -46,13 +39,10 @@ export default function CoursesPage() {
                 <div className='home__banner__background'></div>
                 <Typography variant='h1' color='common.white' sx={{ position: 'absolute' }}>{t("CoursesPage.Banner")}</Typography>
             </div>
-
             <form onSubmit={handleSubmit} className='courses__search-bar'>
                 <input name='course' className='courses__search-bar__input' type="text" />
                 <Button type='submit' variant='contained'>{t("CoursesPage.SearchBar.Button")}</Button>
             </form>
-
-
             {
                 isLoad ?
                     (
@@ -60,9 +50,8 @@ export default function CoursesPage() {
                         display={'flex'}
                         flexDirection={'column'}
                         gap={3}>
-                            {courses?.map((e, i) => <CourseCard2 key={i} data={e}></CourseCard2>)}
+                            {courses.map((e, i) => <CourseCard2 key={i} data={e}></CourseCard2>)}
                         </Box>
-                    
                     )
                     :
                     (
@@ -71,22 +60,6 @@ export default function CoursesPage() {
                     </Box>
                     )
             }
-
-
-            {/* <Box sx={{ maxWidth: 450, bgcolor: 'background.paper', overflow:'auto' }}>
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    variant="scrollable"
-                    scrollButtons="auto"
-                    aria-label="scrollable auto tabs example"
-                    sx={{
-                       
-                    }}
-                >
-                    {courses?.map((e,i)=> <CoursesCard key={i} data={e}/>)}
-                </Tabs>
-            </Box> */}
         </Grid>
     )
 }

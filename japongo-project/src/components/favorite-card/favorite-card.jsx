@@ -29,7 +29,6 @@ export default function FavoriteCard(props){
         fetch('http://localhost:4567/user/fav', options)
           .then(r=>r.json())
           .then(d=> {
-            
             props.onFavRemove(d)})
     }
     
@@ -37,11 +36,11 @@ export default function FavoriteCard(props){
         
             <div className='favorite-card'>
                 <div className='favorite-card__img-container'>
-                    <img src={props.data?.img} alt={props.data?.description} />
+                    <img src={props.data.img} alt={props.data.description} />
                 </div>
                 <div className='favorite-card__info-container'>
-                    <Typography sx={{cursor:'pointer'}} onClick={handleClick} variant='h4'>{props.data?.name}</Typography>
-                    <Typography variant='body'>{props.data?.description}</Typography>
+                    <Typography sx={{cursor:'pointer'}} onClick={handleClick} variant='h4'>{props.data.name}</Typography>
+                    <Typography variant='body'>{props.data.description}</Typography>
                     <Button onClick={handleRemove}>{t("Profile.RemoveFav")}</Button>
                 </div>
             </div>

@@ -10,40 +10,29 @@ import './review-card.css'
 export default function ReviewCard(props) {
 
   const styleBackground = {
-    backgroundImage: `url("${serverUrl}/review-avatar/${props.data?.img}")`,
+    backgroundImage: `url("${serverUrl}/review-avatar/${props.data.img}")`,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     height: '140px',
     width: '140px',
-    borderRadius:'50%'
+    borderRadius: '50%'
   };
-
 
   return (
     <Card className='review-card' sx={{ maxWidth: 345, minWidth: 270 }}>
-
-      
-        <Box display={'flex'} justifyContent={'center'}>
+      <Box display={'flex'} justifyContent={'center'}>
         {props.data && <div style={styleBackground}>
-
         </div>}
-        </Box>
-        {/* {props.data&&<CardMedia
-          component="img"
-          height="140"
-          image={serverUrl+`/review-avatar/${props.data?.img}`}
-          alt={props.data?.img}
-        />} */}
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {props.data.name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {props.data.body}
-          </Typography>
-        </CardContent>
-     
+      </Box>
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {props.data.name}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {props.data.body}
+        </Typography>
+      </CardContent>
     </Card>
   );
 }

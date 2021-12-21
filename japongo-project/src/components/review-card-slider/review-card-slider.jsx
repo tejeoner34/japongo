@@ -9,7 +9,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import './review-card-slider.css';
 import { useTranslation } from 'react-i18next';
-import {serverUrl} from '../../global/global-variable.js'
+import { serverUrl } from '../../global/global-variable.js'
 
 
 
@@ -28,73 +28,45 @@ function ReviewCardSlider(props) {
     };
 
     const styleBackground = {
-        backgroundImage: `url("${serverUrl}/review-avatar/${props?.data?.[activeStep]?.img}")`,
+        backgroundImage: `url("${serverUrl}/review-avatar/${props.data?.[activeStep]?.img}")`,
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         height: '140px',
         width: '140px',
-        borderRadius:'50%'
-      };
-   
+        borderRadius: '50%'
+    };
+
 
     return (
-        <Box className='review-card-slider' justifyContent='space-between' alignContent='center' alignItems='center' sx={{ maxWidth: 300, flexGrow: 1, height:200 }}>
+        <Box className='review-card-slider' justifyContent='space-between'
+             alignContent='center' alignItems='center' 
+             sx={{ maxWidth: 300, flexGrow: 1, height: 200 }}>
             <Paper
                 square
                 elevation={0}
                 sx={{
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent:'center',
+                    justifyContent: 'center',
                     height: 50,
                     pl: 2,
                     bgcolor: 'background.default',
-                    paddingLeft:'0'
+                    paddingLeft: '0'
                 }}
             >
-                <Typography variant='h5'>{props?.data?.[activeStep]?.name}</Typography>
+                <Typography variant='h5'>{props.data?.[activeStep]?.name}</Typography>
             </Paper>
-            {/* <AutoPlaySwipeableViews
-                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                index={activeStep}
-                onChangeIndex={handleStepChange}
-                enableMouseEvents
-            > */}
             <Box
-            className='review-card-slider__info-conatiner'
-            display='flex'
-            flexDirection='column'
-            alignItems='center'
+                className='review-card-slider__info-conatiner'
+                display='flex'
+                flexDirection='column'
+                alignItems='center'
             >
-            {props?.data&&<div style={styleBackground} >
-            </div>}
-            {props?.data?.[activeStep]?.body}
-                {/* {props.data?.map((step, index) => (
-                    <div key={step.name}>
-                        {Math.abs(activeStep - index) <= 2 ? (
-                            <Box
-                                component="div"
-                                sx={{
-                                    height: 255,
-                                    display: 'flex',
-                                    flexDirection:'column',
-                                    alignItems:'center',
-                                    maxWidth: 400,
-                                    overflow: 'hidden',
-                                    width: '90%',
-                                    
-                                }}
-                                
-                            >
-                                <img src=''/>
-                                <Typography>{step.body}</Typography>
-                            </Box>
-                        ) : null}
-                    </div>
-                ))} */}
-                </Box>
-            {/* </AutoPlaySwipeableViews> */}
+                {props.data && <div style={styleBackground} >
+                </div>}
+                {props.data?.[activeStep]?.body}
+            </Box>
             <MobileStepper
                 steps={maxSteps}
                 position="static"
