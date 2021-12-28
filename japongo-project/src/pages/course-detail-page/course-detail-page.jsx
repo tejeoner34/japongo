@@ -43,7 +43,7 @@ export default function CourseDetailPage() {
       body: JSON.stringify({
         name: sessionStorage.getItem('name') ?? localStorage.getItem('name'),
         comment: comment,
-        img: userData?.file.filename
+        img: userData?.file.url
       }),
     };
     fetch(`${serverFetch}courses/course?id=${id}`, options)
@@ -167,6 +167,7 @@ export default function CourseDetailPage() {
                 flexDirection='column'
               >
                 <Typography variant='h3' sx={{ marginBottom: '1rem' }} fontWeight={600}>{t("CoursePage.Info.Comment")}</Typography>
+                <Typography sx={{opacity:'0.7'}}>You can mention some other user by typing "@" and the username. For example: "@userName hello mention"</Typography>
                 {course.comments?.map((e, i) => <CommentCard key={i} data={e} id={id} onDeleteComment={onDeleteComment}></CommentCard>)}
               </Box>
               <form id="create-course-form" onSubmit={onCommentPost} className='course-detail__form'>

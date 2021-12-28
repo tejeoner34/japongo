@@ -1,6 +1,6 @@
 import { Typography, Box, Divider } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { serverUrl, serverFetch } from "../../global/global-variable";
+import { serverFetch } from "../../global/global-variable";
 import reactStringReplace from 'react-string-replace';
 
 export default function CommentCard(props) {
@@ -24,7 +24,7 @@ export default function CommentCard(props) {
 
 
   const styleAvatar = {
-    backgroundImage: `url("${serverUrl}/user-avatar/${props.data?.img}")`,
+    backgroundImage: `url("${props.data?.img}")`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     height: '80px',
@@ -50,6 +50,7 @@ export default function CommentCard(props) {
       <Box
         display='flex'
         justifyContent='space-between'
+        sx={{paddingBottom:'0.5rem'}}
       >
         <Box
           display='flex'

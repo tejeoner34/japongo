@@ -162,7 +162,7 @@ export default function Header(props) {
                             ?
                             <React.Fragment>
                                 <Box>
-                                    <Tooltip title="Account settings">
+                                    <Tooltip title="Notifications">
                                         <Badge sx={{ cursor: 'pointer' }} onClick={handleClickNotifications}
                                             badgeContent={notification?.length} color="error">
                                             <NotificationsIcon />
@@ -206,7 +206,12 @@ export default function Header(props) {
 
 
                                         {
-                                            notification?.length > 0 &&
+                                            notification?.length <= 0
+                                             ?
+                                            <Box>
+                                                <Typography sx={{padding:'.5rem'}}>No notifications</Typography>
+                                            </Box>
+                                            :
                                             notification?.map((e, i) => (
                                                 <MenuItem key={i} onClick={() => {
 
