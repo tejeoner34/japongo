@@ -45,7 +45,7 @@ function App() {
       <ThemeProvider theme={isDark===true ? darkTheme : theme}>
       <UserProvider value={null}>
         <NotificationProvider value={null}>
-        <BrowserRouter>
+        <BrowserRouter basename="/japongo">
           <Paper sx={{ borderRadius: "0" }} style={{ minHeight: '100vh' }}>
             <Grid container direction="column"
               alignItems="center"
