@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/japongo/static/css/main.4521e92a.chunk.css",
-    "main.js": "/japongo/static/js/main.e32b4f2f.chunk.js",
-    "main.js.map": "/japongo/static/js/main.e32b4f2f.chunk.js.map",
-    "runtime-main.js": "/japongo/static/js/runtime-main.b28164cc.js",
-    "runtime-main.js.map": "/japongo/static/js/runtime-main.b28164cc.js.map",
-    "static/js/2.896278d0.chunk.js": "/japongo/static/js/2.896278d0.chunk.js",
-    "static/js/2.896278d0.chunk.js.map": "/japongo/static/js/2.896278d0.chunk.js.map",
-    "static/js/3.e89855a2.chunk.js": "/japongo/static/js/3.e89855a2.chunk.js",
-    "static/js/3.e89855a2.chunk.js.map": "/japongo/static/js/3.e89855a2.chunk.js.map",
+    "main.js": "/japongo/static/js/main.8cb5c002.chunk.js",
+    "main.js.map": "/japongo/static/js/main.8cb5c002.chunk.js.map",
+    "runtime-main.js": "/japongo/static/js/runtime-main.079cccb4.js",
+    "runtime-main.js.map": "/japongo/static/js/runtime-main.079cccb4.js.map",
+    "static/js/2.a35bb45a.chunk.js": "/japongo/static/js/2.a35bb45a.chunk.js",
+    "static/js/2.a35bb45a.chunk.js.map": "/japongo/static/js/2.a35bb45a.chunk.js.map",
+    "static/js/3.93bf4dc1.chunk.js": "/japongo/static/js/3.93bf4dc1.chunk.js",
+    "static/js/3.93bf4dc1.chunk.js.map": "/japongo/static/js/3.93bf4dc1.chunk.js.map",
     "index.html": "/japongo/index.html",
     "static/css/main.4521e92a.chunk.css.map": "/japongo/static/css/main.4521e92a.chunk.css.map",
-    "static/js/2.896278d0.chunk.js.LICENSE.txt": "/japongo/static/js/2.896278d0.chunk.js.LICENSE.txt",
+    "static/js/2.a35bb45a.chunk.js.LICENSE.txt": "/japongo/static/js/2.a35bb45a.chunk.js.LICENSE.txt",
     "static/media/about-us.36f13520.jpg": "/japongo/static/media/about-us.36f13520.jpg",
     "static/media/classroom.a8313576.jpg": "/japongo/static/media/classroom.a8313576.jpg",
     "static/media/home-background.105c4576.jpg": "/japongo/static/media/home-background.105c4576.jpg",
@@ -23,9 +23,9 @@
     "static/media/online-courses-banner.f01367c0.jpg": "/japongo/static/media/online-courses-banner.f01367c0.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.b28164cc.js",
-    "static/js/2.896278d0.chunk.js",
+    "static/js/runtime-main.079cccb4.js",
+    "static/js/2.a35bb45a.chunk.js",
     "static/css/main.4521e92a.chunk.css",
-    "static/js/main.e32b4f2f.chunk.js"
+    "static/js/main.8cb5c002.chunk.js"
   ]
 }
