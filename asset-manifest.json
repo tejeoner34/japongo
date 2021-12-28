@@ -1,28 +1,31 @@
 {
   "files": {
-    "main.css": "/japongo/static/css/main.7b20e1b6.chunk.css",
-    "main.js": "/japongo/static/js/main.f6621db4.chunk.js",
-    "main.js.map": "/japongo/static/js/main.f6621db4.chunk.js.map",
+    "main.css": "/japongo/static/css/main.4521e92a.chunk.css",
+    "main.js": "/japongo/static/js/main.e32b4f2f.chunk.js",
+    "main.js.map": "/japongo/static/js/main.e32b4f2f.chunk.js.map",
     "runtime-main.js": "/japongo/static/js/runtime-main.b28164cc.js",
     "runtime-main.js.map": "/japongo/static/js/runtime-main.b28164cc.js.map",
-    "static/js/2.256d9c3f.chunk.js": "/japongo/static/js/2.256d9c3f.chunk.js",
-    "static/js/2.256d9c3f.chunk.js.map": "/japongo/static/js/2.256d9c3f.chunk.js.map",
+    "static/js/2.896278d0.chunk.js": "/japongo/static/js/2.896278d0.chunk.js",
+    "static/js/2.896278d0.chunk.js.map": "/japongo/static/js/2.896278d0.chunk.js.map",
     "static/js/3.e89855a2.chunk.js": "/japongo/static/js/3.e89855a2.chunk.js",
     "static/js/3.e89855a2.chunk.js.map": "/japongo/static/js/3.e89855a2.chunk.js.map",
     "index.html": "/japongo/index.html",
-    "static/css/main.7b20e1b6.chunk.css.map": "/japongo/static/css/main.7b20e1b6.chunk.css.map",
-    "static/js/2.256d9c3f.chunk.js.LICENSE.txt": "/japongo/static/js/2.256d9c3f.chunk.js.LICENSE.txt",
+    "static/css/main.4521e92a.chunk.css.map": "/japongo/static/css/main.4521e92a.chunk.css.map",
+    "static/js/2.896278d0.chunk.js.LICENSE.txt": "/japongo/static/js/2.896278d0.chunk.js.LICENSE.txt",
+    "static/media/about-us.36f13520.jpg": "/japongo/static/media/about-us.36f13520.jpg",
+    "static/media/classroom.a8313576.jpg": "/japongo/static/media/classroom.a8313576.jpg",
     "static/media/home-background.105c4576.jpg": "/japongo/static/media/home-background.105c4576.jpg",
     "static/media/home-online-card.4460c2e5.jpg": "/japongo/static/media/home-online-card.4460c2e5.jpg",
     "static/media/home-reviews-banner.580e5675.jpg": "/japongo/static/media/home-reviews-banner.580e5675.jpg",
     "static/media/home-school-card.8232b07f.jpg": "/japongo/static/media/home-school-card.8232b07f.jpg",
     "static/media/home-students.7270a8db.jpg": "/japongo/static/media/home-students.7270a8db.jpg",
+    "static/media/online-class.13225786.jpg": "/japongo/static/media/online-class.13225786.jpg",
     "static/media/online-courses-banner.f01367c0.jpg": "/japongo/static/media/online-courses-banner.f01367c0.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.b28164cc.js",
-    "static/js/2.256d9c3f.chunk.js",
-    "static/css/main.7b20e1b6.chunk.css",
-    "static/js/main.f6621db4.chunk.js"
+    "static/js/2.896278d0.chunk.js",
+    "static/css/main.4521e92a.chunk.css",
+    "static/js/main.e32b4f2f.chunk.js"
   ]
 }
