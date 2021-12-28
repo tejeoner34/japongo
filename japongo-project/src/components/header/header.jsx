@@ -103,7 +103,7 @@ export default function Header(props) {
         <Box component='div' sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar sx={{ columnGap: '30px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                    <Typography sx={{ cursor: 'pointer' }} onClick={() => history.push('/')} xs={12} variant='h3'>
+                    <Typography sx={{ cursor: 'pointer' }} onClick={() => history.push('/japongo')} xs={12} variant='h3'>
                         JaponGo
                     </Typography>
                 </Toolbar>
@@ -129,7 +129,7 @@ export default function Header(props) {
                             }}
                             sx={{ minWidth: '500px' }}
                         >
-                            <Link to='/'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Home")}</Typography></MenuItem></Link>
+                            <Link to='/japongo'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Home")}</Typography></MenuItem></Link>
                             <Divider />
                             <Link to='/schools'><MenuItem onClick={handleClose}><Typography color='textPrimary'>{t("Header.Schools")}</Typography></MenuItem></Link>
                             <Divider />
