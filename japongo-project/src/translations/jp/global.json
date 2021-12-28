@@ -14,7 +14,16 @@
         "Courses": "オンライン授業",
         "Home":"ホーム",
         "PrivacyPolicy": "プライバシーポリシー",
-        "AccountSettings": "アカウントの設定"
+        "AccountSettings": "アカウントの設定",
+        "AboutUsPage":{
+            "Title":"2つに分かれています",
+            "School": "学校を探す",
+            "SchoolDescription": "好きな学校を選んでください",
+            "SchoolButton": "学校",
+            "OnlineClass": "オンライン授業",
+            "OnlineDescription": "アカウントを作って授業を受けましょ",
+            "OnlineButton": "授業を探す"
+        }
     },
     "Login": {
         "Access": "アックセス",

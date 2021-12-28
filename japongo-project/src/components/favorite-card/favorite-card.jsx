@@ -3,7 +3,7 @@ import { Typography, Button } from "@mui/material";
 import { useHistory } from "react-router";
 import './favorite-card.css';
 import { useTranslation } from "react-i18next";
-import { serverUrl } from "../../global/global-variable";
+import { serverFetch, serverUrl } from "../../global/global-variable";
 
 
 
@@ -27,7 +27,7 @@ export default function FavoriteCard(props){
               course: props.data
             }),
           };
-        fetch('http://localhost:4567/user/fav', options)
+        fetch(`${serverFetch}user/fav`, options)
           .then(r=>r.json())
           .then(d=> {
             props.onFavRemove(d)})

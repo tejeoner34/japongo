@@ -14,7 +14,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
-import { serverUrl } from "../../global/global-variable.js";
+import { serverFetch } from "../../global/global-variable.js";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { AuthContext } from '../../auth/auth.context';
 
@@ -44,7 +44,7 @@ export default function MyProfile() {
                 password: e.target.password.value
             })
         }
-        fetch('http://localhost:4567/user/', options)
+        fetch(`${serverFetch}user/`, options)
             .then(r => {
                 if (r.ok) {
 
@@ -67,7 +67,7 @@ export default function MyProfile() {
                             name: sessionStorage.getItem('name') ?? localStorage.getItem('name'),
                         })
                     }
-                    fetch('http://localhost:4567/courses', optionsDeleteAllComments)
+                    fetch(`${serverFetch}courses`, optionsDeleteAllComments)
                         .then(r => r.json())
                         .then(d => {
                             console.log(d)
@@ -103,7 +103,7 @@ export default function MyProfile() {
                 newPassword: e.target.newPassword.value
             })
         }
-        fetch('http://localhost:4567/user/', options)
+        fetch(`${serverFetch}user/`, options)
             .then(r => {
                 if (r.ok) {
                     setIncorrectPass(t("Profile.Options.PasswordUpdated"));
@@ -117,7 +117,7 @@ export default function MyProfile() {
     }
 
     useEffect(() => {
-        fetch('http://localhost:4567/user/', {
+        fetch(`${serverFetch}user/`, {
             headers: {
                 "Authorization": sessionStorage.getItem('token') ?? localStorage.getItem('token'),
             }
@@ -180,7 +180,8 @@ export default function MyProfile() {
         } else {
             const formData = new FormData(e.currentTarget);
             const name = sessionStorage.getItem('name') ?? localStorage.getItem('name')
-            formData.append("name", name)
+            formData.append("name", name);
+            formData.append("imgID", userData.file.imgID)
             const options = {
                 method: "PATCH",
                 // headers: {
@@ -188,10 +189,12 @@ export default function MyProfile() {
                 // },
                 body: formData
             };
-            fetch('http://localhost:4567/user/change-avatar', options)
+            fetch(`${serverFetch}user/change-avatar`, options)
                 .then(r => r.json())
                 .then(d => {
                     updateUserData(d);
+                    sessionStorage.setItem("avatar", d.file.url)
+                    localStorage.setItem("avatar", d.file.url)
                     setOpenAvatarImgDialog(false)
                 })
             setImgError('')
@@ -199,9 +202,13 @@ export default function MyProfile() {
     };
     const onBackgroundImgChange = (e) => {
         e.preventDefault();
+        if (e.target[0].files[0].size >= 1 * 1024 * 1024) {
+            setImgError(t("Profile.ImgError"))
+        }else{
         const formData = new FormData(e.currentTarget);
         const name = sessionStorage.getItem('name') ?? localStorage.getItem('name')
-        formData.append("name", name)
+        formData.append("name", name);
+        formData.append("imgID", userData.profileBackgroundImg.imgID)
         const options = {
             method: "PATCH",
             // headers: {
@@ -209,21 +216,22 @@ export default function MyProfile() {
             // },
             body: formData
         };
-        fetch('http://localhost:4567/user/change-background', options)
+        fetch(`${serverFetch}user/change-background`, options)
             .then(r => r.json())
             .then(d => {
                 updateUserData(d);
                 setOpenBackgroundImgDialog(false)
             })
+        }
     }
     const styleBackground = {
-        backgroundImage: `url("${serverUrl}/profile-background/${userData.profileBackgroundImg}")`,
+        backgroundImage: `url("${userData.profileBackgroundImg.url}")`,
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover'
     };
     const styleAvatar = {
-        backgroundImage: `url("${serverUrl}/user-avatar/${userData.file.filename}")`,
+        backgroundImage: `url("${userData.file.url}")`,
         backgroundPosition: 'center',
         backgroundSize: 'cover'
     };

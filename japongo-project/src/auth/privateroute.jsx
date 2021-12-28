@@ -2,6 +2,8 @@ import { Route, Redirect } from "react-router";
 import {  useEffect, useState, useContext } from "react";
 import { UserContext } from "../context/user-context/user-context";
 import { NotificationContext } from "../context/notification-context/notification-context";
+import { serverFetch } from "../global/global-variable.js";
+
 
 
 
@@ -13,7 +15,7 @@ export default function PrivateRoute({ children, ...rest }) {
     
     useEffect(()=>{
       async function getStatus(){
-        const r = await fetch('http://localhost:4567/user/', {
+        const r = await fetch(`${serverFetch}user/`, {
             headers: {
                 "Authorization": sessionStorage.getItem('token')??localStorage.getItem('token'),
             }

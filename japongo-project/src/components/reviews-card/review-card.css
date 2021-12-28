@@ -1,4 +1,8 @@
 
+.review-card{
+    padding: 1rem;
+}
+
 @media (max-width: 900px){
     .review-card{
         display: none;

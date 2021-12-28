@@ -17,12 +17,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Avatar from '@mui/material/Avatar';
 import { LangContext } from '../../context/lang-context/lang-context';
-import { serverUrl } from '../../global/global-variable';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
 import { NotificationContext } from '../../context/notification-context/notification-context.js'
 import NotificationCard from '../notification-card/notification-card';
 import { Tooltip } from '@mui/material';
+import { UserContext } from '../../context/user-context/user-context';
 
 
 export default function Header(props) {
@@ -38,6 +38,7 @@ export default function Header(props) {
     const open = Boolean(anchorEl);
     const open2 = Boolean(anchorEl2)
     const openNotifications = Boolean(anchorElNotifications)
+    const [userData] = useContext(UserContext);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -85,7 +86,10 @@ export default function Header(props) {
 
 
     const styleAvatar = {
-        backgroundImage: `url("${serverUrl}/user-avatar/${sessionStorage.getItem('avatar') ?? localStorage.getItem('avatar') ?? ''}")`,
+        backgroundImage: `url("${userData?.file.url
+            ?? sessionStorage.getItem('avatar')
+            ?? localStorage.getItem('avatar')
+            ?? ''}")`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         width: '40px',

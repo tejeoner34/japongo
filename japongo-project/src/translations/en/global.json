@@ -14,7 +14,17 @@
         "Courses": "Online Courses",
         "Home":"Home",
         "PrivacyPolicy": "Privacy Policy",
-        "AccountSettings": "Account Settings"
+        "AccountSettings": "Account Settings",
+        "AboutUsPage":{
+            "Title":"Two different blocks",
+            "School": "Find your school",
+            "SchoolDescription": "Search for the school that fits your insterests",
+            "SchoolButton": "Schools",
+            "OnlineClass": "Online Course",
+            "OnlineDescription": "Go yo our private zone to take the online courses",
+            "OnlineButton": "Go to Courses"
+
+        }
     },
     "Login": {
         "Access": "Sign in",

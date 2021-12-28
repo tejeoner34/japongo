@@ -4,7 +4,9 @@ import OnlineCoursesBanner from '../../img/online-courses-banner.jpg';
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import CourseCard2 from "../../courses-card2/courses-card";
-import './style.css'
+import './style.css';
+import { serverFetch } from "../../global/global-variable.js";
+
 
 export default function CoursesPage() {
     const [t] = useTranslation('global');
@@ -13,7 +15,7 @@ export default function CoursesPage() {
     const [courseOriginal, setCoursesOriginal] = useState([]);
     
     useEffect(() => {
-        fetch('http://localhost:4567/courses/')
+        fetch(`${serverFetch}courses/`)
             .then(r => r.json())
             .then(d => {
                 setCourses(oldvalue => oldvalue.concat(d));
