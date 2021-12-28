@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/japongo/static/css/main.4521e92a.chunk.css",
-    "main.js": "/japongo/static/js/main.8cb5c002.chunk.js",
-    "main.js.map": "/japongo/static/js/main.8cb5c002.chunk.js.map",
+    "main.js": "/japongo/static/js/main.2d95232a.chunk.js",
+    "main.js.map": "/japongo/static/js/main.2d95232a.chunk.js.map",
     "runtime-main.js": "/japongo/static/js/runtime-main.079cccb4.js",
     "runtime-main.js.map": "/japongo/static/js/runtime-main.079cccb4.js.map",
     "static/js/2.a35bb45a.chunk.js": "/japongo/static/js/2.a35bb45a.chunk.js",
@@ -26,6 +26,6 @@
     "static/js/runtime-main.079cccb4.js",
     "static/js/2.a35bb45a.chunk.js",
     "static/css/main.4521e92a.chunk.css",
-    "static/js/main.8cb5c002.chunk.js"
+    "static/js/main.2d95232a.chunk.js"
   ]
 }
