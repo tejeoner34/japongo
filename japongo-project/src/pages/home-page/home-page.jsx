@@ -12,11 +12,13 @@ import OnlineCourseCard from "../../components/cards/online-course-card/online-c
 import ReviewCard from "../../components/reviews-card/reviews-card";
 import ReviewCardSlider from "../../components/review-card-slider/review-card-slider";
 import { useEffect, useState } from "react";
+import { serverFetch } from "../../global/global-variable.js";
+
 
 export default function HomePage() {
 
     useEffect(()=>{
-        fetch('http://localhost:4567/reviews/')
+        fetch(`${serverFetch}reviews/`)
         .then(r=>r.json())
         .then(d=>{
             setReviews(d)
@@ -81,7 +83,7 @@ export default function HomePage() {
                 <div className='home__card__background'></div>
                 <Typography variant='h1' color='common.white' sx={{ position: 'absolute' }}>{t("Home.Reviews.Banner")}</Typography>
             </div>
-            <Stack direction={{ xs: 'row', sm: 'row' }} spacing={2} rowGap={4} sx={{overflowX:'hidden'}}>
+            <Stack direction={{ xs: 'row', sm: 'row' }} spacing={2} padding={3} rowGap={4} sx={{overflowX:'hidden'}}>
                 {reviews&&(reviews.map((e,i)=> <ReviewCard key={i} data={e}/>))}
             </Stack>
 

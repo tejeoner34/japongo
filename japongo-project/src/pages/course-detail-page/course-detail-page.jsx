@@ -23,7 +23,7 @@ export default function CourseDetailPage() {
   const [userData] = useContext(UserContext);
 
   useEffect(() => {
-    fetch(`http://localhost:4567/courses/course?id=${id}`)
+    fetch(`${serverFetch}courses/course?id=${id}`)
       .then(r => r.json())
       .then(d => {
         updateCourse({ ...d })
@@ -46,7 +46,7 @@ export default function CourseDetailPage() {
         img: userData?.file.filename
       }),
     };
-    fetch(`http://localhost:4567/courses/course?id=${id}`, options)
+    fetch(`${serverFetch}courses/course?id=${id}`, options)
       .then(r => r.json())
       .then(d => updateCourse({ ...d }));
     document.getElementById("create-course-form").reset();
@@ -89,7 +89,7 @@ export default function CourseDetailPage() {
         course: course
       }),
     };
-    fetch(`http://localhost:4567/user/fav`, options)
+    fetch(`${serverFetch}user/fav`, options)
       .then(r => {
         if (r.ok) setIsAdd(false)
         if(!r.ok) setIsAdd(true)

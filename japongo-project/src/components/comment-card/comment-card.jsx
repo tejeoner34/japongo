@@ -1,6 +1,6 @@
 import { Typography, Box, Divider } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { serverUrl } from "../../global/global-variable";
+import { serverUrl, serverFetch } from "../../global/global-variable";
 import reactStringReplace from 'react-string-replace';
 
 export default function CommentCard(props) {
@@ -17,7 +17,7 @@ export default function CommentCard(props) {
         comment: props.data
       }),
     };
-    fetch(`http://localhost:4567/courses/course?id=${props.id}`, options)
+    fetch(`${serverFetch}courses/course?id=${props.id}`, options)
       .then(r => r.json())
       .then(d => props.onDeleteComment(d));
   }

@@ -10,7 +10,7 @@ import WifiIcon from '@mui/icons-material/Wifi';
 import WorkIcon from '@mui/icons-material/Work';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
 import { useTranslation } from 'react-i18next';
-import { serverUrl } from '../../global/global-variable';
+import { serverUrl, serverFetch } from '../../global/global-variable';
 import './school-detail-page.css';
 import AccommodationMap from '../../components/map-component/map-component-accommodation';
 
@@ -24,11 +24,11 @@ export default function SchoolDetailPage() {
     const [t] = useTranslation('global');
 
     useEffect(() => {
-        fetch(`http://localhost:4567/schools/school?id=${id}`)
+        fetch(`${serverFetch}schools/school?id=${id}`)
             .then(r => r.json())
             .then(d => {
                 updateSchool({ ...d });
-                fetch(`http://localhost:4567/accommodation?lat=${d.lat}&lon=${d.lon}`)
+                fetch(`${serverFetch}accommodation?lat=${d.lat}&lon=${d.lon}`)
                     .then(r => r.json())
                     .then(d => updateAcommodations(oldvalue => oldvalue.concat(d)))
             })
@@ -52,7 +52,7 @@ export default function SchoolDetailPage() {
                 token: id
             })
         }
-        fetch('http://localhost:4567/info', options)
+        fetch(`${serverFetch}info`, options)
             .then(r => {
                 if (r.ok) updateInfoSentMessage(t("SchoolDetail.Message"));
                 return r.json()

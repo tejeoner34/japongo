@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom"; 
 import Login from "../login-page/login-page";
 import { useTranslation } from 'react-i18next';
+import { serverFetch } from "../../global/global-variable";
 
 
 function useQuery() {
@@ -17,7 +18,7 @@ function ValidateEmail() {
   const token = query.get("token");
   useEffect(() => {
     if (token) {
-      fetch(`http://localhost:4567/auth/validate?token=${token}`) 
+      fetch(`${serverFetch}auth/validate?token=${token}`) 
         .then((r) => {
           setLoading(false); 
           if (!r.ok) throw new Error("No se ha validado correctamente");

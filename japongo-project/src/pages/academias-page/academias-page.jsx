@@ -4,6 +4,8 @@ import TokyoMap from '../../components/map-component/map-component.jsx';
 import SchoolsCard from '../../components/schools-card/schools-card.jsx';
 import backgorund from '../../img/home-background.jpg';
 import { useTranslation } from 'react-i18next';
+import { serverFetch } from "../../global/global-variable.js";
+
 
 
 function EscuelasPage() {
@@ -14,7 +16,7 @@ function EscuelasPage() {
     const tokyoLon = 139.7684809508418;
 
     useEffect(() => {
-        fetch('http://localhost:4567/schools')
+        fetch(`${serverFetch}schools`)
             .then(r => r.json())
             .then(d => updateSchools(d))
     }, [])

@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { serverFetch } from "../../global/global-variable";
 
 
 export default function NotificationCard(props) {
@@ -15,7 +16,7 @@ export default function NotificationCard(props) {
       }),
     };
 
-    fetch('http://localhost:4567/mentions/', options)
+    fetch(`${serverFetch}mentions/`, options)
       .then(r => r.json())
       .then(d => props.onNotificationDelete(d.mentions))
   }

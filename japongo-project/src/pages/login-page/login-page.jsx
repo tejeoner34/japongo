@@ -10,6 +10,8 @@ import { useState, useContext, Fragment } from 'react';
 import { AuthContext } from '../../auth/auth.context.js'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { serverFetch } from "../../global/global-variable.js";
+
 
 function Login() {
 
@@ -37,7 +39,7 @@ function Login() {
                     password: e.target.password.value
                 })
             }
-            fetch('http://localhost:4567/auth/login', options)
+            fetch(`${serverFetch}auth/login`, options)
                 .then(r => {
                     if (r.status !== 200) {
                         setErrorMessage(t('Register.ErrorMessage'))
@@ -50,7 +52,7 @@ function Login() {
                         sessionStorage.setItem('token', 'Bearer ' + d.token);
                         sessionStorage.setItem('mail', d.email);
                         sessionStorage.setItem('name', d.name);
-                        sessionStorage.setItem('avatar', d.file.filename)
+                        sessionStorage.setItem('avatar', d.file.url)
                         updateIsAuth(true)
                         sessionStorage.setItem('isAuth', true);
                         history.push("/my-profile");
@@ -61,7 +63,7 @@ function Login() {
                         localStorage.setItem('token', 'Bearer ' + d.token);
                         localStorage.setItem('mail', d.email);
                         localStorage.setItem('name', d.name);
-                        localStorage.setItem('avatar', d.file.filename)
+                        localStorage.setItem('avatar', d.file.url)
                         updateIsAuth(true)
                         sessionStorage.setItem('isAuth', true);
                         localStorage.setItem('isAuth', true);
