@@ -6,6 +6,7 @@
     align-items: center;
     max-height: 300px;
     overflow-y: hidden;
+    text-align: center;
 }
 
 .home__banner-animation{

@@ -56,6 +56,7 @@ export default function SwitchComponent(props) {
   return (
     <FormGroup>
       <FormControlLabel
+      sx={{margin:'0'}}
         onChange={
             () => {
                 props.onThemeChange();

@@ -142,7 +142,7 @@ export default function Header(props) {
                             <Link to='/privacy-policy'><MenuItem onClick={handleClose} ><Typography color='textPrimary'>{t("Header.PrivacyPolicy")}</Typography></MenuItem></Link>
                         </Menu>
                     </Box>
-                    <Box sx={{ columnGap: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Box sx={{ columnGap: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         {/* <LanguageSelect /> */}
                         <select style={{ borderRadius: '5px' }}
                             onChange={(e) => {
