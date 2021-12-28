@@ -91,7 +91,7 @@ function App() {
                 <Route path='/about-us'>
                   <AboutUsPage></AboutUsPage>
                 </Route>
-                <Route path='/japongo'>
+                <Route exact path='/'>
                   <HomePage></HomePage>
                 </Route>
                 <PrivateRoute path='/my-profile'>
