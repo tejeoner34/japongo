@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/japongo/static/css/main.6b4a3b34.chunk.css",
-    "main.js": "/japongo/static/js/main.29975999.chunk.js",
-    "main.js.map": "/japongo/static/js/main.29975999.chunk.js.map",
+    "main.css": "/japongo/static/css/main.1eb75cc3.chunk.css",
+    "main.js": "/japongo/static/js/main.854e3631.chunk.js",
+    "main.js.map": "/japongo/static/js/main.854e3631.chunk.js.map",
     "runtime-main.js": "/japongo/static/js/runtime-main.079cccb4.js",
     "runtime-main.js.map": "/japongo/static/js/runtime-main.079cccb4.js.map",
     "static/js/2.a35bb45a.chunk.js": "/japongo/static/js/2.a35bb45a.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.93bf4dc1.chunk.js": "/japongo/static/js/3.93bf4dc1.chunk.js",
     "static/js/3.93bf4dc1.chunk.js.map": "/japongo/static/js/3.93bf4dc1.chunk.js.map",
     "index.html": "/japongo/index.html",
-    "static/css/main.6b4a3b34.chunk.css.map": "/japongo/static/css/main.6b4a3b34.chunk.css.map",
+    "static/css/main.1eb75cc3.chunk.css.map": "/japongo/static/css/main.1eb75cc3.chunk.css.map",
     "static/js/2.a35bb45a.chunk.js.LICENSE.txt": "/japongo/static/js/2.a35bb45a.chunk.js.LICENSE.txt",
     "static/media/about-us.36f13520.jpg": "/japongo/static/media/about-us.36f13520.jpg",
     "static/media/classroom.a8313576.jpg": "/japongo/static/media/classroom.a8313576.jpg",
@@ -25,7 +25,7 @@
   "entrypoints": [
     "static/js/runtime-main.079cccb4.js",
     "static/js/2.a35bb45a.chunk.js",
-    "static/css/main.6b4a3b34.chunk.css",
-    "static/js/main.29975999.chunk.js"
+    "static/css/main.1eb75cc3.chunk.css",
+    "static/js/main.854e3631.chunk.js"
   ]
 }
