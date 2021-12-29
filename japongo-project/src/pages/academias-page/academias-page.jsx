@@ -29,7 +29,7 @@ function EscuelasPage() {
                 <Typography variant='h1' color='common.white' sx={{ position: 'absolute' }}>{t("Schools.Title")}</Typography>
             </div>
             <Typography variant='h2'>{t("Schools.TokyoName")}</Typography>
-            <Typography sx={{ maxWidth: '600px' }}>{t("Schools.TokyoDescription")}</Typography>
+            <Typography sx={{ maxWidth: '600px', padding:'1rem', opacity:'0.8' }}>{t("Schools.TokyoDescription")}</Typography>
             <Divider sx={{ padding: '10px', width: '40%', borderBottomWidth: 2, }} />
             <Typography variant='h2'>{t("Schools.Location")}</Typography>
 

@@ -75,3 +75,23 @@
 .profile__info__avatar-edit-container:hover{
     transform: rotate(360deg) ;
 }
+
+
+@media (max-width: 600px) {
+    .profile__info__container h1{
+        font-size: 1.5rem;
+    }
+
+    .profile__info__container{
+        margin-left: 12rem;
+    }
+
+    .profile__info__avatar-edit-container{
+        left: 120px;
+    }
+
+    .profile__info__img-container{
+        height: 150px;
+        width: 150px;
+    }
+}

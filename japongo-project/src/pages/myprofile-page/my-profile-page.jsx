@@ -34,6 +34,7 @@ export default function MyProfile() {
 
     const onAccountDelete = (e) => {
         e.preventDefault();
+        const imgArray = [userData.file.imgID, userData.profileBackgroundImg.imgID]
         const options = {
             method: 'DELETE',
             headers: {
@@ -41,7 +42,8 @@ export default function MyProfile() {
             },
             body: JSON.stringify({
                 email: sessionStorage.getItem('mail') ?? localStorage.getItem('mail'),
-                password: e.target.password.value
+                password: e.target.password.value,
+                imgArray
             })
         }
         fetch(`${serverFetch}user/`, options)
