@@ -66,8 +66,8 @@ function Register() {
           <TextField required type='email' name='email' label={t("Register.Email")} variant="outlined" />
           <TextField required type='text' name='name' label={t("Register.Name")} variant="outlined" />
           <div style={inputFileStyle}>
-            <label htmlFor="avatar"></label>
-            <input required  type="file" name="avatar" />
+            <label htmlFor="avatar">Avatar:  </label>
+            <input required id="avatar" type="file" accept="image/*" name="avatar" />
           </div>
           <TextField error={error} required type='password' name='password' label={t('Register.Password')} variant="outlined" />
           <Typography color='red'>{passwordTooShort}</Typography>

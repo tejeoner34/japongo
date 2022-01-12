@@ -45,13 +45,13 @@ function App() {
       <ThemeProvider theme={isDark===true ? darkTheme : theme}>
       <UserProvider value={null}>
         <NotificationProvider value={null}>
+        <LangProvider value={localStorage.getItem('lang')??'en'}>
         <BrowserRouter basename="/japongo">
           <Paper sx={{ borderRadius: "0" }} style={{ minHeight: '100vh' }}>
             <Grid container direction="column"
               alignItems="center"
               justifyContent="center"
             >
-              <LangProvider value={localStorage.getItem('lang')??'en'}>
               <Grid item container xs={12}>
                 <Header isDark={isDark} onThemeChange={onThemeChange} />
               </Grid>
@@ -105,11 +105,12 @@ function App() {
                 </PrivateRoute>
               </Switch>
               </main>
-              </LangProvider>
               <Footer></Footer>
             </Grid>
           </Paper>
         </BrowserRouter>
+        </LangProvider>
+
         </NotificationProvider>
         </UserProvider>
 
