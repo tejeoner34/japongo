@@ -133,7 +133,7 @@ export default function SchoolDetailPage() {
                     >
                         <Typography variant='h4'>{t("SchoolDetail.Characteristics")}</Typography>
                     </AccordionSummary>
-                    <AccordionDetails sx={{ textAlign: 'center' }}>
+                    <AccordionDetails sx={{ textAlign: 'center', justifyContent:'center' }}>
                         {school?.characteristics.beginners &&
                             <div className='school-detail__accordion__content'>
                                 <ChildCareIcon sx={{ fontSize: 60 }}></ChildCareIcon>
