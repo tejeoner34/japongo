@@ -52,7 +52,7 @@ export default function CourseDetailPage() {
     document.getElementById("create-course-form").reset();
     updateInputValue('');
     const splited = comment.split(' ')
-    const finded = splited.find(e => e.includes('@'))
+    const finded = splited.find(e => e.charAt(0)==='@')
     if (finded !== undefined) {
       const name = finded.split('@')[1];
       const options2 = {
